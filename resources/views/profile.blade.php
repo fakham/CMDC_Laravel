@@ -97,7 +97,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="button" class="btn btn-primary" onclick="modifier()">
                                     {{ __('Modifier') }}
                                 </button>
                                 <button type="submit" class="btn btn-primary">
@@ -111,4 +111,15 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function modifier() {
+        $('#prenom').prop('readonly', false);
+        $('#nom').prop('readonly', false);
+        $('#email').prop('readonly', false);
+        $('#username').prop('readonly', false);
+        $('#password').prop('readonly', false);
+        $('#telephone').prop('readonly', false);
+    }
+</script>
 @endsection
