@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Nouvelle Charge</div>
+                <div class="card-header">Nouvelle Recette</div>
 
                 <div class="card-body">
                     <div class="input-group">
@@ -17,10 +17,10 @@
                     </div>
                     <br>
                     <div class="input-group">
-                        <select name="fournisseur" class="form-control">
-                            <option value="" disabled selected>Fournisseur..</option>
-                            <option>Fournisseur 1</option>
-                            <option>Fournisseur 2</option>
+                        <select name="client" class="form-control">
+                            <option value="" disabled selected>Client..</option>
+                            <option>Client 1</option>
+                            <option>Client 2</option>
                         </select>
                     </div>
                     <br>
