@@ -145,7 +145,7 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item">Init</li>
+                            <li class="list-group-item"><a href="../produits/add">Init</a></li>
                             <li class="list-group-item">Modif/Suppr</li>
                         </ul>
                     </div>

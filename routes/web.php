@@ -24,3 +24,5 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
+
+Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
