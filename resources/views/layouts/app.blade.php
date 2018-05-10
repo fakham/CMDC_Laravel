@@ -20,6 +20,42 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .sidenav {
+            width: 200px;
+            position: fixed;
+            z-index: 1;
+            top: 300px;
+            left: 10px;
+            background: #eee;
+            overflow-x: hidden;
+            padding: 8px 0;
+        }
+
+        .sidenav a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #2196F3;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #064579;
+        }
+
+        .main {
+            margin-left: 140px; /* Same width as the sidebar + left position in px */
+            font-size: 28px; /* Increased text to enable scrolling */
+            padding: 0px 10px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 300px;}
+            .sidenav a {font-size: 18px;}
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -68,7 +104,55 @@
                 </div>
             </div>
         </nav>
-
+        @auth
+        <div class="sidenav">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Charges</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Init</li>
+                            <li class="list-group-item">Modif/Suppr</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2">Recettes</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Init</li>
+                            <li class="list-group-item">Modif/Suppr</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse3">Programmer</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Init</li>
+                            <li class="list-group-item">Modif/Suppr</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endauth
         <main class="py-4">
             @yield('content')
         </main>
