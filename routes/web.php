@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 
 Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
+Route::get('/charges', 'ChargeController@show')->name('charges');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
 
