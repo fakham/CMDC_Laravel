@@ -28,3 +28,4 @@ Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
 Route::get('/recettes', 'RecetteController@show')->name('recettes');
 
 Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
+Route::get('/programmer', 'ProduitController@show')->name('programmer');
