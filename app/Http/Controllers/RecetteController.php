@@ -9,4 +9,8 @@ class RecetteController extends Controller
     public function add() {
         return view('recettes/addRecette');
     }
+
+    public function show() {
+        return view('recettes/show');
+    }
 }

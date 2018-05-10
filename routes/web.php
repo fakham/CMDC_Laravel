@@ -25,5 +25,6 @@ Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
 Route::get('/charges', 'ChargeController@show')->name('charges');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
+Route::get('/recettes', 'RecetteController@show')->name('recettes');
 
 Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
