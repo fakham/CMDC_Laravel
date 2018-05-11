@@ -100,7 +100,7 @@
                                 <button type="button" class="btn btn-primary" onclick="modifier()">
                                     {{ __('Modifier') }}
                                 </button>
-                                <button type="submit" class="btn btn-primary">
+                                <button id="enregistrer" type="submit" class="btn btn-primary" disabled>
                                     {{ __('Enregistrer') }}
                                 </button>
                             </div>
@@ -120,6 +120,8 @@
         $('#username').prop('readonly', false);
         $('#password').prop('readonly', false);
         $('#telephone').prop('readonly', false);
+
+        $('#enregistrer').prop('disabled', false);
     }
 </script>
 @endsection
