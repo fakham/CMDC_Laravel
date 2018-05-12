@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Profile Utilisateur : ') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('profile') }}">
+                    <form method="POST" action="{{'profile/'.Auth::id().'/update'}}">
                         @csrf
 
                         <div class="form-group row">
