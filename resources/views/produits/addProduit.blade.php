@@ -9,15 +9,15 @@
 
                 <div class="card-body">
                     <div class="input-group">
-                        <input name="nom" class="form-control" type="text" placeholder="Nom Produit..."/>
+                        <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ old('nom') }}"/>
                     </div>
                     <br>
                     <div class="input-group">
-                        <textarea name="description" class="form-control" placeholder="Description..." rows="3"></textarea>
+                        <textarea name="description" class="form-control" placeholder="Description..." rows="3" value="{{ old('description') }}"></textarea>
                     </div>
                     <br>
                     <div class="input-group">
-                        <input name="prix" class="form-control" type="number" placeholder="Prix..."/>
+                        <input name="prix" class="form-control" type="number" placeholder="Prix..." value="{{ old('prix') }}"/>
                     </div>
                     <br>
                     <div class="input-group">
