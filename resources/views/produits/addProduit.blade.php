@@ -37,9 +37,9 @@
                     <div class="input-group">
                         <select name="client" class="form-control" id="typeProduit">
                             <option value="" disabled selected>Client..</option>
-                            <option>Client 1</option>
-                            <option>Client 2</option>
-                            <option>Client 3</option>
+                            @foreach ($clients as $client)
+                            <option value="{{$client->id}}">{{$client->nom}}</option>
+                            @endforeach
                         </select>
                         <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#clientModal">Ajouter</button>
 
