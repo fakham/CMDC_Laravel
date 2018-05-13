@@ -32,3 +32,5 @@ Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
 Route::get('/programmer', 'ProduitController@show')->name('programmer');
 
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
+
+Route::post('/produits/add/addFournisseur', 'FournisseurController@add')->name('addFournisseur');

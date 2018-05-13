@@ -10,8 +10,9 @@ class ProduitController extends Controller
     public function add() {
 
         $clients = DB::table('clients')->get();
+        $fournisseurs = DB::table('fournisseurs')->get();
 
-        return view('produits.addProduit', compact('clients'));
+        return view('produits.addProduit', compact('clients', 'fournisseurs'));
     }
 
     public function show() {
