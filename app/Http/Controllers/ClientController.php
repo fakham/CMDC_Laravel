@@ -24,6 +24,6 @@ class ClientController extends Controller
         $client->region = $request->region;
         $client->save();
 
-        return redirect(Request::url());
+        return back();
     }
 }

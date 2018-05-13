@@ -53,27 +53,30 @@
                                         <h4 class="modal-title w-100">Ajouter Client</h4>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="input-group">
-                                            <input name="nom" class="form-control" type="text" placeholder="Nom Client..."/>
+                                    <form method="POST" action="{{'add/addClient'}}">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="input-group">
+                                                <input name="nom" class="form-control" type="text" placeholder="Nom Client..."/>
+                                            </div>
+                                            <br>
+                                            <div class="input-group">
+                                                <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
+                                            </div>
+                                            <br>
+                                            <div class="input-group">
+                                                <input name="region" class="form-control" type="text" placeholder="Region..."/>
+                                            </div>
+                                            <br>
+                                            <div class="input-group">
+                                                <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
+                                            </div>
                                         </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-default" value="Ajouter"/>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                         </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-default">Ajouter</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
