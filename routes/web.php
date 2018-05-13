@@ -29,6 +29,8 @@ Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
 Route::get('/recettes', 'RecetteController@show')->name('recettes');
 
 Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
+Route::post('/produits/add/{client}/addRecette', 'ProduitController@addRecette')->name('addProduitRecette');
+Route::post('/produits/add/{fournisseur}/addCharge', 'ProduitController@addCharge')->name('addProduitCharge');
 Route::get('/programmer', 'ProduitController@show')->name('programmer');
 
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
