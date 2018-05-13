@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Client;
 
-class ClientController extends Controller
+use App\Fournisseur;
+
+class FournisseurController extends Controller
 {
     public function add(Request $request) {
 
@@ -17,12 +18,12 @@ class ClientController extends Controller
             ['telephone.required' => 'Telephone est obligatoire!']
         );
 
-        $client = new Client;
-        $client->nom = $request->nom;
-        $client->telephone = $request->telephone;
-        $client->activite = $request->activite;
-        $client->region = $request->region;
-        $client->save();
+        $fournisseur = new Fournisseur;
+        $fournisseur->nom = $request->nom;
+        $fournisseur->telephone = $request->telephone;
+        $fournisseur->activite = $request->activite;
+        $fournisseur->region = $request->region;
+        $fournisseur->save();
 
         return back();
     }
