@@ -34,4 +34,10 @@ class ClientController extends Controller
         return back();
 
     }
+
+    public function edit(Client $client) {
+
+        return view('clients.editPage', compact('client'));
+
+    }
 }
