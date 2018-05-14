@@ -40,8 +40,8 @@ class ProduitController extends Controller
        
         $fournisseur->produits()->save($produit);
 
-        return back();
-        
+        return view('charges.addCharge');
+
     }
 
     public function addRecette(Request $request, Client $client) {
@@ -61,7 +61,7 @@ class ProduitController extends Controller
 
         $client->produits()->save($produit);
 
-        return back();
+        return view('recettes.addRecette');
 
     }
 }
