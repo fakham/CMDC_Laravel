@@ -70,7 +70,7 @@ class ProduitController extends Controller
 
     }
 
-    public function deleteProduit(Produit $produit) {
+    public function delete(Produit $produit) {
 
         $produit->delete();
 
@@ -78,19 +78,5 @@ class ProduitController extends Controller
 
     }
 
-    public function deleteFournisseur(Fournisseur $fournisseur) {
-
-        $fournisseur->delete();
-
-        return back();
-
-    }
-
-    public function deleteClient(Client $client) {
-
-        $client->delete();
-
-        return back();
-
-    }
+    
 }

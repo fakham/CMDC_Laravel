@@ -26,4 +26,12 @@ class ClientController extends Controller
 
         return back();
     }
+
+    public function delete(Client $client) {
+
+        $client->delete();
+
+        return back();
+
+    }
 }

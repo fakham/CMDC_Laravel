@@ -27,4 +27,12 @@ class FournisseurController extends Controller
 
         return back();
     }
+
+    public function delete(Fournisseur $fournisseur) {
+
+        $fournisseur->delete();
+
+        return back();
+
+    }
 }

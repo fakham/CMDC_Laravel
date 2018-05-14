@@ -33,10 +33,10 @@ Route::post('/produits/add/{client}/addRecette', 'ProduitController@addRecette')
 Route::post('/produits/add/{fournisseur}/addCharge', 'ProduitController@addCharge')->name('addProduitCharge');
 
 Route::get('/programmer', 'ProduitController@show')->name('programmer');
-Route::get('/produit/{produit}/delete', 'ProduitController@deleteProduit')->name('deleteProduit');
-Route::get('/client/{client}/delete', 'ProduitController@deleteClient')->name('deleteClient');
-Route::get('/fournisseur/{fournisseur}/delete', 'ProduitController@deleteFournisseur')->name('deleteFournisseur');
+Route::get('/produit/{produit}/delete', 'ProduitController@delete')->name('deleteProduit');
 
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
+Route::get('/client/{client}/delete', 'ClientController@delete')->name('deleteClient');
 
 Route::post('/produits/add/addFournisseur', 'FournisseurController@add')->name('addFournisseur');
+Route::get('/fournisseur/{fournisseur}/delete', 'FournisseurController@delete')->name('deleteFournisseur');
