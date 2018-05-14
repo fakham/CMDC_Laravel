@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>{{ $fournisseur->nom }}</td>
                                             <td>{{ $fournisseur->telephone }}</td>
-                                            <td><a class="btn btn-default" href="fournisseur/{{ $fournisseur->id }}/edit">Modifier</a></td>
+                                            <td><a type="button" class="btn btn-default" href="fournisseur/{{ $fournisseur->id }}/edit">Modifier</a></td>
                                             <td><a class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer le fournisseur (\'{{ $fournisseur->nom }}\')?')" href="fournisseur/{{ $fournisseur->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
@@ -76,7 +76,7 @@
                                         <tr>
                                             <td>{{$client->nom}}</td>
                                             <td>{{$client->telephone}}</td>
-                                            <td><a class="btn btn-default" href="client/{{ $client->id }}/edit">Modifier</a></td>
+                                            <td><a type="button" class="btn btn-default" href="client/{{ $client->id }}/edit">Modifier</a></td>
                                             <td><a class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer le client (\'{{ $client->nom }}\')?')" href="client/{{ $client->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
