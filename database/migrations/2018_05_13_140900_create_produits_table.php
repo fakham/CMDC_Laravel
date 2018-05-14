@@ -21,8 +21,8 @@ class CreateProduitsTable extends Migration
             $table->string('type');
             $table->integer('qtte')->unsigned()->nullable();
             $table->tinyInteger('isFinit')->nullable();
-            $table->integer('client')->unsigned()->index()->nullable();
-            $table->integer('fournisseur')->unsigned()->index()->nullable();
+            $table->integer('client_id')->unsigned()->index()->nullable();
+            $table->integer('fournisseur_id')->unsigned()->index()->nullable();
             $table->timestamps();
         });
     }

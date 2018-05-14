@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -59,7 +60,7 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="input-group">
-                                                    <input name="nom" class="form-control" type="text" placeholder="Nom Client..."/>
+                                                    <input name="nom_client" class="form-control" type="text" placeholder="Nom Client..."/>
                                                 </div>
                                                 <br>
                                                 <div class="input-group">
@@ -107,7 +108,7 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="input-group">
-                                                    <input name="nom" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
+                                                    <input name="nom_fournisseur" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
                                                 </div>
                                                 <br>
                                                 <div class="input-group">
@@ -145,6 +146,7 @@
 </div>
 
 <script type="text/javascript">
+    var url = '{{ url("/") }}'; 
     var type = "addCharge";
     var proOrForId = 0;
     $('#clientDiv').hide();
@@ -155,7 +157,7 @@
     }
 
     function changePage() {
-        $('#formProduit').attr('action', '../../produits/add/'+proOrForId+'/' + type);
+        $('#formProduit').attr('action', url + '/produits/add/' + proOrForId + '/' + type);
     }
 
     function checkRecette() {

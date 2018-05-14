@@ -41,7 +41,7 @@ class ProduitController extends Controller
         $fournisseur->produits()->save($produit);
 
         return back();
-
+        
     }
 
     public function addRecette(Request $request, Client $client) {

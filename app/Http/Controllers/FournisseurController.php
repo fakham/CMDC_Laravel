@@ -12,14 +12,14 @@ class FournisseurController extends Controller
 
         $this->validate(
             $request,
-            ['nom' => 'required|min:5'],
-            ['nom.required' => 'Le nom est obligatoire!'],
+            ['nom_fournisseur' => 'required|min:5'],
+            ['nom_fournisseur.required' => 'Le nom est obligatoire!'],
             ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
             ['telephone.required' => 'Telephone est obligatoire!']
         );
 
         $fournisseur = new Fournisseur;
-        $fournisseur->nom = $request->nom;
+        $fournisseur->nom = $request->nom_fournisseur;
         $fournisseur->telephone = $request->telephone;
         $fournisseur->activite = $request->activite;
         $fournisseur->region = $request->region;
