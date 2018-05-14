@@ -77,4 +77,20 @@ class ProduitController extends Controller
         return back();
 
     }
+
+    public function deleteFournisseur(Fournisseur $fournisseur) {
+
+        $fournisseur->delete();
+
+        return back();
+
+    }
+
+    public function deleteClient(Client $client) {
+
+        $client->delete();
+
+        return back();
+
+    }
 }
