@@ -35,4 +35,26 @@ class FournisseurController extends Controller
         return back();
 
     }
+
+    public function edit(Fournisseur $fournisseur) {
+
+        return view('fournisseurs.editPage', compact('fournisseur'));
+
+    }
+
+    public function update(Request $request, Fournisseur $fournisseur) {
+
+        $this->validate(
+            $request,
+            ['nom' => 'required|min:5'],
+            ['nom.required' => 'Le nom est obligatoire!'],
+            ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+            ['telephone.required' => 'Telephone est obligatoire!']
+        );
+
+        $fournisseur->update($request->all());
+
+        return redirect('programmer');
+
+    }
 }

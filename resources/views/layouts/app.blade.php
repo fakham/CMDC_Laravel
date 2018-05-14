@@ -115,8 +115,8 @@
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="../charges/add">Init</a></li>
-                            <li class="list-group-item"><a href="../charges">Modif/Suppr</a></li>
+                            <li class="list-group-item"><a href="/charges/add">Init</a></li>
+                            <li class="list-group-item"><a href="/charges">Modif/Suppr</a></li>
                         </ul>
                     </div>
                 </div>
@@ -130,8 +130,8 @@
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="../recettes/add">Init</a></li>
-                            <li class="list-group-item"><a href="../recettes">Modif/Suppr</a></li>
+                            <li class="list-group-item"><a href="/recettes/add">Init</a></li>
+                            <li class="list-group-item"><a href="/recettes">Modif/Suppr</a></li>
                         </ul>
                     </div>
                 </div>
@@ -145,8 +145,8 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="../produits/add">Init</a></li>
-                            <li class="list-group-item"><a href="../programmer">Modif/Suppr</a></li>
+                            <li class="list-group-item"><a href="/produits/add">Init</a></li>
+                            <li class="list-group-item"><a href="/programmer">Modif/Suppr</a></li>
                         </ul>
                     </div>
                 </div>

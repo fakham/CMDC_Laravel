@@ -9,7 +9,7 @@
                 <div class="card-header">Modifier Client</div>
 
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="../../client/{{$client->id}}/update">
                             @csrf
                             <div class="input-group">
                                 <input name="nom" class="form-control" type="text" placeholder="Nom Client..." value='{{ $client->nom }}'/>
@@ -28,7 +28,7 @@
                             </div>
                             <br>
                             <input type="submit" class="btn btn-default" value="Enregistrer"/>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                            <a type="button" class="btn btn-danger" href="/programmer">Annuler</a>
                         </form>
                                     
                     </div>

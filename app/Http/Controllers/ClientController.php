@@ -40,4 +40,20 @@ class ClientController extends Controller
         return view('clients.editPage', compact('client'));
 
     }
+
+    public function update(Request $request, Client $client) {
+
+        $this->validate(
+            $request,
+            ['nom' => 'required|min:5'],
+            ['nom.required' => 'Le nom est obligatoire!'],
+            ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+            ['telephone.required' => 'Telephone est obligatoire!']
+        );
+
+        $client->update($request->all());
+
+        return redirect('programmer');
+
+    }
 }

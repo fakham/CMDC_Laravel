@@ -38,6 +38,9 @@ Route::get('/produit/{produit}/delete', 'ProduitController@delete')->name('delet
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
 Route::get('/client/{client}/delete', 'ClientController@delete')->name('deleteClient');
 Route::get('/client/{client}/edit', 'ClientController@edit')->name('editClient');
+Route::post('/client/{client}/update', 'ClientController@update')->name('updateClient');
 
 Route::post('/produits/add/addFournisseur', 'FournisseurController@add')->name('addFournisseur');
 Route::get('/fournisseur/{fournisseur}/delete', 'FournisseurController@delete')->name('deleteFournisseur');
+Route::get('/fournisseur/{fournisseur}/edit', 'FournisseurController@edit')->name('editFournisseur');
+Route::post('/fournisseur/{fournisseur}/update', 'FournisseurController@update')->name('updateFournisseur');

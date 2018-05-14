@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>{{ $fournisseur->nom }}</td>
                                             <td>{{ $fournisseur->telephone }}</td>
-                                            <td><button class="btn btn-default">Modifier</button></td>
+                                            <td><a class="btn btn-default" href="fournisseur/{{ $fournisseur->id }}/edit">Modifier</a></td>
                                             <td><a class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer le fournisseur (\'{{ $fournisseur->nom }}\')?')" href="fournisseur/{{ $fournisseur->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
