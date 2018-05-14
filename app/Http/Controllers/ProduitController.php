@@ -78,5 +78,34 @@ class ProduitController extends Controller
 
     }
 
+    public function edit(Produit $produit) {
+
+        $clients = DB::table('clients')->get();
+        $fournisseurs = DB::table('fournisseurs')->get();
+
+        return view('produits.editPage', compact('produit', 'clients', 'fournisseurs'));
+
+    }
+
+    public function update(Request $request, Produit $produit) {
+
+        $this->validate(
+            $request,
+            ['nom' => 'required|min:5'],
+            ['nom.required' => 'Le nom est obligatoire!'],
+            ['nom.min' => 'Le min est 5 caracteres!']
+        );
+
+        $produit->nom = $request->nom;
+        $produit->description = $request->description;
+        $produit->prix = $request->prix;
+        $produit->type = $request->type;
+
+        $produit->save();
+
+        return redirect('programmer');
+
+    }
+
     
 }

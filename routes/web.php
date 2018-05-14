@@ -34,6 +34,8 @@ Route::post('/produits/add/{fournisseur}/addCharge', 'ProduitController@addCharg
 
 Route::get('/programmer', 'ProduitController@show')->name('programmer');
 Route::get('/produit/{produit}/delete', 'ProduitController@delete')->name('deleteProduit');
+Route::get('/produit/{produit}/edit', 'ProduitController@edit')->name('editProduit');
+Route::post('/produit/{produit}/update', 'ProduitController@update')->name('updateProduit');
 
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
 Route::get('/client/{client}/delete', 'ClientController@delete')->name('deleteClient');

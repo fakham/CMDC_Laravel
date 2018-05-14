@@ -24,7 +24,7 @@
                                         <tr>
                                             <td>{{ $produit->nom }}</td>
                                             <td>{{ $produit->description }}</td>
-                                            <td><button class="btn btn-default">Modifier</button></td>
+                                            <td><a type="button" class="btn btn-default" href="produit/{{ $produit->id }}/edit">Modifier</a></td>
                                             <td><a class="btn btn-danger" onclick="return confirm('Voulez-vous supprimer le produit (\'{{ $produit->nom }}\')?')" href="produit/{{ $produit->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
