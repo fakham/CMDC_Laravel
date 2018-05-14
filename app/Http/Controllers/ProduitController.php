@@ -20,7 +20,12 @@ class ProduitController extends Controller
     }
 
     public function show() {
-        return view('produits.show');
+
+        $clients = DB::table('clients')->get();
+        $fournisseurs = DB::table('fournisseurs')->get();
+        $produits = DB::table('produits')->get();
+        
+        return view('produits.show', compact('clients', 'fournisseurs', 'produits'));
     }
 
     public function addCharge(Request $request, Fournisseur $fournisseur) {

@@ -20,36 +20,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Produit 1</td>
-                                        <td>Desc 1</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produit 1</td>
-                                        <td>Desc 1</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produit 1</td>
-                                        <td>Desc 1</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produit 1</td>
-                                        <td>Desc 1</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produit 1</td>
-                                        <td>Desc 1</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
+                                        @foreach ($produits as $produit)
+                                        <tr>
+                                            <td>{{ $produit->nom }}</td>
+                                            <td>{{ $produit->description }}</td>
+                                            <td><button class="btn btn-default">Modifier</button></td>
+                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -68,36 +46,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Fournisseur 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fournisseur 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fournisseur 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fournisseur 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fournisseur 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
+                                        @foreach ($fournisseurs as $fournisseur)
+                                        <tr>
+                                            <td>{{ $fournisseur->nom }}</td>
+                                            <td>{{ $fournisseur->telephone }}</td>
+                                            <td><button class="btn btn-default">Modifier</button></td>
+                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -116,36 +72,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Client 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Client 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Client 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Client 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Client 1</td>
-                                        <td>0606060677</td>
-                                        <td><button class="btn btn-default">Modifier</button></td>
-                                        <td><a class="btn btn-danger">Supprimer</a></td>
-                                    </tr>
+                                        @foreach ($clients as $client)
+                                        <tr>
+                                            <td>{{$client->nom}}</td>
+                                            <td>{{$client->telephone}}</td>
+                                            <td><button class="btn btn-default">Modifier</button></td>
+                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
