@@ -25,7 +25,7 @@
                                             <td>{{ $produit->nom }}</td>
                                             <td>{{ $produit->description }}</td>
                                             <td><button class="btn btn-default">Modifier</button></td>
-                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                            <td><a class="btn btn-danger" href="produit/{{ $produit->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -51,7 +51,7 @@
                                             <td>{{ $fournisseur->nom }}</td>
                                             <td>{{ $fournisseur->telephone }}</td>
                                             <td><button class="btn btn-default">Modifier</button></td>
-                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                            <td><a class="btn btn-danger" href="fournisseur/{{ $fournisseur->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -77,7 +77,7 @@
                                             <td>{{$client->nom}}</td>
                                             <td>{{$client->telephone}}</td>
                                             <td><button class="btn btn-default">Modifier</button></td>
-                                            <td><a class="btn btn-danger">Supprimer</a></td>
+                                            <td><a class="btn btn-danger" href="client/{{ $client->id }}/delete">Supprimer</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>

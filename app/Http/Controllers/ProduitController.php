@@ -69,4 +69,12 @@ class ProduitController extends Controller
         return view('recettes.addRecette');
 
     }
+
+    public function deleteProduit(Produit $produit) {
+
+        $produit->delete();
+
+        return back();
+
+    }
 }
