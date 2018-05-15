@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Client;
 use App\Fournisseur;
+use App\User;
 
 class Produit extends Model
 {
@@ -20,6 +21,12 @@ class Produit extends Model
     public function fournisseur() {
         
         return $this->belogesTo(Fournisseur::class);
+
+    }
+
+    public function user() {
+        
+        return $this->belogesTo(User::class);
 
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Produit;
+use App\User;
 
 class Client extends Model
 {
@@ -13,6 +14,12 @@ class Client extends Model
     public function produits() {
 
         return $this->hasMany(Produit::class);
+
+    }
+
+    public function user() {
+        
+        return $this->belogesTo(User::class);
 
     }
 }

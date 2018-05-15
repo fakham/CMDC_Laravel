@@ -23,6 +23,7 @@ class CreateProduitsTable extends Migration
             $table->tinyInteger('isFinit')->nullable();
             $table->integer('client_id')->unsigned()->index()->nullable();
             $table->integer('fournisseur_id')->unsigned()->index()->nullable();
+            $table->integer('user_id')->unsigned()->index();
             $table->timestamps();
         });
     }
