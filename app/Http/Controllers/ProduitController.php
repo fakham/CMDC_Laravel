@@ -14,18 +14,23 @@ class ProduitController extends Controller
 {
     public function add() {
 
-        $clients = DB::table('clients')->get();
-        $fournisseurs = DB::table('fournisseurs')->get();
+        // $clients = DB::table('clients')->get();
+        $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
+        // $fournisseurs = DB::table('fournisseurs')->get();
+        $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
 
         return view('produits.addProduit', compact('clients', 'fournisseurs'));
     }
 
     public function show() {
 
-        $clients = DB::table('clients')->get();
-        $fournisseurs = DB::table('fournisseurs')->get();
-        $produits = DB::table('produits')->get();
-        
+        // $clients = DB::table('clients')->get();
+        // $fournisseurs = DB::table('fournisseurs')->get();
+        // $produits = DB::table('produits')->get();
+        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+
         return view('produits.show', compact('clients', 'fournisseurs', 'produits'));
     }
 
@@ -70,7 +75,7 @@ class ProduitController extends Controller
         $produit->type = $request->type;
 
         $client->produits()->save($produit);
-        
+
         $user = Auth::user();
 
         $user->produits()->save($produit);
@@ -89,8 +94,10 @@ class ProduitController extends Controller
 
     public function edit(Produit $produit) {
 
-        $clients = DB::table('clients')->get();
-        $fournisseurs = DB::table('fournisseurs')->get();
+        // $clients = DB::table('clients')->get();
+        // $fournisseurs = DB::table('fournisseurs')->get();
+        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
 
         return view('produits.editPage', compact('produit', 'clients', 'fournisseurs'));
 
