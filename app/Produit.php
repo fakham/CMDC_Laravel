@@ -10,7 +10,7 @@ use App\User;
 
 class Produit extends Model
 {
-    protected $fillable = ['nom', 'description', 'prix', 'type', 'qtte', 'isFinit', 'client', 'fournisseur'];
+    protected $fillable = ['nom', 'description', 'prix', 'type', 'qtte', 'isFinit', 'client', 'fournisseur', 'user_id'];
 
     public function client() {
 

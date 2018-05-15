@@ -49,11 +49,11 @@ class ProduitController extends Controller
         $produit->prix = $request->prix;
         $produit->type = $request->type;
        
-        $fournisseur->produits()->save($produit);
-
         $user = Auth::user();
 
-        $user->produits()->save($produit);
+        $produit->user_id = $user->id;
+
+        $fournisseur->produits()->save($produit);
 
         return view('charges.addCharge');
 
@@ -74,11 +74,11 @@ class ProduitController extends Controller
         $produit->prix = $request->prix;
         $produit->type = $request->type;
 
-        $client->produits()->save($produit);
-
         $user = Auth::user();
 
-        $user->produits()->save($produit);
+        $produit->user_id = $user->id;
+
+        $client->produits()->save($produit);
 
         return view('recettes.addRecette');
 
