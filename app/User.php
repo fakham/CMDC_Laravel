@@ -33,19 +33,19 @@ class User extends Authenticatable
 
     public function clients() {
 
-        $this->hasMany(Client::class);
+        return $this->hasMany(Client::class);
 
     }
 
     public function fournisseurs() {
 
-        $this->hasMany(Fournisseur::class);
+        return $this->hasMany(Fournisseur::class);
 
     }
 
     public function produits() {
 
-        $this->hasMany(Produit::class);
+        return $this->hasMany(Produit::class);
 
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use DB;
 use App\Fournisseur;
@@ -45,6 +46,10 @@ class ProduitController extends Controller
        
         $fournisseur->produits()->save($produit);
 
+        $user = Auth::user();
+
+        $user->produits()->save($produit);
+
         return view('charges.addCharge');
 
     }
@@ -65,6 +70,10 @@ class ProduitController extends Controller
         $produit->type = $request->type;
 
         $client->produits()->save($produit);
+        
+        $user = Auth::user();
+
+        $user->produits()->save($produit);
 
         return view('recettes.addRecette');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Fournisseur;
 
@@ -23,7 +24,10 @@ class FournisseurController extends Controller
         $fournisseur->telephone = $request->telephone;
         $fournisseur->activite = $request->activite;
         $fournisseur->region = $request->region;
-        $fournisseur->save();
+
+        $user = Auth::user();
+
+        $user->fournisseurs()->save($fournisseur);
 
         return back();
     }

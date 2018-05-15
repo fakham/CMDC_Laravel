@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Client;
 
 class ClientController extends Controller
@@ -22,7 +24,10 @@ class ClientController extends Controller
         $client->telephone = $request->telephone;
         $client->activite = $request->activite;
         $client->region = $request->region;
-        $client->save();
+
+        $user = Auth::user();
+
+        $user->clients()->save($client);
 
         return back();
     }
