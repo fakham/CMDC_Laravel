@@ -26,12 +26,14 @@ Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
 Route::get('/charges/{charge}/delete', 'ChargeController@delete')->name('deleteCharge');
 Route::get('/charges', 'ChargeController@show')->name('charges');
 Route::get('/charges/{charge}/edit', 'ChargeController@edit')->name('editCharge');
+Route::post('/charges/{charge}/update', 'ChargeController@update')->name('updateCharge');
 Route::post('/charges/add/store', 'ChargeController@store')->name('storeCharge');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
 Route::get('/recettes/{recette}/delete', 'RecetteController@delete')->name('deleteRecette');
 Route::get('/recettes', 'RecetteController@show')->name('recettes');
 Route::get('/recettes/{recette}/edit', 'RecetteController@edit')->name('editRecette');
+Route::post('/recettes/{recette}/update', 'RecetteController@update')->name('updateRecette');
 Route::post('/recettes/add/store', 'RecetteController@store')->name('storeRecette');
 
 Route::get('/produits/add', 'ProduitController@add')->name('addProduit');

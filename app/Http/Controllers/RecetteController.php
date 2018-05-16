@@ -73,4 +73,22 @@ class RecetteController extends Controller
         
         return view('recettes.edit', compact('charge', 'clients', 'produits'));
     }
+
+    public function update(Request $request, Recette $recette) {
+
+        $this->validate(
+            $request,
+            ['date' => 'required'],
+            ['date.required' => 'La date est obligatoire!'],
+            ['prix' => 'required|numeric'],
+            ['prix.required' => 'Le prix est obligatoire!'],
+            ['qtte' => 'required|numeric'],
+            ['qtte.required' => 'La quantité est obligatoire!']
+        );
+
+        $recette->update($request->all());
+
+        return redirect('/recettes');
+
+    }
 }

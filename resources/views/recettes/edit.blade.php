@@ -11,7 +11,7 @@
                     <form method="POST" action="/recettes/{{$recette->id}}/update">
                     @csrf
                         <div class="input-group">
-                            <select name="produit" class="form-control">
+                            <select name="produit_id" class="form-control">
                                 <option value="" disabled selected>Produit..</option>
                                 @foreach ($produits as $produit)
                                     @if ($produit->id == $recette->produit_id)
@@ -24,7 +24,7 @@
                         </div>
                         <br>
                         <div class="input-group">
-                            <select name="fournisseur" class="form-control">
+                            <select name="fournisseur_id" class="form-control">
                                 <option value="" disabled selected>Fournisseur..</option>
                                 @foreach ($clients as $client)
                                     @if ($client->id == $recette->client_id)

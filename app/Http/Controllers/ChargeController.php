@@ -76,4 +76,22 @@ class ChargeController extends Controller
         
         return view('charges.edit', compact('charge', 'fournisseurs', 'produits'));
     }
+
+    public function update(Request $request, Charge $charge) {
+
+        $this->validate(
+            $request,
+            ['date' => 'required'],
+            ['date.required' => 'La date est obligatoire!'],
+            ['prix' => 'required|numeric'],
+            ['prix.required' => 'Le prix est obligatoire!'],
+            ['qtte' => 'required|numeric'],
+            ['qtte.required' => 'La quantité est obligatoire!']
+        );
+
+        $charge->update($request->all());
+
+        return redirect('/charges');
+
+    }
 }
