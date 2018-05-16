@@ -11,16 +11,18 @@
                     <div class="input-group">
                         <select name="produit" class="form-control">
                             <option value="" disabled selected>Produit..</option>
-                            <option>Produit 1</option>
-                            <option>Produit 2</option>
+                            @foreach ($produits as $produit)
+                            <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <br>
                     <div class="input-group">
                         <select name="fournisseur" class="form-control">
                             <option value="" disabled selected>Fournisseur..</option>
-                            <option>Fournisseur 1</option>
-                            <option>Fournisseur 2</option>
+                            @foreach ($fournisseurs as $fournisseur)
+                            <option value="{{ $fournisseur->id }}">{{ $fournisseur->nom }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <br>
