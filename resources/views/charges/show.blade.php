@@ -24,8 +24,8 @@
                             <td>{{ $charge->produit }}</td>
                             <td>{{ $charge->fournisseur }}</td>
                             <td>{{ $charge->prix * $charge->qtte }}</td>
-                            <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
+                            <td><a class="btn btn-default" href="/charges/{{ $charge->id }}/edit">Modifier</a></td>
+                            <td><a class="btn btn-danger" href="/charges/{{ $charge->id }}/delete" onclick="return confirm('Voulez-vous supprimer ce charge?')">Supprimer</a></td>
                         </tr>
                         @endforeach
                         </tbody>

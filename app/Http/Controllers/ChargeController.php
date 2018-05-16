@@ -60,4 +60,12 @@ class ChargeController extends Controller
 
         return redirect('/charges');
     }
+
+    public function delete(Charge $charge) {
+
+        $charge->delete();
+
+        return back();
+
+    }
 }

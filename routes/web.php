@@ -23,10 +23,12 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile/{user}/update', 'ProfileController@update')->name('updateProfile');
 
 Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
+Route::get('/charges/{charge}/delete', 'ChargeController@delete')->name('deleteCharge');
 Route::get('/charges', 'ChargeController@show')->name('charges');
 Route::post('/charges/add/store', 'ChargeController@store')->name('storeCharge');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
+Route::get('/recettes/{recette}/delete', 'RecetteController@delete')->name('deleteRecette');
 Route::get('/recettes', 'RecetteController@show')->name('recettes');
 Route::post('/recettes/add/store', 'RecetteController@store')->name('storeRecette');
 

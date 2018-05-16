@@ -25,7 +25,7 @@
                             <td>{{ $recette->client }}</td>
                             <td>{{ $recette->prix * $recette->qtte }}</td>
                             <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
+                            <td><a class="btn btn-danger" href="/recettes/{{ $recette->id }}/delete" onclick="return confirm('Voulez-vous supprimer cette recette?')">Supprimer</a></td>
                         </tr>
                         @endforeach
                         </tbody>

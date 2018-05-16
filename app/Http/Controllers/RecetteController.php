@@ -57,4 +57,12 @@ class RecetteController extends Controller
 
         return redirect('/recettes');
     }
+
+    public function delete(Recette $recette) {
+
+        $recette->delete();
+
+        return back();
+
+    }
 }
