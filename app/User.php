@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Client;
 use App\Fournisseur;
 use App\Produit;
+use App\Charge;
+use App\Recette;
 
 class User extends Authenticatable
 {
@@ -46,6 +48,18 @@ class User extends Authenticatable
     public function produits() {
 
         return $this->hasMany(Produit::class);
+
+    }
+
+    public function charges() {
+
+        return $this->hasMany(Charge::class);
+
+    }
+
+    public function recettes() {
+
+        return $this->hasMany(Recette::class);
 
     }
 }

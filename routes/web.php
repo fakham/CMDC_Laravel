@@ -24,9 +24,11 @@ Route::post('/profile/{user}/update', 'ProfileController@update')->name('updateP
 
 Route::get('/charges/add', 'ChargeController@add')->name('addCharge');
 Route::get('/charges', 'ChargeController@show')->name('charges');
+Route::post('/charges/add/store', 'ChargeController@store')->name('storeCharge');
 
 Route::get('/recettes/add', 'RecetteController@add')->name('addRecette');
 Route::get('/recettes', 'RecetteController@show')->name('recettes');
+Route::post('/recettes/add/store', 'RecetteController@store')->name('storeRecette');
 
 Route::get('/produits/add', 'ProduitController@add')->name('addProduit');
 Route::post('/produits/add/{client}/addRecette', 'ProduitController@addRecette')->name('addProduitRecette');
