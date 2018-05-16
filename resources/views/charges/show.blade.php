@@ -18,46 +18,16 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach ($charges as $charge)
                         <tr>
-                            <td>10/05/2018</td>
-                            <td>Produit 1</td>
-                            <td>Fournisseur 1</td>
-                            <td>1000 DH</td>
+                            <td>{{ $charge->date }}</td>
+                            <td>{{ $charge->produit_id }}</td>
+                            <td>{{ $charge->fournisseur_id }}</td>
+                            <td>{{ $charge->prix * $charge->qtte }}</td>
                             <td><button class="btn btn-default">Modifier</button></td>
                             <td><a class="btn btn-danger">Supprimer</a></td>
                         </tr>
-                        <tr>
-                            <td>10/05/2018</td>
-                            <td>Produit 1</td>
-                            <td>Fournisseur 1</td>
-                            <td>1000 DH</td>
-                            <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
-                        </tr>
-                        <tr>
-                            <td>10/05/2018</td>
-                            <td>Produit 1</td>
-                            <td>Fournisseur 1</td>
-                            <td>1000 DH</td>
-                            <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
-                        </tr>
-                        <tr>
-                            <td>10/05/2018</td>
-                            <td>Produit 1</td>
-                            <td>Fournisseur 1</td>
-                            <td>1000 DH</td>
-                            <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
-                        </tr>
-                        <tr>
-                            <td>10/05/2018</td>
-                            <td>Produit 1</td>
-                            <td>Fournisseur 1</td>
-                            <td>1000 DH</td>
-                            <td><button class="btn btn-default">Modifier</button></td>
-                            <td><a class="btn btn-danger">Supprimer</a></td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

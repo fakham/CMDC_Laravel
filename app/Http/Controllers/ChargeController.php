@@ -19,7 +19,10 @@ class ChargeController extends Controller
     }
 
     public function show() {
-        return view('charges/show');
+
+        $charges = DB::table('charges')->where('user_id', '=', Auth::user()->id)->get();
+
+        return view('charges/show', compact('charges'));
     }
 
     public function store(Request $request) {

@@ -19,7 +19,10 @@ class RecetteController extends Controller
     }
 
     public function show() {
-        return view('recettes/show');
+
+        $recettes = DB::table('recettes')->where('user_id', '=', Auth::user()->id)->get();
+
+        return view('recettes/show', compact('recettes'));
     }
 
     public function store(Request $request) {
