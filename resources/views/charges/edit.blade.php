@@ -14,7 +14,11 @@
                             <select name="produit" class="form-control">
                                 <option value="" disabled selected>Produit..</option>
                                 @foreach ($produits as $produit)
-                                <option value="{{ $produit->id }}">{{ $produit->nom }}</option>
+                                    @if ($produit->id == $charge->produit_id)
+                                    <option value="{{$produit->id}}" selected>{{$produit->nom}}</option>
+                                    @else
+                                    <option value="{{$produit->id}}">{{$produit->nom}}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -23,7 +27,11 @@
                             <select name="fournisseur" class="form-control">
                                 <option value="" disabled selected>Fournisseur..</option>
                                 @foreach ($fournisseurs as $fournisseur)
-                                <option value="{{ $fournisseur->id }}">{{ $fournisseur->nom }}</option>
+                                    @if ($fournisseur->id == $charge->fournisseur_id)
+                                    <option value="{{ $fournisseur->id }}" selected>{{ $fournisseur->nom }}</option>
+                                    @else
+                                    <option value="{{ $fournisseur->id }}">{{ $fournisseur->nom }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
