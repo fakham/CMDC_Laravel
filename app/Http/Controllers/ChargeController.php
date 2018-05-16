@@ -20,7 +20,17 @@ class ChargeController extends Controller
 
     public function show() {
 
-        $charges = DB::table('charges')->where('user_id', '=', Auth::user()->id)->get();
+        // $charges = DB::table('charges')->where('user_id', '=', Auth::user()->id)->get();
+
+        $charges = DB::table('charges AS C')
+        ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "F.nom AS fournisseur", "P.nom AS produit")
+        ->join('fournisseurs AS F', 'C.fournisseur_id', '=', 'F.id')
+        ->join('produits AS P', 'C.produit_id', '=', 'P.id')
+        ->where('C.user_id', '=', Auth::user()->id)
+        ->get();
+
+        // dump($charges->all());
+        // die;
 
         return view('charges/show', compact('charges'));
     }

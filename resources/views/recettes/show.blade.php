@@ -21,8 +21,8 @@
                         @foreach ($recettes as $recette)
                         <tr>
                             <td>{{ $recette->date }}</td>
-                            <td>{{ $recette->produit_id }}</td>
-                            <td>{{ $recette->client_id }}</td>
+                            <td>{{ $recette->produit }}</td>
+                            <td>{{ $recette->client }}</td>
                             <td>{{ $recette->prix * $recette->qtte }}</td>
                             <td><button class="btn btn-default">Modifier</button></td>
                             <td><a class="btn btn-danger">Supprimer</a></td>

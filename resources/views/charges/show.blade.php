@@ -21,8 +21,8 @@
                         @foreach ($charges as $charge)
                         <tr>
                             <td>{{ $charge->date }}</td>
-                            <td>{{ $charge->produit_id }}</td>
-                            <td>{{ $charge->fournisseur_id }}</td>
+                            <td>{{ $charge->produit }}</td>
+                            <td>{{ $charge->fournisseur }}</td>
                             <td>{{ $charge->prix * $charge->qtte }}</td>
                             <td><button class="btn btn-default">Modifier</button></td>
                             <td><a class="btn btn-danger">Supprimer</a></td>

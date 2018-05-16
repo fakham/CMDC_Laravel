@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Produit;
 use App\User;
+use App\Charge;
 
 class Fournisseur extends Model
 {
@@ -20,6 +21,12 @@ class Fournisseur extends Model
     public function user() {
         
         return $this->belogesTo(User::class);
+
+    }
+
+    public function charges() {
+        
+        return $this->belogesToMany(Charge::class);
 
     }
 }
