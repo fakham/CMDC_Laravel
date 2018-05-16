@@ -68,4 +68,12 @@ class ChargeController extends Controller
         return back();
 
     }
+
+    public function edit(Charge $charge) {
+
+        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+        
+        return view('charges.edit', compact('charge', 'fournisseurs', 'produits'));
+    }
 }

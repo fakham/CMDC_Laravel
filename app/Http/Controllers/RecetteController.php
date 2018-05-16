@@ -65,4 +65,12 @@ class RecetteController extends Controller
         return back();
 
     }
+
+    public function edit(Recette $recette) {
+
+        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+        
+        return view('recettes.edit', compact('charge', 'clients', 'produits'));
+    }
 }
