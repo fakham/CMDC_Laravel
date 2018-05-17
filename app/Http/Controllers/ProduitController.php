@@ -14,112 +14,143 @@ class ProduitController extends Controller
 {
     public function add() {
 
-        // $clients = DB::table('clients')->get();
-        $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
-        // $fournisseurs = DB::table('fournisseurs')->get();
-        $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
+        if (Auth::check()) {
+            $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
+            $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
 
-        return view('produits.addProduit', compact('clients', 'fournisseurs'));
+            return view('produits.addProduit', compact('clients', 'fournisseurs'));
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function show() {
 
-        // $clients = DB::table('clients')->get();
-        // $fournisseurs = DB::table('fournisseurs')->get();
-        // $produits = DB::table('produits')->get();
-        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
-        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
-        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+        if (Auth::check()) {
+            $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+            $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+            $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
 
-        return view('produits.show', compact('clients', 'fournisseurs', 'produits'));
+            return view('produits.show', compact('clients', 'fournisseurs', 'produits'));
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function addCharge(Request $request, Fournisseur $fournisseur) {
 
-        $this->validate(
-            $request,
-            ['nom' => 'required|min:5'],
-            ['nom.required' => 'Le nom est obligatoire!'],
-            ['nom.min' => 'Le min est 5 caracteres!']
-        );
+        if (Auth::check()) {
 
-        $produit = new Produit;
-        $produit->nom = $request->nom;
-        $produit->description = $request->description;
-        $produit->prix = $request->prix;
-        $produit->type = $request->type;
-       
-        $user = Auth::user();
+            $this->validate(
+                $request,
+                ['nom' => 'required|min:5'],
+                ['nom.required' => 'Le nom est obligatoire!'],
+                ['nom.min' => 'Le min est 5 caracteres!']
+            );
 
-        $produit->user_id = $user->id;
+            $produit = new Produit;
+            $produit->nom = $request->nom;
+            $produit->description = $request->description;
+            $produit->prix = $request->prix;
+            $produit->type = $request->type;
+        
+            $user = Auth::user();
 
-        $fournisseur->produits()->save($produit);
+            $produit->user_id = $user->id;
 
-        return view('charges.addCharge');
+            $fournisseur->produits()->save($produit);
+
+            return view('charges.addCharge');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function addRecette(Request $request, Client $client) {
 
-        $this->validate(
-            $request,
-            ['nom' => 'required|min:5'],
-            ['nom.required' => 'Le nom est obligatoire!'],
-            ['nom.min' => 'Le min est 5 caracteres!']
-        );
+        if (Auth::check()) {
 
-        $produit = new Produit;
-        $produit->nom = $request->nom;
-        $produit->description = $request->description;
-        $produit->prix = $request->prix;
-        $produit->type = $request->type;
+            $this->validate(
+                $request,
+                ['nom' => 'required|min:5'],
+                ['nom.required' => 'Le nom est obligatoire!'],
+                ['nom.min' => 'Le min est 5 caracteres!']
+            );
 
-        $user = Auth::user();
+            $produit = new Produit;
+            $produit->nom = $request->nom;
+            $produit->description = $request->description;
+            $produit->prix = $request->prix;
+            $produit->type = $request->type;
 
-        $produit->user_id = $user->id;
+            $user = Auth::user();
 
-        $client->produits()->save($produit);
+            $produit->user_id = $user->id;
 
-        return view('recettes.addRecette');
+            $client->produits()->save($produit);
+
+            return view('recettes.addRecette');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function delete(Produit $produit) {
 
-        $produit->delete();
+        if (Auth::check()) {
 
-        return back();
+            $produit->delete();
+
+            return back();
+
+        } else {
+            return redirect('login');
+        }
 
     }
 
     public function edit(Produit $produit) {
 
-        // $clients = DB::table('clients')->get();
-        // $fournisseurs = DB::table('fournisseurs')->get();
-        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
-        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+        if (Auth::check()) {
 
-        return view('produits.editPage', compact('produit', 'clients', 'fournisseurs'));
+            $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+            $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+
+            return view('produits.editPage', compact('produit', 'clients', 'fournisseurs'));
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function update(Request $request, Produit $produit) {
 
-        $this->validate(
-            $request,
-            ['nom' => 'required|min:5'],
-            ['nom.required' => 'Le nom est obligatoire!'],
-            ['nom.min' => 'Le min est 5 caracteres!']
-        );
+        if (Auth::check()) {
 
-        $produit->nom = $request->nom;
-        $produit->description = $request->description;
-        $produit->prix = $request->prix;
-        $produit->type = $request->type;
+            $this->validate(
+                $request,
+                ['nom' => 'required|min:5'],
+                ['nom.required' => 'Le nom est obligatoire!'],
+                ['nom.min' => 'Le min est 5 caracteres!']
+            );
 
-        $produit->save();
+            $produit->nom = $request->nom;
+            $produit->description = $request->description;
+            $produit->prix = $request->prix;
+            $produit->type = $request->type;
 
-        return redirect('programmer');
+            $produit->save();
+
+            return redirect('programmer');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 

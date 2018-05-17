@@ -11,54 +11,78 @@ class ClientController extends Controller
 {
     public function add(Request $request) {
 
-        $this->validate(
-            $request,
-            ['nom_client' => 'required|min:5'],
-            ['nom_client.required' => 'Le nom est obligatoire!'],
-            ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
-            ['telephone.required' => 'Telephone est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $client = new Client;
-        $client->nom = $request->nom_client;
-        $client->telephone = $request->telephone;
-        $client->activite = $request->activite;
-        $client->region = $request->region;
+            $this->validate(
+                $request,
+                ['nom_client' => 'required|min:5'],
+                ['nom_client.required' => 'Le nom est obligatoire!'],
+                ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+                ['telephone.required' => 'Telephone est obligatoire!']
+            );
 
-        $user = Auth::user();
+            $client = new Client;
+            $client->nom = $request->nom_client;
+            $client->telephone = $request->telephone;
+            $client->activite = $request->activite;
+            $client->region = $request->region;
 
-        $user->clients()->save($client);
+            $user = Auth::user();
 
-        return back();
+            $user->clients()->save($client);
+
+            return back();
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function delete(Client $client) {
 
-        $client->delete();
+        if (Auth::check()) {
 
-        return back();
+            $client->delete();
+
+            return back();
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function edit(Client $client) {
 
-        return view('clients.editPage', compact('client'));
+        if (Auth::check()) {
+
+            return view('clients.editPage' , compact('client'));
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function update(Request $request, Client $client) {
 
-        $this->validate(
-            $request,
-            ['nom' => 'required|min:5'],
-            ['nom.required' => 'Le nom est obligatoire!'],
-            ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
-            ['telephone.required' => 'Telephone est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $client->update($request->all());
+            $this->validate(
+                $request,
+                ['nom' => 'required|min:5'],
+                ['nom.required' => 'Le nom est obligatoire!'],
+                ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+                ['telephone.required' => 'Telephone est obligatoire!']
+            );
 
-        return redirect('programmer');
+            $client->update($request->all());
+
+            return redirect('/programmer');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 }

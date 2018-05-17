@@ -12,83 +12,117 @@ class RecetteController extends Controller
 {
     public function add() {
 
-        $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
-        $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
+        if (Auth::check()) {
 
-        return view('recettes/addRecette', compact('clients', 'produits'));
+            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
+            $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
+
+            return view('recettes/addRecette', compact('clients', 'produits'));
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function show() {
 
-        // $recettes = DB::table('recettes')->where('user_id', '=', Auth::user()->id)->get();
+        if (Auth::check()) {
 
-        $recettes = DB::table('recettes AS R')
-        ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "C.nom AS client", "P.nom AS produit")
-        ->join('clients AS C', 'R.client_id', '=', 'C.id')
-        ->join('produits AS P', 'R.produit_id', '=', 'P.id')
-        ->where('R.user_id', '=', Auth::user()->id)
-        ->get();
+            $recettes = DB::table('recettes AS R')
+            ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "C.nom AS client", "P.nom AS produit")
+            ->join('clients AS C', 'R.client_id', '=', 'C.id')
+            ->join('produits AS P', 'R.produit_id', '=', 'P.id')
+            ->where('R.user_id', '=', Auth::user()->id)
+            ->get();
 
-        return view('recettes/show', compact('recettes'));
+            return view('recettes/show', compact('recettes'));
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function store(Request $request) {
 
-        $this->validate(
-            $request,
-            ['date' => 'required'],
-            ['date.required' => 'La date est obligatoire!'],
-            ['prix' => 'required|numeric'],
-            ['prix.required' => 'Le prix est obligatoire!'],
-            ['qtte' => 'required|numeric'],
-            ['qtte.required' => 'La quantité est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $recette = new Recette;
-        $recette->date = $request->date;
-        $recette->prix = $request->prix;
-        $recette->qtte = $request->qtte;
-        $recette->produit_id = $request->produit;
-        $recette->fournisseur_id = $request->fournisseur;
+            $this->validate(
+                $request,
+                ['date' => 'required'],
+                ['date.required' => 'La date est obligatoire!'],
+                ['prix' => 'required|numeric'],
+                ['prix.required' => 'Le prix est obligatoire!'],
+                ['qtte' => 'required|numeric'],
+                ['qtte.required' => 'La quantité est obligatoire!']
+            );
 
-        $user = Auth::user();
+            $recette = new Recette;
+            $recette->date = $request->date;
+            $recette->prix = $request->prix;
+            $recette->qtte = $request->qtte;
+            $recette->produit_id = $request->produit;
+            $recette->fournisseur_id = $request->fournisseur;
 
-        $user->recettes()->save($recette);
+            $user = Auth::user();
 
-        return redirect('/recettes');
+            $user->recettes()->save($recette);
+
+            return redirect('/recettes');
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function delete(Recette $recette) {
 
-        $recette->delete();
+        if (Auth::check()) {
 
-        return back();
+            $recette->delete();
+
+            return back();
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function edit(Recette $recette) {
 
-        $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
-        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
-        
-        return view('recettes.edit', compact('charge', 'clients', 'produits'));
+        if (Auth::check()) {
+
+            $clients = DB::table('clients')->where('user_id', '=', Auth::user()->id)->get();
+            $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+            
+            return view('recettes.edit', compact('charge', 'clients', 'produits'));
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function update(Request $request, Recette $recette) {
 
-        $this->validate(
-            $request,
-            ['date' => 'required'],
-            ['date.required' => 'La date est obligatoire!'],
-            ['prix' => 'required|numeric'],
-            ['prix.required' => 'Le prix est obligatoire!'],
-            ['qtte' => 'required|numeric'],
-            ['qtte.required' => 'La quantité est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $recette->update($request->all());
+            $this->validate(
+                $request,
+                ['date' => 'required'],
+                ['date.required' => 'La date est obligatoire!'],
+                ['prix' => 'required|numeric'],
+                ['prix.required' => 'Le prix est obligatoire!'],
+                ['qtte' => 'required|numeric'],
+                ['qtte.required' => 'La quantité est obligatoire!']
+            );
 
-        return redirect('/recettes');
+            $recette->update($request->all());
+
+            return redirect('/recettes');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 }

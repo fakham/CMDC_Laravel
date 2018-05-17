@@ -12,15 +12,24 @@ class ProfileController extends Controller
     //
 
     public function index() {
-        return view('profile');
+
+        if (Auth::check()) {
+            return view('profile');
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function update(Request $request, User $user) {
-        $user->update($request->all());
+        if (Auth::check()) {
+            $user->update($request->all());
 
-        $user->password = Hash::make($request->password);
-        $user->save();
+            $user->password = Hash::make($request->password);
+            $user->save();
 
-        return redirect('../../profile');
+            return redirect('/profile');
+        } else {
+            return redirect('/login');
+        }
     }
 }

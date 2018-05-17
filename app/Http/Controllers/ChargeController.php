@@ -12,86 +12,117 @@ class ChargeController extends Controller
 {
     public function add() {
 
-        $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
-        $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
+        if (Auth::check()) {
 
-        return view('charges/addCharge', compact('produits', 'fournisseurs'));
+            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
+            $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
+    
+            return view('charges/addCharge', compact('produits', 'fournisseurs'));
+
+        } else {
+            return redirec('/login');
+        }
     }
 
     public function show() {
 
-        // $charges = DB::table('charges')->where('user_id', '=', Auth::user()->id)->get();
+        if (Auth::check()) {
 
-        $charges = DB::table('charges AS C')
-        ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "F.nom AS fournisseur", "P.nom AS produit")
-        ->join('fournisseurs AS F', 'C.fournisseur_id', '=', 'F.id')
-        ->join('produits AS P', 'C.produit_id', '=', 'P.id')
-        ->where('C.user_id', '=', Auth::user()->id)
-        ->get();
+            $charges = DB::table('charges AS C')
+            ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "F.nom AS fournisseur", "P.nom AS produit")
+            ->join('fournisseurs AS F', 'C.fournisseur_id', '=', 'F.id')
+            ->join('produits AS P', 'C.produit_id', '=', 'P.id')
+            ->where('C.user_id', '=', Auth::user()->id)
+            ->get();
 
-        // dump($charges->all());
-        // die;
+            return view('charges/show', compact('charges'));
 
-        return view('charges/show', compact('charges'));
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function store(Request $request) {
 
-        $this->validate(
-            $request,
-            ['date' => 'required'],
-            ['date.required' => 'La date est obligatoire!'],
-            ['prix' => 'required|numeric'],
-            ['prix.required' => 'Le prix est obligatoire!'],
-            ['qtte' => 'required|numeric'],
-            ['qtte.required' => 'La quantité est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $charge = new Charge;
-        $charge->date = $request->date;
-        $charge->prix = $request->prix;
-        $charge->qtte = $request->qtte;
-        $charge->produit_id = $request->produit;
-        $charge->fournisseur_id = $request->fournisseur;
+            $this->validate(
+                $request,
+                ['date' => 'required'],
+                ['date.required' => 'La date est obligatoire!'],
+                ['prix' => 'required|numeric'],
+                ['prix.required' => 'Le prix est obligatoire!'],
+                ['qtte' => 'required|numeric'],
+                ['qtte.required' => 'La quantité est obligatoire!']
+            );
 
-        $user = Auth::user();
+            $charge = new Charge;
+            $charge->date = $request->date;
+            $charge->prix = $request->prix;
+            $charge->qtte = $request->qtte;
+            $charge->produit_id = $request->produit;
+            $charge->fournisseur_id = $request->fournisseur;
 
-        $user->charges()->save($charge);
+            $user = Auth::user();
 
-        return redirect('/charges');
+            $user->charges()->save($charge);
+
+            return redirect('/charges');
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function delete(Charge $charge) {
 
-        $charge->delete();
+        if (Auth::check()) {
 
-        return back();
+            $charge->delete();
+
+            return back();
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 
     public function edit(Charge $charge) {
 
-        $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
-        $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
-        
-        return view('charges.edit', compact('charge', 'fournisseurs', 'produits'));
+        if (Auth::check()) {
+
+            $fournisseurs = DB::table('fournisseurs')->where('user_id', '=', Auth::user()->id)->get();
+            $produits = DB::table('produits')->where('user_id', '=', Auth::user()->id)->get();
+            
+            return view('charges.edit', compact('charge', 'fournisseurs', 'produits'));
+
+        } else {
+            return redirect('/login');
+        }
     }
 
     public function update(Request $request, Charge $charge) {
 
-        $this->validate(
-            $request,
-            ['date' => 'required'],
-            ['date.required' => 'La date est obligatoire!'],
-            ['prix' => 'required|numeric'],
-            ['prix.required' => 'Le prix est obligatoire!'],
-            ['qtte' => 'required|numeric'],
-            ['qtte.required' => 'La quantité est obligatoire!']
-        );
+        if (Auth::check()) {
 
-        $charge->update($request->all());
+            $this->validate(
+                $request,
+                ['date' => 'required'],
+                ['date.required' => 'La date est obligatoire!'],
+                ['prix' => 'required|numeric'],
+                ['prix.required' => 'Le prix est obligatoire!'],
+                ['qtte' => 'required|numeric'],
+                ['qtte.required' => 'La quantité est obligatoire!']
+            );
 
-        return redirect('/charges');
+            $charge->update($request->all());
+
+            return redirect('/charges');
+
+        } else {
+            return redirect('/login');
+        }
 
     }
 }
