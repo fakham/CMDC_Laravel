@@ -9,7 +9,7 @@
                 <div class="card-header">Produit</div>
 
                 <div class="card-body">
-                    <form method="POST" id="formProduit" action="/produit/{{ $produit->id }}/update">
+                    <form method="POST" id="formProduit" action="/produit/{{ $produit->id }}/update" onsubmit="return false">
                         @csrf
                         <div class="input-group">
                             <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ $produit->nom }}"/>
@@ -80,7 +80,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" class="btn btn-default" value="Ajouter"/>
+                                                <button type="button" class="btn btn-default">Ajouter</button>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                             </div>
                                         </form>
@@ -132,7 +132,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" class="btn btn-default" value="Ajouter"/>
+                                                <button type="button" class="btn btn-default">Ajouter</button>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                             </div>
                                         </form>
@@ -143,7 +143,7 @@
 
                         <br>
                         <div class="input-group-btn">
-                            <input type="submit" form="formProduit" class="btn btn-default" value="Enregistrer" />
+                            <button type="button" class="btn btn-default">Enregistrer</button>
                             <a class="btn btn-danger">Annuler</a>
                         </div>
                     </form>

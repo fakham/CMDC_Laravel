@@ -9,7 +9,7 @@
                 <div class="card-header">Produit</div>
 
                 <div class="card-body">
-                    <form method="POST" id="formProduit" action="">
+                    <form method="POST" id="formProduit" action="" onsubmit="return false">
                         @csrf
                         <div class="input-group">
                             <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ old('nom') }}"/>
@@ -56,7 +56,7 @@
                                             <h4 class="modal-title w-100">Ajouter Client</h4>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <form method="POST" action="{{'add/addClient'}}">
+                                        <form method="POST" action="{{'add/addClient'}}" id="formClient">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="input-group">
@@ -76,7 +76,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <input type="submit" class="btn btn-default" value="Ajouter"/>
+                                                <button type="button" class="btn btn-default" onclick="$('#formClient').submit()">Ajouter</button>
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                             </div>
                                         </form>
