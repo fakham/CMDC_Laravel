@@ -14,7 +14,7 @@ class RecetteController extends Controller
 
         if (Auth::check()) {
 
-            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
+            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->whereNotNull('client_id')->get();
             $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
 
             return view('recettes.addRecette', compact('clients', 'produits'));

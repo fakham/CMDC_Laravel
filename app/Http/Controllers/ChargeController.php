@@ -14,7 +14,7 @@ class ChargeController extends Controller
 
         if (Auth::check()) {
 
-            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
+            $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->whereNotNull('fournisseur_id')->get();
             $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
     
             return view('charges.addCharge', compact('produits', 'fournisseurs'));
