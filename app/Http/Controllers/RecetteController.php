@@ -61,7 +61,7 @@ class RecetteController extends Controller
             $recette->prix = $request->prix;
             $recette->qtte = $request->qtte;
             $recette->produit_id = $request->produit;
-            $recette->fournisseur_id = $request->fournisseur;
+            $recette->client_id = $request->client;
 
             $user = Auth::user();
 
