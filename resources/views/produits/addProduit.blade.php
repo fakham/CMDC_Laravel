@@ -9,7 +9,7 @@
                 <div class="card-header">Produit</div>
 
                 <div class="card-body">
-                    <form method="POST" id="formProduit" action="" onsubmit="return false">
+                    <form method="POST" id="formProduit" action="">
                         @csrf
                         <div class="input-group">
                             <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ old('nom') }}"/>
@@ -44,46 +44,12 @@
                                 <option value="{{$client->id}}">{{$client->nom}}</option>
                                 @endforeach
                             </select>
-                            <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#clientModal">Ajouter</button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="clientModal" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header w-100">
-                                            <h4 class="modal-title w-100">Ajouter Client</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form method="POST" action="{{'add/addClient'}}" id="formClient">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="input-group">
-                                                    <input name="nom_client" class="form-control" type="text" placeholder="Nom Client..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" onclick="$('#formClient').submit()">Ajouter</button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                            
+                            
                         </div>
+
+                            
 
                         <div class="input-group" id="fournisseurDiv">
                             <select name="fournisseur" class="form-control" onchange="getSelectedValue(this)">
@@ -92,54 +58,96 @@
                                 <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
                                 @endforeach
                             </select>
-                            <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#fournisseurModal">Ajouter</button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="fournisseurModal" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header w-100">
-                                            <h4 class="modal-title w-100">Ajouter Fournisseur</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form method="POST" action="{{'add/addFournisseur'}}">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="input-group">
-                                                    <input name="nom_fournisseur" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <input type="submit" class="btn btn-default" value="Ajouter"/>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
                         <br>
                         <div class="input-group-btn">
                             <input type="submit" form="formProduit" class="btn btn-default" value="Enregistrer" />
-                            <a class="btn btn-danger">Annuler</a>
+                            <a class="btn btn-danger" href="/programmer">Annuler</a>
                         </div>
                     </form>
+                    <br>
+                    <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#clientModal">Ajouter Client</button>
+                            
+                    <!-- Modal -->
+                    <div class="modal fade" id="clientModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header w-100">
+                                    <h4 class="modal-title w-100">Ajouter Client</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form method="POST" action="{{'add/addClient'}}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="input-group">
+                                            <input name="nom_client" class="form-control" type="text" placeholder="Nom Client..."/>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <input name="region" class="form-control" type="text" placeholder="Region..."/>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-default" value="Ajouter" />
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#fournisseurModal">Ajouter Fournisseur</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="fournisseurModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header w-100">
+                                    <h4 class="modal-title w-100">Ajouter Fournisseur</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form method="POST" action="{{'add/addFournisseur'}}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="input-group">
+                                            <input name="nom_fournisseur" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <input name="region" class="form-control" type="text" placeholder="Region..."/>
+                                        </div>
+                                        <br>
+                                        <div class="input-group">
+                                            <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-default" value="Ajouter"/>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                    
             </div>
         </div>
     </div>

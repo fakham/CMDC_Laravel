@@ -60,7 +60,7 @@ class ProduitController extends Controller
 
             $fournisseur->produits()->save($produit);
 
-            return view('charges.addCharge');
+            return redirect('programmer');
 
         } else {
             return redirect('/login');
@@ -91,7 +91,7 @@ class ProduitController extends Controller
 
             $client->produits()->save($produit);
 
-            return view('recettes.addRecette');
+            return redirect('/programmer');
 
         } else {
             return redirect('/login');
@@ -108,7 +108,7 @@ class ProduitController extends Controller
             return back();
 
         } else {
-            return redirect('login');
+            return redirect('/login');
         }
 
     }
@@ -146,7 +146,7 @@ class ProduitController extends Controller
 
             $produit->save();
 
-            return redirect('programmer');
+            return redirect('/programmer');
 
         } else {
             return redirect('/login');

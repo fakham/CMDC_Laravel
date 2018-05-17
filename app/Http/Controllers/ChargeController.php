@@ -17,7 +17,7 @@ class ChargeController extends Controller
             $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
             $fournisseurs = DB::table('fournisseurs')->where('user_id','=', Auth::user()->id)->get();
     
-            return view('charges/addCharge', compact('produits', 'fournisseurs'));
+            return view('charges.addCharge', compact('produits', 'fournisseurs'));
 
         } else {
             return redirec('/login');
@@ -35,7 +35,7 @@ class ChargeController extends Controller
             ->where('C.user_id', '=', Auth::user()->id)
             ->get();
 
-            return view('charges/show', compact('charges'));
+            return view('charges.show', compact('charges'));
 
         } else {
             return redirect('/login');

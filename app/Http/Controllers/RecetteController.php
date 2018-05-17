@@ -17,7 +17,7 @@ class RecetteController extends Controller
             $produits = DB::table('produits')->where('user_id','=', Auth::user()->id)->get();
             $clients = DB::table('clients')->where('user_id','=', Auth::user()->id)->get();
 
-            return view('recettes/addRecette', compact('clients', 'produits'));
+            return view('recettes.addRecette', compact('clients', 'produits'));
 
         } else {
             return redirect('/login');
@@ -35,7 +35,7 @@ class RecetteController extends Controller
             ->where('R.user_id', '=', Auth::user()->id)
             ->get();
 
-            return view('recettes/show', compact('recettes'));
+            return view('recettes.show', compact('recettes'));
 
         } else {
             return redirect('/login');
