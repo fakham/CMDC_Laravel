@@ -170,9 +170,9 @@
 
     function checkRecette() {
         $('#type option:gt(0)').remove();
-        $("#type").append('<option value="Recette 1">Recette 1</option>');
-        $("#type").append('<option value="Recette 2">Recette 2</option>');
-        $("#type").append('<option value="Recette 3">Recette 3</option>');
+        $("#type").append('<option value="Explotation">Explotation</option>');
+        $("#type").append('<option value="Financière">Financière</option>');
+        $("#type").append('<option value="Non courante">Non courante</option>');
         $('#fournisseurDiv').hide();
         $('#clientDiv').show();
         type = "addRecette";
