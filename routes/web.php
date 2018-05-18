@@ -54,3 +54,7 @@ Route::post('/produits/add/addFournisseur', 'FournisseurController@add')->name('
 Route::get('/fournisseur/{fournisseur}/delete', 'FournisseurController@delete')->name('deleteFournisseur');
 Route::get('/fournisseur/{fournisseur}/edit', 'FournisseurController@edit')->name('editFournisseur');
 Route::post('/fournisseur/{fournisseur}/update', 'FournisseurController@update')->name('updateFournisseur');
+
+
+Route::get('/control', 'HomeController@control')->name('control');
+Route::post('/update-role/{user}', 'HomeController@updateRole')->name('update-role');

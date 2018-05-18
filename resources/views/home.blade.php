@@ -13,8 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    @if (Auth::user()->role <= 3)
+                    <h1>You are logged in!</h1>
+                    @else
+                    <h1 style="color:red">Votre compte est en cours d'activation...</h1>
+                    @endif
                 </div>
             </div>
         </div>
