@@ -107,7 +107,7 @@
                 </div>
             </div>
         </nav>
-        @auth
+        @if (Auth::check() && Auth::user()->role <= 3)
         <div class="sidenav">
             <div class="panel-group">
                 <div class="panel panel-default">
@@ -155,7 +155,7 @@
                 </div>
             </div>
         </div>
-        @endauth
+        @endif
         <main class="py-4">
             @yield('content')
         </main>
