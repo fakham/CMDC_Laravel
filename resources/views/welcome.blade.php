@@ -94,7 +94,7 @@
                         <li><a href="#" data-scroll-nav="3" class="">Testimonails</a></li>
                         <li><a href="#" data-scroll-nav="4" class="">Blog</a></li>
                         <li><a href="#" data-scroll-nav="5">Contact</a></li>
-                        <li><a href="login.html"style="font-size: 48px "><font color="#d63561">Login</font></a></li>
+                        <li><a href="/login"style="font-size: 48px "><font color="#d63561">Login</font></a></li>
                     </ul>
                 </div>
             </div>
