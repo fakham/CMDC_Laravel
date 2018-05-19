@@ -38,10 +38,11 @@
 
             <div class="login100-more" style="background-image: url('img/calculator.jpeg');"></div>
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
-                <form class="login100-form validate-form" action="{{ route('login') }}">
+                <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                @csrf
                     <span class="login100-form-title p-b-59">
                         
-                            <a style="font-size:20px; " href="indexhome.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30"> 
+                            <a style="font-size:20px; " href="/" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30"> 
                                 <i class="fa fa-long-arrow-left m-l-5"></i>
 							Home
 							
@@ -54,7 +55,7 @@
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <span class="label-input100">Email</span>
-                        <input class="input100" type="text" name="email" placeholder="Email addess...">
+                        <input class="input100" type="text" name="email" placeholder="Email addess..." required>
                         <span class="focus-input100"></span>
                     </div>
 
@@ -62,7 +63,7 @@
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
                         <span class="label-input100">Password</span>
-                        <input class="input100" type="text" name="pass" placeholder="*************">
+                        <input class="input100" type="password" name="password" placeholder="*************" required>
                         <span class="focus-input100"></span>
                     </div>
 
@@ -74,7 +75,7 @@
 							</button>
                         </div>
 
-                        <a href="signUp.html" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
+                        <a href="/register" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30">
 							Sign Up
 							<i class="fa fa-long-arrow-right m-l-5"></i>
 						</a>
