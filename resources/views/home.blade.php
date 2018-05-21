@@ -193,13 +193,23 @@
             <script>
                 const CHART = document.getElementById("chart");
 
+                var charges = {!! $jsonCharges !!};
+                var recettes = {!! $jsonRecettes !!};
+
+                var labels = [];
+                var data = [];
+                for (var i = 0; i < recettes.length; i++) {
+                    data.push(recettes[i].prix);
+                    labels.push(recettes[i].date);
+                }
+
                 let lineChart = new Chart(CHART, {
                     type: 'line',
                     data: {
-                        labels: ['Lun', 'Mar', 'Mer'],
+                        labels: labels,
                         datasets: [
                             {
-                                data: [20, 50, 10]
+                                data: data
                             }
                         ]
                     }

@@ -32,13 +32,13 @@ class HomeController extends Controller
             $recettes = DB::table('recettes AS R')
             ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "P.nom AS produit", "P.type AS typeP")
             ->join('produits AS P', 'R.produit_id', '=', 'P.id')
-            ->where('R.user_id', '=', Auth::user()->id)
+            ->where('R.user_id', '=', Auth::user()->id)->orderBy('date')
             ->get();
 
             $charges = DB::table('charges AS C')
             ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "P.nom AS produit", "P.type AS typeP")
             ->join('produits AS P', 'C.produit_id', '=', 'P.id')
-            ->where('C.user_id', '=', Auth::user()->id)
+            ->where('C.user_id', '=', Auth::user()->id)->orderBy('date')
             ->get();
             
             $resultatsCharges = 0;
@@ -52,7 +52,10 @@ class HomeController extends Controller
 
             $resultats = $resultatsRecettes - $resultatsCharges;
 
-            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats'));
+            $jsonCharges = $charges->toJson();
+            $jsonRecettes = $recettes->toJson();
+
+            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes'));
         } else {
             return redirect('/login');
         }
