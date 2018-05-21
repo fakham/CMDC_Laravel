@@ -175,9 +175,8 @@
                                 @if (Auth::user()->role <= 3)
                                 <!--<h1>You are logged in!</h1>-->
                                 <ul class="list-inline">
-                                    <li class="list-inline-item"><h4>Résultats d'exploitation : {{ $resultatsExp }}</h4></li>
-                                    <li class="list-inline-item"><h4>Résultats financiers : {{ $resultatsFin }}</h4></li>
-                                    <li class="list-inline-item"><h4>Résultats non courantes : {{ $resultatsNon }}</h4></li>
+                                    <li class="list-inline-item"><h4>Charges : {{ $resultatsCharges }}</h4></li>
+                                    <li class="list-inline-item"><h4>Recettes : {{ $resultatsRecettes }}</h4></li>
                                 </ul>
                                 <div><h3>Résultats : {{ $resultats }}</h3></div>
                                 <div style="width:400px">

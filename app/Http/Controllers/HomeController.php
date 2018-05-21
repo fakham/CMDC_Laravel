@@ -40,40 +40,19 @@ class HomeController extends Controller
             ->join('produits AS P', 'C.produit_id', '=', 'P.id')
             ->where('C.user_id', '=', Auth::user()->id)
             ->get();
+            
+            $resultatsCharges = 0;
+            $resultatsRecettes = 0;
 
-            $chargesExp = 0;
-            $chargesFin = 0;
-            $chargesNon = 0;
+            foreach ($charges as $charge)
+                $resultatsCharges += $charge->prix * $charge->qtte;
 
-            $recettesExp = 0;
-            $recettesFin = 0;
-            $recettesNon = 0;
+            foreach ($recettes as $recette)
+                $resultatsRecettes += $recette->prix * $recette->qtte;
 
-            foreach($charges as $charge) {
-                if ($charge->typeP == "Explotation")
-                    $chargesExp += $charge->prix * $charge->qtte;
-                else if ($charge->typeP == "Financière")
-                    $chargesFin += $charge->prix * $charge->qtte;
-                else if ($charge->typeP == "Non courante")
-                    $chargesNon += $charge->prix * $charge->qtte;
-            }
+            $resultats = $resultatsRecettes - $resultatsCharges;
 
-            foreach($recettes as $recette) {
-                if ($recette->typeP == "Explotation")
-                    $recettesExp += $recette->prix * $recette->qtte;
-                else if ($recette->typeP == "Financière")
-                    $recettesFin += $recette->prix * $recette->qtte;
-                else if ($recette->typeP == "Non courante")
-                    $recettesNon += $recette->prix * $recette->qtte;
-            }
-
-            $resultatsExp = $recettesExp - $chargesExp;
-            $resultatsFin = $recettesFin - $chargesFin;
-            $resultatsNon = $recettesNon - $chargesNon;
-
-            $resultats = $resultatsExp + $resultatsFin + $resultatsNon;
-
-            return view('home', compact('resultatsExp', 'resultatsFin', 'resultatsNon', 'resultats'));
+            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats'));
         } else {
             return redirect('/login');
         }
