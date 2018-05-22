@@ -59,7 +59,7 @@ class ProduitController extends Controller
 
             $fournisseur->produits()->save($produit);
 
-            return redirect('programmer');
+            return redirect('/programmer');
 
         } else {
             return redirect('/login');
