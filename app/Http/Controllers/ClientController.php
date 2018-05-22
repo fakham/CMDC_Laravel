@@ -15,9 +15,9 @@ class ClientController extends Controller
 
             $this->validate(
                 $request,
-                ['nom_client' => 'required|min:5'],
+                ['nom_client' => 'required'],
                 ['nom_client.required' => 'Le nom est obligatoire!'],
-                ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+                ['telephone' => 'required|numeric'],
                 ['telephone.required' => 'Telephone est obligatoire!']
             );
 
@@ -70,9 +70,9 @@ class ClientController extends Controller
 
             $this->validate(
                 $request,
-                ['nom' => 'required|min:5'],
+                ['nom' => 'required'],
                 ['nom.required' => 'Le nom est obligatoire!'],
-                ['telephone' => 'required|numeric|regex:/(0)([5-7])[0-9]{8}/'],
+                ['telephone' => 'required|numeric'],
                 ['telephone.required' => 'Telephone est obligatoire!']
             );
 

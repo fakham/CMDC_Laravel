@@ -43,9 +43,8 @@ class ProduitController extends Controller
 
             $this->validate(
                 $request,
-                ['nom' => 'required|min:5'],
-                ['nom.required' => 'Le nom est obligatoire!'],
-                ['nom.min' => 'Le min est 5 caracteres!']
+                ['nom' => 'required'],
+                ['nom.required' => 'Le nom est obligatoire!']
             );
 
             $produit = new Produit;
@@ -74,9 +73,8 @@ class ProduitController extends Controller
 
             $this->validate(
                 $request,
-                ['nom' => 'required|min:5'],
-                ['nom.required' => 'Le nom est obligatoire!'],
-                ['nom.min' => 'Le min est 5 caracteres!']
+                ['nom' => 'required'],
+                ['nom.required' => 'Le nom est obligatoire!']
             );
 
             $produit = new Produit;
@@ -134,9 +132,8 @@ class ProduitController extends Controller
 
             $this->validate(
                 $request,
-                ['nom' => 'required|min:5'],
-                ['nom.required' => 'Le nom est obligatoire!'],
-                ['nom.min' => 'Le min est 5 caracteres!']
+                ['nom' => 'required'],
+                ['nom.required' => 'Le nom est obligatoire!']
             );
 
             $produit->nom = $request->nom;
