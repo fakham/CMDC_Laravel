@@ -228,7 +228,11 @@
                             labels: labels,
                             datasets: [
                                 {
-                                    data: data
+                                    label: 'Recettes',
+                                    data: data,
+                                    borderColor: [
+                                        "#61C8C8"
+                                    ],
                                 }
                             ]
                         }
