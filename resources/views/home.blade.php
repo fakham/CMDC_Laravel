@@ -13,6 +13,7 @@
     <!-- Scripts -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    <script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -196,25 +197,44 @@
                 var charges = {!! $jsonCharges !!};
                 var recettes = {!! $jsonRecettes !!};
 
-                var labels = [];
-                var data = [];
-                for (var i = 0; i < recettes.length; i++) {
-                    data.push(recettes[i].prix);
-                    labels.push(recettes[i].date);
-                }
-
-                let lineChart = new Chart(CHART, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                data: data
+                function daily() {
+                    var labels = [];
+                    var data = [];
+                    var date = new Date();
+                    var dateR = new Date();
+                    var isFound = false;
+                    date.setDate(date.getDate() - 30);
+                    for (var i = 0; i < 30; i++) {
+                        for (var j = 0; j < recettes.length; j++) {
+                            dateR = moment(recettes[j].date);
+                            if (dateR.isSame(date, "day")) {
+                                isFound = true;
+                                data.push(recettes[j].prix * recettes[j].qtte);
                             }
-                        ]
+                        }
+                        if (!isFound)
+                            data.push(0);
+                        else
+                            isFound = false;
+                        date.setDate(date.getDate() + 1);
+                        labels.push(date.getDate());
                     }
-                });
+                    data.shift();
+                    console.log(data);
 
+                    let lineChart = new Chart(CHART, {
+                        type: 'line',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    data: data
+                                }
+                            ]
+                        }
+                    });
+                }
+                daily();
             </script>
         </main>
     </div>
