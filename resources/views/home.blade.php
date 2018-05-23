@@ -180,7 +180,40 @@
                                     <li class="list-inline-item"><h4>Recettes : {{ $resultatsRecettes }}</h4></li>
                                 </ul>
                                 <div><h3>Résultats : {{ $resultats }}</h3></div>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="d-flex flex-row text-center">Période : </div>
+                                    <div class='col-sm-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker1'>
+                                                <input id="datepicker1" type='text' class="form-control" name="date" placeholder="Du..." onchange="changeCharts()" onclick="(this.type='date')"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='col-sm-3'>
+                                        <div class="form-group">
+                                            <div class='input-group date' id='datetimepicker2'>
+                                                <input id="datepicker2" type='text' class="form-control" name="date" placeholder="Au..." onchange="changeCharts()" onclick="(this.type='date')"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style="width:400px">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="input-group col-sm-4">
+                                            <select id="client" name="client" class="form-control" onchange="changeCharts()">
+                                                <option value="-1" disabled selected>Client..</option>
+                                                @foreach ($recettes as $recette)
+                                                    <option value="{{$recette->id_client}}">{{$recette->client}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <canvas id="chart" width="400" height="400"></canvas>
                                 </div>
                                 @else
@@ -197,17 +230,20 @@
                 var charges = {!! $jsonCharges !!};
                 var recettes = {!! $jsonRecettes !!};
 
-                function daily() {
+                function daily(dateD, dateF, client) {
                     var labels = [];
                     var data = [];
-                    var date = new Date();
-                    var dateR = new Date();
+                    
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+                    
+                    var isClient = client == -1 ? false : true;
                     var isFound = false;
-                    date.setDate(date.getDate() - 30);
-                    for (var i = 0; i < 30; i++) {
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
                         for (var j = 0; j < recettes.length; j++) {
                             dateR = moment(recettes[j].date);
-                            if (dateR.isSame(date, "day")) {
+                            if (dateR.isSame(i, "day") && (!isClient || recettes[j].id_client == client)) {
                                 isFound = true;
                                 data.push(recettes[j].prix * recettes[j].qtte);
                             }
@@ -216,10 +252,9 @@
                             data.push(0);
                         else
                             isFound = false;
-                        date.setDate(date.getDate() + 1);
-                        labels.push(date.getDate());
+                        labels.push(i.get('date'));
                     }
-                    data.shift();
+                    // data.shift();
                     console.log(data);
 
                     let lineChart = new Chart(CHART, {
@@ -238,7 +273,25 @@
                         }
                     });
                 }
-                daily();
+                daily('', '', -1);
+
+                function changeCharts() {
+                    var v1 = $('#datepicker1').val();
+                    var v2 = $('#datepicker2').val();
+                    var v3 = $('#client').val();
+                    daily(v1, v2, v3);
+                    console.log(v1);
+                    console.log(v2);
+                    // console.log(moment($('#datetimepicker1').val()).get('date')); 
+                    // console.log(moment($('#datetimepicker2').val()).get('date')); 
+                }
+
+                // $(function () {
+                //     $('#datetimepicker1').datetimepicker();
+                // });
+                // $(function () {
+                //     $('#datetimepicker2').datetimepicker();
+                // });
             </script>
         </main>
     </div>
