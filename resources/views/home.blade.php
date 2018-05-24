@@ -205,9 +205,9 @@
                                 </div>
                                 <div style="width:400px">
                                     <div class="row d-flex justify-content-center">
-                                        <div class="input-group col-sm-4">
+                                        <div class="input-group col-sm-5">
                                             <select id="client" name="client" class="form-control" onchange="changeCharts()">
-                                                <option value="-1" disabled selected>Client..</option>
+                                                <option value="" selected>Client.. (Tous)</option>
                                                 @foreach ($recettes as $recette)
                                                     <option value="{{$recette->id_client}}">{{$recette->client}}</option>
                                                 @endforeach
@@ -238,7 +238,7 @@
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
                     
-                    var isClient = client == -1 ? false : true;
+                    var isClient = client == "" ? false : true;
                     var isFound = false;
                     for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
                         for (var j = 0; j < recettes.length; j++) {
@@ -273,7 +273,7 @@
                         }
                     });
                 }
-                daily('', '', -1);
+                daily('', '', '');
 
                 function changeCharts() {
                     var v1 = $('#datepicker1').val();
@@ -281,7 +281,7 @@
                     var v3 = $('#client').val();
                     daily(v1, v2, v3);
                     console.log(v1);
-                    console.log(v2);
+                    console.log(v3);
                     // console.log(moment($('#datetimepicker1').val()).get('date')); 
                     // console.log(moment($('#datetimepicker2').val()).get('date')); 
                 }
