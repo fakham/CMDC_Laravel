@@ -203,8 +203,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="width:400px">
-                                    <div class="row d-flex justify-content-center">
+                                <div class="row center-xs">
+                                <div style="width:430px">
+                                    <div class="d-flex justify-content-center">
                                         <div class="input-group col-sm-5">
                                             <select id="client" name="client" class="form-control" onchange="changeCharts()">
                                                 <option value="" selected>Client.. (Tous)</option>
@@ -216,6 +217,20 @@
                                     </div>
                                     <canvas id="chart" width="400" height="400"></canvas>
                                 </div>
+                                <div style="width:430px">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="input-group col-sm-6">
+                                            <select id="fournisseur" name="fournisseur" class="form-control" onchange="changeCharts()">
+                                                <option value="" selected>Fournisseur.. (Tous)</option>
+                                                @foreach ($charges as $charge)
+                                                    <option value="{{$charge->id_fournisseur}}">{{$charge->fournisseur}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <canvas id="chart2" width="400" height="400"></canvas>
+                                </div>
+                                </div>
                                 @else
                                 <h1 style="color:red">Votre compte est en cours d'activation...</h1>
                                 @endif
@@ -226,13 +241,15 @@
             </div>
             <script>
                 const CHART = document.getElementById("chart");
+                const CHART2 = document.getElementById("chart2");
 
                 var charges = {!! $jsonCharges !!};
                 var recettes = {!! $jsonRecettes !!};
 
-                function daily(dateD, dateF, client) {
+                function dailyRecette(dateD, dateF, client) {
                     var labels = [];
                     var data = [];
+                    var qtte = [];
                     
                     var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
@@ -246,40 +263,111 @@
                             if (dateR.isSame(i, "day") && (!isClient || recettes[j].id_client == client)) {
                                 isFound = true;
                                 data.push(recettes[j].prix * recettes[j].qtte);
+                                qtte.push(recettes[j].qtte);
                             }
                         }
-                        if (!isFound)
+                        if (!isFound) {
                             data.push(0);
-                        else
+                            qtte.push(0);
+                        } else
                             isFound = false;
+
                         labels.push(i.get('date'));
                     }
                     // data.shift();
                     console.log(data);
 
                     let lineChart = new Chart(CHART, {
-                        type: 'line',
+                        type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [
                                 {
-                                    label: 'Recettes',
+                                    label: 'Recettes : Quantité',
+                                    data: qtte,
+                                    borderColor: [
+                                        "#FF0000"
+                                    ],
+                                },
+                                {
+                                    label: 'Recettes : Prix',
                                     data: data,
                                     borderColor: [
                                         "#61C8C8"
                                     ],
+                                    type: 'line'
                                 }
                             ]
                         }
                     });
                 }
-                daily('', '', '');
+
+                function dailyCharge(dateD, dateF, fournisseur) {
+                    var labels = [];
+                    var data = [];
+                    var qtte = [];
+                    
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+                    
+                    var isFournisseur = fournisseur == "" ? false : true;
+                    var isFound = false;
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < charges.length; j++) {
+                            dateR = moment(charges[j].date);
+                            if (dateR.isSame(i, "day") && (!isFournisseur || charges[j].id_fournisseur == fournisseur)) {
+                                isFound = true;
+                                data.push(charges[j].prix * charges[j].qtte);
+                                qtte.push(charges[j].qtte);
+                            }
+                        }
+                        if (!isFound) {
+                            data.push(0);
+                            qtte.push(0);
+                        } else
+                            isFound = false;
+
+                        labels.push(i.get('date'));
+                    }
+                    // data.shift();
+                    console.log(data);
+
+                    let lineChart = new Chart(CHART2, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [
+                                {
+                                    label: 'Charges : Quantité',
+                                    data: qtte,
+                                    borderColor: [
+                                        "#FF0000"
+                                    ],
+                                },
+                                {
+                                    label: 'Charges : Prix',
+                                    data: data,
+                                    borderColor: [
+                                        "#61C8C8"
+                                    ],
+                                    type: 'line'
+                                }
+                            ]
+                        }
+                    });
+                }
+
+                dailyCharge('', '', '');
+                dailyRecette('', '', '');
 
                 function changeCharts() {
                     var v1 = $('#datepicker1').val();
                     var v2 = $('#datepicker2').val();
                     var v3 = $('#client').val();
-                    daily(v1, v2, v3);
+                    var v4 = $('#fournisseur').val();
+                    dailyCharge(v1, v2, v4);
+                    dailyRecette(v1, v2, v3);
                     console.log(v1);
                     console.log(v3);
                     // console.log(moment($('#datetimepicker1').val()).get('date')); 

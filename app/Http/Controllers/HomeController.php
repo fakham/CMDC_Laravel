@@ -43,7 +43,8 @@ class HomeController extends Controller
             ->get();
 
             $charges = DB::table('charges AS C')
-            ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "P.nom AS produit", "P.type AS typeP")
+            ->select("C.id AS id", "C.date AS date", "C.prix AS prix", "C.qtte AS qtte", "F.id AS id_fournisseur", "F.nom AS fournisseur", "P.nom AS produit", "P.type AS typeP")
+            ->join('fournisseurs AS F', 'C.fournisseur_id', '=', 'F.id')
             ->join('produits AS P', 'C.produit_id', '=', 'P.id')
             ->where('C.user_id', '=', Auth::user()->id)->orderBy('date')
             ->get();
