@@ -1,24 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Contrôler les Utilisateurs : ') }}</div>
+                <div class="header">
+                    <h4 class="title">Controler les utilisateurs</h4>
 
-                <div class="card-body">
+                </div>
+                <div class="content table-responsive table-full-width">
                     <table class="table table-striped">
                         <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Prenom</th>
-                                <th>Nom</th>
-                                <th>Telephone</th>
-                                <th>E-mail</th>
-                                <th>Role</th>
-                            </tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Prenom</th>
+                            <th>Nom</th>
+                            <th>Telephone</th>
+                            <th>E-mail</th>
+                            <th>Role</th>
+
                         </thead>
                         <tbody>
                         @foreach ($users as $user)
@@ -36,7 +37,7 @@
                                     @else
                                         <form method="post" action="/update-role/{{ $user->id }}">
                                             @csrf
-                                            <select class="form-control" name="role" onchange="this.form.submit();">
+                                            <select class="form-control border-input" name="role" onchange="this.form.submit();">
                                                 <option value="1" {{ ($user->role == 1) ? 'selected' : null}}>Admin</option>
                                                 <option value="2" {{ ($user->role == 2) ? 'selected' : null}}>Manager</option>
                                                 <option value="3" {{ ($user->role == 3) ? 'selected' : null}}>User</option>
