@@ -80,7 +80,7 @@
                                     <h4 class="modal-title w-100">Ajouter Client</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form method="POST" action="{{'add/addClient'}}">
+                                <form method="POST" action="{{'/produits/add/addClient'}}">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="input-group">

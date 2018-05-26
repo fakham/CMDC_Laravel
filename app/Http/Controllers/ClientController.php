@@ -9,6 +9,16 @@ use App\Client;
 
 class ClientController extends Controller
 {
+    public function index() {
+        if (Auth::check()) {
+
+            return view('clients.add');
+
+        } else {
+            return redirect('/login');
+        }
+    }
+
     public function add(Request $request) {
 
         if (Auth::check()) {

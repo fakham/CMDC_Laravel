@@ -45,6 +45,7 @@ Route::get('/produit/{produit}/delete', 'ProduitController@delete')->name('delet
 Route::get('/produit/{produit}/edit', 'ProduitController@edit')->name('editProduit');
 Route::post('/produit/{produit}/update', 'ProduitController@update')->name('updateProduit');
 
+Route::get('/client/new', 'ClientController@index')->name('newClient');
 Route::post('/produits/add/addClient', 'ClientController@add')->name('addClient');
 Route::get('/client/{client}/delete', 'ClientController@delete')->name('deleteClient');
 Route::get('/client/{client}/edit', 'ClientController@edit')->name('editClient');
