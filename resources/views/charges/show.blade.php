@@ -1,21 +1,21 @@
 @extends('../layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Charges</div>
+                <div class="header">
+                    <h4 class="title">Modifier ou supprimer votre charges</h4>
 
-                <div class="card-body">
+                </div>
+                <div class="content table-responsive table-full-width">
                     <table class="table table-striped">
                         <thead>
-                        <tr>
                             <th>Date</th>
                             <th>Produit</th>
                             <th>Fournisseur</th>
                             <th>Prix</th>
-                        </tr>
                         </thead>
                         <tbody>
                         @foreach ($charges as $charge)
@@ -24,7 +24,7 @@
                             <td>{{ $charge->produit }}</td>
                             <td>{{ $charge->fournisseur }}</td>
                             <td>{{ $charge->prix * $charge->qtte }}</td>
-                            <td><a class="btn btn-default" href="/charges/{{ $charge->id }}/edit">Modifier</a></td>
+                            <td><a class="btn btn-info" href="/charges/{{ $charge->id }}/edit">Modifier</a></td>
                             <td><a class="btn btn-danger" href="/charges/{{ $charge->id }}/delete" onclick="return confirm('Voulez-vous supprimer ce charge?')">Supprimer</a></td>
                         </tr>
                         @endforeach
