@@ -82,6 +82,7 @@
     </div>
 </div>
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 document.getElementById("total").disable=true;
     $('#qty').on('keyup', function() {
