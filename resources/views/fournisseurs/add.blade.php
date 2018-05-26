@@ -7,7 +7,7 @@
         <div class="col-lg-8 col-md-7">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Ajouter Client</h4>
+                    <h4 class="title">Ajouter Fournisseur</h4>
                 </div>
                 <div class="content">
                     <form method="POST" action="{{'/produits/add/addFournisseur'}}">
