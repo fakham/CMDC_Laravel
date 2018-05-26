@@ -1,158 +1,102 @@
 @extends('../layouts.app')
 
 @section('content')
-<div class="container">
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-md-7">
             <div class="card">
-                <div class="card-header">Produit</div>
-
-                <div class="card-body">
+                <div class="header">
+                    <h4 class="title">Ajouter Produit</h4>
+                </div>
+                <div class="content">
                     <form method="POST" id="formProduit" action="">
                         @csrf
-                        <div class="input-group">
-                            <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ old('nom') }}"/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nom Produit</label>
+                                    <input name="nom" class="form-control border-input" type="text" placeholder="Nom Produit..." value="{{ old('nom') }}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control border-input" placeholder="Description..." rows="3" value="{{ old('description') }}"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <center>
+                                <div class="col-md-3">
+                                    <div class="form-group radio">
+                                        <label>Charge
+                                            <input type="radio" id="Charge" value="charge" checked="checked" name="typeProduit" class="form-control" onchange="checkCharge()">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group radio">
+                                        <label>Recette
+                                            <input type="radio" id="Recette" value="recette" name="typeProduit" class="form-control" onchange="checkRecette()">
+                                        </label>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group autocomplete">
+                                    <label>Type</label>
+                                    <select name="type" class="form-control border-input" id="type">
+                                        <option value="" disabled selected>Type..</option>
+                                        <option value="Explotation">Explotation</option>
+                                        <option value="Financière">Financière</option>
+                                        <option value="Non courante">Non courante</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="clientDiv">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select name="client" class="form-control border-input" onchange="getSelectedValue(this)">
+                                        <option value="" disabled selected>Client..</option>
+                                        @foreach ($clients as $client)
+                                        <option value="{{$client->id}}">{{$client->nom}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="fournisseurDiv">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Fournisseur</label>
+                                    <select name="fournisseur" class="form-control border-input" onchange="getSelectedValue(this)">
+                                        <option value="" disabled selected>Fourniseur..</option>
+                                        @foreach ($fournisseurs as $fournisseur)
+                                        <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <br>
-                        <div class="input-group">
-                            <textarea name="description" class="form-control" placeholder="Description..." rows="3" value="{{ old('description') }}"></textarea>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input name="prix" class="form-control" type="number" placeholder="Prix..." value="{{ old('prix') }}"/>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input name="typeProduit" value="charge" class="form-control" type="radio" checked="checked" onchange="checkCharge()">Charge</input>
-                            <input name="typeProduit" value="recette" class="form-control" type="radio" onchange="checkRecette()">Recette</input>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <select name="type" class="form-control" id="type">
-                                <option value="" disabled selected>Type..</option>
-                                <option value="Explotation">Explotation</option>
-                                <option value="Financière">Financière</option>
-                                <option value="Non courante">Non courante</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div class="input-group" id="clientDiv">
-                            <select name="client" class="form-control" onchange="getSelectedValue(this)">
-                                <option value="" disabled selected>Client..</option>
-                                @foreach ($clients as $client)
-                                <option value="{{$client->id}}">{{$client->nom}}</option>
-                                @endforeach
-                            </select>
-                            
-                            
-                            
-                        </div>
-
-                            
-
-                        <div class="input-group" id="fournisseurDiv">
-                            <select name="fournisseur" class="form-control" onchange="getSelectedValue(this)">
-                                <option value="" disabled selected>Fourniseur..</option>
-                                @foreach ($fournisseurs as $fournisseur)
-                                <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
-                                @endforeach
-                            </select>
-                            
-                        </div>
-
-                        <br>
-                        <div class="input-group-btn">
-                            <input type="submit" form="formProduit" class="btn btn-default" value="Enregistrer" />
+                        <div class="text-center">
+                            <input type="submit" form="formProduit" class="btn btn-default" value="Enregistrer">
                             <a class="btn btn-danger" href="/programmer">Annuler</a>
                         </div>
                     </form>
-                    <br>
-                    <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#clientModal">Ajouter Client</button>
-                            
-                    <!-- Modal -->
-                    <div class="modal fade" id="clientModal" role="dialog">
-                        <div class="modal-dialog">
-                        
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header w-100">
-                                    <h4 class="modal-title w-100">Ajouter Client</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form method="POST" action="{{'/produits/add/addClient'}}">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <div class="input-group">
-                                            <input name="nom_client" class="form-control" type="text" placeholder="Nom Client..."/>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="submit" class="btn btn-default" value="Ajouter" />
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#fournisseurModal">Ajouter Fournisseur</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="fournisseurModal" role="dialog">
-                        <div class="modal-dialog">
-                        
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header w-100">
-                                    <h4 class="modal-title w-100">Ajouter Fournisseur</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form method="POST" action="{{'add/addFournisseur'}}">
-                                    @csrf
-                                    <div class="modal-body">
-                                        <div class="input-group">
-                                            <input name="nom_fournisseur" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                        </div>
-                                        <br>
-                                        <div class="input-group">
-                                            <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="submit" class="btn btn-default" value="Ajouter"/>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                    
             </div>
         </div>
     </div>
 </div>
 
+<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     var url = '{{ url("/") }}'; 
     var type = "addCharge";
