@@ -1,164 +1,208 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>CMDC</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet" />
 
-    <style>
-        .sidenav {
-            width: 200px;
-            position: fixed;
-            z-index: 1;
-            top: 300px;
-            left: 10px;
-            background: #eee;
-            overflow-x: hidden;
-            padding: 8px 0;
-        }
+    <!--  Paper Dashboard core CSS    -->
+    <link href="assets/css/paper-dashboard.css" rel="stylesheet" />
 
-        .sidenav a {
-            padding: 6px 8px 6px 16px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #2196F3;
-            display: block;
-        }
+    
+    <link href="assets/css/demo.css" rel="stylesheet" />
 
-        .sidenav a:hover {
-            color: #064579;
-        }
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
 
-        .main {
-            margin-left: 140px; /* Same width as the sidebar + left position in px */
-            font-size: 28px; /* Increased text to enable scrolling */
-            padding: 0px 10px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {padding-top: 300px;}
-            .sidenav a {font-size: 18px;}
-        }
-    </style>
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'CMDC') }}
+
+    <div class="wrapper">
+        <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+     
+
+             <!--  repeter dans tout les pages  -->
+			<div class="sidebar-wrapper">
+				<div class="logo">
+					<a href="/home" class="simple-text">
+                    CMDC app
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+				</div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+				<ul class="nav">
+					<li class="">
+						<a href="/home">
+                        <i class="ti-dashboard"></i>
+                        <p>Dashboard</p>
+                    </a>
+					</li>
+					<li>
+						<li class="active">
+						<a href="/profile">
+                        <i class="ti-user"></i>
+                        <p>User Profile</p>
+                    </a>
+					</li>
+					<li class="dropdown ">
 
-                    </ul>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" ti-pie-chart"></i>
+                                    <p class="notification"></p>
+									<p>Charge </p>
+									
+                              </a>
+						<ul class="dropdown-menu">
+							<li><a href="/charges/add">init</a></li>
+							<li><a href="/charges">Modif/suppr</a></li>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li><a class="nav-link" href="{{ route('profile') }}">{{ __('Profile') }}</a></li>
-                            @if ( Auth::user()->role <= 2 )
-                                <li><a class="nav-link" href="{{ route('control') }}">{{ __('Control') }}</a></li>
-                            @endif
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }} <span class="caret"></span>
-                                </a>
+						</ul>
+					</li>
+					<li>
+						<li class="dropdown ">
 
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-receipt"></i>
+                                    <p class="notification"></p>
+									<p>Recettes</p>
+									
+                              </a>
+							<ul class="dropdown-menu">
+								<li><a href="/recettes/add">init</a></li>
+								<li><a href="/recettes">Modif/suppr</a></li>
 
+							</ul>
+						</li>
+						<li>
+							<li class="dropdown ">
+
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" ti-pencil-alt2"></i>
+                                    <p class="notification"></p>
+									<p>Programme</p>
+									
+                              </a>
+								<ul class="dropdown-menu">
+									<li><a href="/produits/add">init</a></li>
+									<li><a href="/programmer">Modif/suppr</a></li>
+									<li><a href="ajouterClient.html">Ajouter Client</a></li>
+									<li><a href="AjouterFournisseur.html">Ajouter Fournisseur</a></li>
+
+								</ul>
+							</li>
+
+
+				</ul>
+			</div>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+						<a class="navbar-brand" href="/home">Dashboard</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+
+
+
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-layout-list-thumb"></i>
+                                    
+									<p>Acount setting</p>
+									<b class="ti-angle-double-down"></b>
+                              </a>
+								<ul class="dropdown-menu">
+                                    @if ( Auth::user()->role <= 2 )
+									<li><a href="/control">Control</a></li>
+                                    @endif
+									<li><a href="/profile">Profile</a></li>
+									<!-- a mohammed-->
+									<li><a href="{{ route('logout') }}" 
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">Deconnecter</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
+
+								</ul>
+							</li>
+
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+
+
+<div class="content">
+    <main class="py-4">
+        @yield('content')
+    </main>
+</div>
+
+
+<footer class="footer">
+    <div class="container-fluid">
+        <nav class="pull-left">
+            <ul>
+
+            </ul>
         </nav>
-        @if (Auth::check() && Auth::user()->role <= 3)
-        <div class="sidenav">
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse1">Charges</a>
-                        </h4>
-                    </div>
-                    <div id="collapse1" class="panel-collapse collapse">
-                        <ul class="list-group">
-                            <li class="list-group-item"><a href="/charges/add">Init</a></li>
-                            <li class="list-group-item"><a href="/charges">Modif/Suppr</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse2">Recettes</a>
-                        </h4>
-                    </div>
-                    <div id="collapse2" class="panel-collapse collapse">
-                        <ul class="list-group">
-                            <li class="list-group-item"><a href="/recettes/add">Init</a></li>
-                            <li class="list-group-item"><a href="/recettes">Modif/Suppr</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="panel-group">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapse3">Programmer</a>
-                        </h4>
-                    </div>
-                    <div id="collapse3" class="panel-collapse collapse">
-                        <ul class="list-group">
-                            <li class="list-group-item"><a href="/produits/add">Init</a></li>
-                            <li class="list-group-item"><a href="/programmer">Modif/Suppr</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+</footer>
+
+</div>
+</div>
+
+
 </body>
+
+<!--   Core JS Files   -->
+<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+
+<!--  Charts Plugin -->
+<script src="assets/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="assets/js/paper-dashboard.js"></script>
+
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+
 </html>
