@@ -9,6 +9,17 @@ use App\Fournisseur;
 
 class FournisseurController extends Controller
 {
+
+    public function index() {
+        if (Auth::check()) {
+
+            return view('fournisseurs.add');
+
+        } else {
+            return redirect('/login');
+        }
+    }
+
     public function add(Request $request) {
 
         if (Auth::check()) {

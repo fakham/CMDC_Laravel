@@ -51,6 +51,7 @@ Route::get('/client/{client}/delete', 'ClientController@delete')->name('deleteCl
 Route::get('/client/{client}/edit', 'ClientController@edit')->name('editClient');
 Route::post('/client/{client}/update', 'ClientController@update')->name('updateClient');
 
+Route::get('/fournisseur/new', 'FournisseurController@index')->name('newFournisseur');
 Route::post('/produits/add/addFournisseur', 'FournisseurController@add')->name('addFournisseur');
 Route::get('/fournisseur/{fournisseur}/delete', 'FournisseurController@delete')->name('deleteFournisseur');
 Route::get('/fournisseur/{fournisseur}/edit', 'FournisseurController@edit')->name('editFournisseur');

@@ -10,13 +10,13 @@
                     <h4 class="title">Ajouter Client</h4>
                 </div>
                 <div class="content">
-                    <form method="POST" action="{{'/produits/add/addClient'}}">
+                    <form method="POST" action="{{'/produits/add/addFournisseur'}}">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Nom Client</label>
-                                    <input name="nom_client" type="text" class="form-control border-input"> 
+                                    <label>Nom Fournisseur</label>
+                                    <input name="nom_fournisseur" type="text" class="form-control border-input"> 
                                 </div>
                             </div>
                         </div>
