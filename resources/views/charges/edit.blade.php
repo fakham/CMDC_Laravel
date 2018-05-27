@@ -62,8 +62,13 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
+    document.getElementById("activeProfile").classList.remove('active');
+    document.getElementById("activeDashboard").classList.remove('active');
+    document.getElementById("activeCharge").classList.add('active');
+    document.getElementById("activeRecette").classList.remove('active');
+    document.getElementById("activeProgramme").classList.remove('active');
+    
     $(function () {
         $('#datetimepicker1').datetimepicker();
     });

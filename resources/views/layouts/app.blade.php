@@ -47,20 +47,20 @@
 				</div>
 
 				<ul class="nav">
-					<li class="">
+					<li class="active" id="activeDashboard">
 						<a href="/home">
                         <i class="ti-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
 					</li>
 					<li>
-						<li class="active">
+						<li class="" id="activeProfile">
 						<a href="/profile">
                         <i class="ti-user"></i>
                         <p>User Profile</p>
                     </a>
 					</li>
-					<li class="dropdown ">
+					<li class="dropdown " id="activeCharge">
 
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class=" ti-pie-chart"></i>
@@ -75,10 +75,10 @@
 						</ul>
 					</li>
 					<li>
-						<li class="dropdown ">
+						<li class="dropdown " id="activeRecette">
 
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-receipt"></i>
+                                    <i class="ti-receipt" ></i>
                                     <p class="notification"></p>
 									<p>Recettes</p>
 									
@@ -90,10 +90,10 @@
 							</ul>
 						</li>
 						<li>
-							<li class="dropdown ">
+							<li class="dropdown " id="activeProgramme">
 
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class=" ti-pencil-alt2"></i>
+                                    <i class=" ti-pencil-alt2" ></i>
                                     <p class="notification"></p>
 									<p>Programme</p>
 									

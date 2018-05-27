@@ -113,4 +113,11 @@
 
     </div>
 </div>
+<script type="text/javascript">
+    document.getElementById("activeProfile").classList.add('active');
+    document.getElementById("activeDashboard").classList.remove('active');
+    document.getElementById("activeCharge").classList.remove('active');
+    document.getElementById("activeRecette").classList.remove('active');
+    document.getElementById("activeProgramme").classList.remove('active');
+</script>
 @endsection

@@ -84,6 +84,12 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+    document.getElementById("activeProfile").classList.remove('active');
+    document.getElementById("activeDashboard").classList.remove('active');
+    document.getElementById("activeCharge").classList.remove('active');
+    document.getElementById("activeRecette").classList.add('active');
+    document.getElementById("activeProgramme").classList.remove('active');
+
     document.getElementById("total").disable = true;
     $('#qty').on('keyup', function() {
         $('#total').val($('#qty').val() * $('#price').val());
