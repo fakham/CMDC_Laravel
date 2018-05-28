@@ -1,150 +1,101 @@
 @extends('../layouts.app')
 
 @section('content')
-<div class="container">
-
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 col-md-7">
             <div class="card">
-                <div class="card-header">Produit</div>
-
-                <div class="card-body">
-                    <form method="POST" id="formProduit" action="/produit/{{ $produit->id }}/update" onsubmit="return false">
+                <div class="header">
+                    <h4 class="title">Modifier Produit</h4>
+                </div>
+                <div class="content">
+                    <form method="POST" id="formProduit" action="/produit/{{ $produit->id }}/update">
                         @csrf
-                        <div class="input-group">
-                            <input name="nom" class="form-control" type="text" placeholder="Nom Produit..." value="{{ $produit->nom }}"/>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <textarea name="description" class="form-control" placeholder="Description..." rows="3">{{ $produit->description }}</textarea>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input name="prix" class="form-control" type="number" placeholder="Prix..." value="{{ $produit->prix }}"/>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <input name="typeProduit" value="charge" class="form-control" checked="checked" type="radio" onchange="checkCharge()">Charge</input>
-                            <input name="typeProduit" value="recette" class="form-control" type="radio" onchange="checkRecette()">Recette</input>
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <select name="type" class="form-control" id="type" value="{{ $produit->type }}">
-                                <option value="" disabled>Type..</option>
-                                <option value="Explotation">Explotation</option>
-                                <option value="Financière">Financière</option>
-                                <option value="Non courante">Non courante</option>
-                            </select>
-                        </div>
-                        <br>
-                        <div class="input-group" id="clientDiv">
-                            <select name="client" class="form-control" onchange="getSelectedValue(this)">
-                                <option value="" disabled>Client..</option>
-                                @foreach ($clients as $client)
-                                    @if ($produit->client_id == $client->id)
-                                    <option value="{{$client->id}}" selected>{{$client->nom}}</option>
-                                    @else
-                                    <option value="{{$client->id}}">{{$client->nom}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#clientModal">Ajouter</button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="clientModal" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header w-100">
-                                            <h4 class="modal-title w-100">Ajouter Client</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form method="POST" action="{{'/produits/add/addClient'}}">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="input-group">
-                                                    <input name="nom_client" class="form-control" type="text" placeholder="Nom Client..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default">Ajouter</button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nom Produit</label>
+                                    <input name="nom" class="form-control border-input" type="text" placeholder="Nom Produit..." value="{{ $produit->nom }}"/>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="input-group" id="fournisseurDiv">
-                            <select name="fournisseur" class="form-control" onchange="getSelectedValue(this)">
-                                <option value="" disabled selected>Fourniseur..</option>
-                                @foreach ($fournisseurs as $fournisseur)
-                                    @if ($produit->fournisseur_id == $fournisseur->id)
-                                    <option value="{{$fournisseur->id}}" selected>{{$fournisseur->nom}}</option>
-                                    @else
-                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            <button class="btn btn-default" style="margin-left: 10px" data-toggle="modal" data-target="#fournisseurModal">Ajouter</button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="fournisseurModal" role="dialog">
-                                <div class="modal-dialog">
-                                
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header w-100">
-                                            <h4 class="modal-title w-100">Ajouter Fournisseur</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <form method="POST" action="{{'/produits/add/addFournisseur'}}">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="input-group">
-                                                    <input name="nom_fournisseur" class="form-control" type="text" placeholder="Nom Fournisseur..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <textarea name="activite" class="form-control" placeholder="Activié..." rows="3"></textarea>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="region" class="form-control" type="text" placeholder="Region..."/>
-                                                </div>
-                                                <br>
-                                                <div class="input-group">
-                                                    <input name="telephone" class="form-control" type="text" placeholder="Telephone..."/>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default">Ajouter</button>
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            </div>
-                                        </form>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control border-input" placeholder="Description..." rows="3" value="{{ $produit->description }}"></textarea>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <center>
+                                <div class="col-md-3">
+                                    <div class="form-group radio">
+                                        <label>Charge
+                                            <input type="radio" id="Charge" value="charge" checked="checked" name="typeProduit" class="form-control" onchange="checkCharge()">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group radio">
+                                        <label>Recette
+                                            <input type="radio" id="Recette" value="recette" name="typeProduit" class="form-control" onchange="checkRecette()">
+                                        </label>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group autocomplete">
+                                    <label>Type</label>
+                                    <select name="type" class="form-control border-input" id="type">
+                                        <option value="" disabled selected>Type..</option>
+                                        <option value="Explotation">Explotation</option>
+                                        <option value="Financière">Financière</option>
+                                        <option value="Non courante">Non courante</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="clientDiv">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select name="client" class="form-control border-input" onchange="getSelectedValue(this)">
+                                        <option value="" disabled selected>Client..</option>
+                                        @foreach ($clients as $client)
+                                            @if ($client->id == $produit->client_id)
+                                            <option value="{{$client->id}}" selected>{{$client->nom}}</option>
+                                            @else
+                                            <option value="{{$client->id}}">{{$client->nom}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="fournisseurDiv">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Fournisseur</label>
+                                    <select name="fournisseur" class="form-control border-input" onchange="getSelectedValue(this)">
+                                        <option value="" disabled selected>Fourniseur..</option>
+                                        @foreach ($fournisseurs as $fournisseur)
+                                            @if ($fournisseur->id == $produit->fournisseur_id)
+                                            <option value="{{$fournisseur->id}}" selected>{{$fournisseur->nom}}</option>
+                                            @else
+                                            <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <br>
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default">Enregistrer</button>
-                            <a class="btn btn-danger">Annuler</a>
+                        <div class="text-center">
+                            <input type="submit" form="formProduit" class="btn btn-default" value="Enregistrer">
+                            <a class="btn btn-danger" href="/programmer">Annuler</a>
                         </div>
                     </form>
                 </div>
@@ -152,6 +103,8 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script type="text/javascript">
     document.getElementById("activeProfile").classList.remove('active');
     document.getElementById("activeDashboard").classList.remove('active');
@@ -159,15 +112,29 @@
     document.getElementById("activeRecette").classList.remove('active');
     document.getElementById("activeProgramme").classList.add('active');
 
+    var url = '{{ url("/") }}'; 
+    var type = "addCharge";
+    var proOrForId = 0;
     $('#clientDiv').hide();
+
+    function getSelectedValue(e) {
+        proOrForId = e.value;
+        changePage();
+    }
+
+    function changePage() {
+        $('#formProduit').attr('action', url + '/produits/add/' + proOrForId + '/' + type);
+    }
 
     function checkRecette() {
         $('#type option:gt(0)').remove();
-        $("#type").append('<option value="Recette 1">Recette 1</option>');
-        $("#type").append('<option value="Recette 2">Recette 2</option>');
-        $("#type").append('<option value="Recette 3">Recette 3</option>');
+        $("#type").append('<option value="Explotation">Explotation</option>');
+        $("#type").append('<option value="Financière">Financière</option>');
+        $("#type").append('<option value="Non courante">Non courante</option>');
         $('#fournisseurDiv').hide();
         $('#clientDiv').show();
+        type = "addRecette";
+        changePage();
     }
     function checkCharge() {
         $('#type option:gt(0)').remove();
@@ -176,6 +143,8 @@
         $("#type").append('<option value="Non courante">Non courante</option>');
         $('#fournisseurDiv').show();
         $('#clientDiv').hide();
+        type = "addCharge";
+        changePage();
     }
 </script>
 
