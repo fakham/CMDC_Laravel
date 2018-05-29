@@ -41,7 +41,7 @@ class ClientController extends Controller
 
             $user->clients()->save($client);
 
-            return back();
+            return redirect('/programmer?client=added');
 
         } else {
             return redirect('/login');
@@ -54,7 +54,7 @@ class ClientController extends Controller
 
             $client->delete();
 
-            return back();
+            return redirect('/programmer?client=deleted');
 
         } else {
             return redirect('/login');
@@ -88,7 +88,7 @@ class ClientController extends Controller
 
             $client->update($request->all());
 
-            return redirect('/programmer');
+            return redirect('/programmer?client=modified');
 
         } else {
             return redirect('/login');

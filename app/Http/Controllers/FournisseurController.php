@@ -42,7 +42,7 @@ class FournisseurController extends Controller
 
             $user->fournisseurs()->save($fournisseur);
 
-            return back();
+            return redirect('/programmer?fournisseur=added');
 
         } else {
             return redirect('/login');
@@ -55,7 +55,7 @@ class FournisseurController extends Controller
 
             $fournisseur->delete();
 
-            return back();
+            return redirect('/programmer?fournisseur=deleted');
 
         } else {
             return redirect('/login');
@@ -89,7 +89,7 @@ class FournisseurController extends Controller
 
             $fournisseur->update($request->all());
 
-            return redirect('/programmer');
+            return redirect('/programmer?fournisseur=modified');
 
         } else {
             return redirect('/login');

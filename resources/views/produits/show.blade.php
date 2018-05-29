@@ -89,12 +89,101 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 <script type="text/javascript">
     document.getElementById("activeProfile").classList.remove('active');
     document.getElementById("activeDashboard").classList.remove('active');
     document.getElementById("activeCharge").classList.remove('active');
     document.getElementById("activeRecette").classList.remove('active');
     document.getElementById("activeProgramme").classList.add('active');
+
+    $(document).ready(function() {
+
+        @if (app('request')->input('produit') == "added")
+            $.notify({
+                icon: 'ti-arrow-circle-down',
+                message: "<b>Produit added successfully.</b>"
+
+            }, {
+                type: 'success',
+                timer: 4000
+            });
+        @elseif (app('request')->input('produit') == "modified")
+            $.notify({
+                icon: 'ti-pencil',
+                message: "<b>Produit modified successfully.</b>"
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+        @elseif (app('request')->input('produit') == "deleted")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Produit deleted successfully.</b>"
+
+            }, {
+                type: 'danger',
+                timer: 4000
+            });
+        @elseif (app('request')->input('client') == "added")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Client added successfully.</b>"
+
+            }, {
+                type: 'success',
+                timer: 4000
+            });
+        @elseif (app('request')->input('client') == "modified")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Client modified successfully.</b>"
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+        @elseif (app('request')->input('client') == "deleted")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Client deleted successfully.</b>"
+
+            }, {
+                type: 'danger',
+                timer: 4000
+            });
+        @elseif (app('request')->input('fournisseur') == "added")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Fournisseur added successfully.</b>"
+
+            }, {
+                type: 'success',
+                timer: 4000
+            });
+        @elseif (app('request')->input('fournisseur') == "modified")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Fournisseur modified successfully.</b>"
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+        @elseif (app('request')->input('fournisseur') == "deleted")
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Fournisseur deleted successfully.</b>"
+
+            }, {
+                type: 'danger',
+                timer: 4000
+            });
+        @endif
+
+    });
 </script>
 
 @endsection

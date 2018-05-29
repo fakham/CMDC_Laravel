@@ -59,7 +59,7 @@ class ProduitController extends Controller
 
             $fournisseur->produits()->save($produit);
 
-            return redirect('/programmer');
+            return redirect('/programmer?produit=added');
 
         } else {
             return redirect('/login');
@@ -89,7 +89,7 @@ class ProduitController extends Controller
 
             $client->produits()->save($produit);
 
-            return redirect('/programmer');
+            return redirect('/programmer?produit=added');
 
         } else {
             return redirect('/login');
@@ -103,7 +103,7 @@ class ProduitController extends Controller
 
             $produit->delete();
 
-            return back();
+            return redirect('/programmer?produit=deleted');
 
         } else {
             return redirect('/login');
@@ -143,7 +143,7 @@ class ProduitController extends Controller
 
             $produit->save();
 
-            return redirect('/programmer');
+            return redirect('/programmer?produit=modified');
 
         } else {
             return redirect('/login');
