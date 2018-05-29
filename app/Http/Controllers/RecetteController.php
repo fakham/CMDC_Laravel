@@ -67,7 +67,7 @@ class RecetteController extends Controller
 
             $user->recettes()->save($recette);
 
-            return redirect('/recettes');
+            return redirect('/recettes?added=true');
 
         } else {
             return redirect('/login');
@@ -80,7 +80,7 @@ class RecetteController extends Controller
 
             $recette->delete();
 
-            return back();
+            return redirect('/recettes?deleted=true');
 
         } else {
             return redirect('/login');
@@ -118,7 +118,7 @@ class RecetteController extends Controller
 
             $recette->update($request->all());
 
-            return redirect('/recettes');
+            return redirect('/recettes?modified=true');
 
         } else {
             return redirect('/login');

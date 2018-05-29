@@ -113,11 +113,29 @@
 
     </div>
 </div>
+<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 <script type="text/javascript">
     document.getElementById("activeProfile").classList.add('active');
     document.getElementById("activeDashboard").classList.remove('active');
     document.getElementById("activeCharge").classList.remove('active');
     document.getElementById("activeRecette").classList.remove('active');
     document.getElementById("activeProgramme").classList.remove('active');
+    
+    $(document).ready(function() {
+
+        @if (app('request')->input('modified'))
+            $.notify({
+                icon: 'ti-pencil',
+                message: "<b>Profile modified successfully.</b>"
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+        @endif
+
+    });
+
 </script>
 @endsection

@@ -34,12 +34,49 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 <script type="text/javascript">
     document.getElementById("activeProfile").classList.remove('active');
     document.getElementById("activeDashboard").classList.remove('active');
     document.getElementById("activeCharge").classList.remove('active');
     document.getElementById("activeRecette").classList.add('active');
     document.getElementById("activeProgramme").classList.remove('active');
+
+    $(document).ready(function() {
+
+        @if (app('request')->input('added'))
+            $.notify({
+                icon: 'ti-arrow-circle-down',
+                message: "<b>Recette added successfully.</b>"
+
+            }, {
+                type: 'success',
+                timer: 4000
+            });
+        @elseif (app('request')->input('modified'))
+            $.notify({
+                icon: 'ti-pencil',
+                message: "<b>Recette modified successfully.</b>"
+
+            }, {
+                type: 'info',
+                timer: 4000
+            });
+        @elseif (app('request')->input('deleted'))
+            $.notify({
+                icon: 'ti-trash',
+                message: "<b>Recette deleted successfully.</b>"
+
+            }, {
+                type: 'danger',
+                timer: 4000
+            });
+        @endif
+
+    });
+
+
 </script>
 
 @endsection

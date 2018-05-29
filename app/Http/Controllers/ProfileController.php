@@ -28,7 +28,7 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            return redirect('/profile');
+            return redirect('/profile?modified=true');
         } else {
             return redirect('/login');
         }

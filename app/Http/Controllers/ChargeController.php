@@ -67,7 +67,7 @@ class ChargeController extends Controller
 
             $user->charges()->save($charge);
 
-            return redirect('/charges');
+            return redirect('/charges?added=true');
 
         } else {
             return redirect('/login');
@@ -80,7 +80,8 @@ class ChargeController extends Controller
 
             $charge->delete();
 
-            return back();
+            // return back();
+            return redirect('/charges?deleted=true');
 
         } else {
             return redirect('/login');
@@ -118,7 +119,7 @@ class ChargeController extends Controller
 
             $charge->update($request->all());
 
-            return redirect('/charges');
+            return redirect('/charges?modified=true');
 
         } else {
             return redirect('/login');
