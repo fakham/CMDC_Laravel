@@ -23,9 +23,16 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user) {
         if (Auth::check()) {
-            $user->update($request->all());
 
-            $user->password = Hash::make($request->password);
+            $user->prenom = $request->prenom;
+            $user->nom = $request->nom;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->telephone = $request->telephone;
+
+            if ($user->password != $request->password)
+                $user->password = Hash::make($request->password);
+
             $user->save();
 
             return redirect('/profile?modified=true');
