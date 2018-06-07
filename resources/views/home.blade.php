@@ -92,10 +92,10 @@
                     Période : 
                 </div>
                 <div class="col-md-4">
-                    <input id="datepicker1" type='date' class="form-control" name="date" onchange="changeCharts()"/>
+                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
                 <div class="col-md-4">
-                    <input id="datepicker2" type='date' class="form-control" name="date" onchange="changeCharts()"/>
+                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
             </div>
         </div> 
@@ -108,7 +108,7 @@
                     <h4 class="title">Recette Statistics (Prix)</h4>
                     <div class="d-flex justify-content-center">
                         <div class="input-group col-sm-5">
-                            <select id="client" name="client" class="form-control" onchange="changeCharts()">
+                            <select id="client" name="client" class="form-control border-input" onchange="changeCharts()">
                                 <option value="" selected>Client.. (Tous)</option>
                                 @foreach ($recettes as $recette)
                                     <option value="{{$recette->id_client}}">{{$recette->client}}</option>
@@ -128,7 +128,7 @@
                     <h4 class="title">Charge Statistics (Prix)</h4>
                     <div class="d-flex justify-content-center">
                         <div class="input-group col-sm-6">
-                            <select id="fournisseur" name="fournisseur" class="form-control" onchange="changeCharts()">
+                            <select id="fournisseur" name="fournisseur" class="form-control border-input" onchange="changeCharts()">
                                 <option value="" selected>Fournisseur.. (Tous)</option>
                                 @foreach ($charges as $charge)
                                     <option value="{{$charge->id_fournisseur}}">{{$charge->fournisseur}}</option>
