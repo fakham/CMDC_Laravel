@@ -49,6 +49,16 @@ class HomeController extends Controller
             ->where('C.user_id', '=', Auth::user()->id)->orderBy('date')
             ->get();
             
+            $produitsCharge = DB::table('produits')
+            ->where('user_id','=', Auth::user()->id)
+            ->whereNotNull('fournisseur_id')
+            ->get();
+
+            $produitsRecette = DB::table('produits')
+            ->where('user_id','=', Auth::user()->id)
+            ->whereNotNull('client_id')
+            ->get();
+
             $resultatsCharges = 0;
             $resultatsRecettes = 0;
 
@@ -63,7 +73,7 @@ class HomeController extends Controller
             $jsonCharges = $charges->toJson();
             $jsonRecettes = $recettes->toJson();
 
-            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges'));
+            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette'));
         } else {
             return redirect('/login');
         }

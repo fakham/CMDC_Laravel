@@ -152,8 +152,8 @@
                     <div class="d-flex justify-content-center">
                         <div class="input-group col-sm-5">
                             <select id="recette" name="recette" class="form-control border-input" onchange="changeCharts()">
-                                @foreach ($recettes as $recette)
-                                    <option value="{{$recette->produit}}">{{$recette->produit}}</option>
+                                @foreach ($produitsRecette as $recette)
+                                    <option value="{{$recette->nom}}">{{$recette->nom}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -171,8 +171,8 @@
                     <div class="d-flex justify-content-center">
                         <div class="input-group col-sm-6">
                             <select id="charge" name="charge" class="form-control border-input" onchange="changeCharts()">
-                                @foreach ($charges as $charge)
-                                    <option value="{{$charge->produit}}">{{$charge->produit}}</option>
+                                @foreach ($produitsCharge as $charge)
+                                    <option value="{{$charge->nom}}">{{$charge->nom}}</option>
                                 @endforeach
                             </select>
                         </div>
