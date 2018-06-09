@@ -36,7 +36,7 @@ class HomeController extends Controller
             // ->get();
 
             $recettes = DB::table('recettes AS R')
-            ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "C.id AS id_client", "C.nom AS client", "P.nom AS produit")
+            ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "C.id AS id_client", "C.nom AS client", "P.nom AS produit", "P.type AS typeP")
             ->join('clients AS C', 'R.client_id', '=', 'C.id')
             ->join('produits AS P', 'R.produit_id', '=', 'P.id')
             ->where('R.user_id', '=', Auth::user()->id)->orderBy('date')

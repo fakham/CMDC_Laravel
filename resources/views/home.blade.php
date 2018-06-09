@@ -143,6 +143,48 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Recette Statistics (Quantité)</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="input-group col-sm-5">
+                            <select id="recette" name="recette" class="form-control border-input" onchange="changeCharts()">
+                                @foreach ($recettes as $recette)
+                                    <option value="{{$recette->produit}}">{{$recette->produit}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="header">
+                    <h4 class="title">Charge Statistics (Quantité)</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="input-group col-sm-6">
+                            <select id="charge" name="charge" class="form-control border-input" onchange="changeCharts()">
+                                @foreach ($charges as $charge)
+                                    <option value="{{$charge->produit}}">{{$charge->produit}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <canvas id="chart4"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script>
@@ -165,11 +207,13 @@
 
     const CHART = document.getElementById("chart");
     const CHART2 = document.getElementById("chart2");
+    const CHART3 = document.getElementById("chart3");
+    const CHART4 = document.getElementById("chart4");
 
     var charges = {!! $jsonCharges !!};
     var recettes = {!! $jsonRecettes !!};
 
-    function dailyRecette(dateD, dateF, client) {
+    function dailyRecette(dateD, dateF, client, recette) {
         var labels = [];
         var data = [];
         var qtte = [];
@@ -180,20 +224,28 @@
         
         var isClient = client == "" ? false : true;
         var isFound = false;
+        var isFoundQtte = false;
         for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
             for (var j = 0; j < recettes.length; j++) {
                 dateR = moment(recettes[j].date);
                 if (dateR.isSame(i, "day") && (!isClient || recettes[j].id_client == client)) {
                     isFound = true;
                     data.push(recettes[j].prix * recettes[j].qtte);
-                    qtte.push(recettes[j].qtte);
+                    if (recette == recettes[j].produit) {
+                        qtte.push(recettes[j].qtte);
+                        isFoundQtte = true;
+                    }
                 }
             }
             if (!isFound) {
                 data.push(0);
-                qtte.push(0);
             } else
                 isFound = false;
+
+            if (!isFoundQtte)
+                qtte.push(0);
+            else
+                isFoundQtte = false;
 
             labels.push(i.get('date'));
         }
@@ -206,27 +258,6 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Charges : Quantité',
-                        data: qtte,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1,
-                    },
-                    {
                         label: 'Recettes : Prix',
                         data: data,
                         borderColor: [
@@ -237,9 +268,26 @@
                 ]
             }
         });
+
+        let lineChart2 = new Chart(CHART3, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Quantité ('+recette+')',
+                        data: qtte,
+                        borderColor: [
+                            "#61C8C8"
+                        ],
+                        type: 'bar'
+                    }
+                ]
+            }
+        });
     }
 
-    function dailyCharge(dateD, dateF, fournisseur) {
+    function dailyCharge(dateD, dateF, fournisseur, charge) {
         var labels = [];
         var data = [];
         var qtte = [];
@@ -250,20 +298,28 @@
         
         var isFournisseur = fournisseur == "" ? false : true;
         var isFound = false;
+        var isFoundQtte = false;
         for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
             for (var j = 0; j < charges.length; j++) {
                 dateR = moment(charges[j].date);
                 if (dateR.isSame(i, "day") && (!isFournisseur || charges[j].id_fournisseur == fournisseur)) {
                     isFound = true;
                     data.push(charges[j].prix * charges[j].qtte);
-                    qtte.push(charges[j].qtte);
+                    if (charge == charges[j].produit) {
+                        isFoundQtte = true;
+                        qtte.push(charges[j].qtte);
+                    }
                 }
             }
             if (!isFound) {
                 data.push(0);
-                qtte.push(0);
             } else
                 isFound = false;
+
+            if (!isFoundQtte) {
+                qtte.push(0);
+            } else
+                isFoundQtte = false;
 
             labels.push(i.get('date'));
         }
@@ -276,27 +332,6 @@
                 labels: labels,
                 datasets: [
                     {
-                        label: 'Charges : Quantité',
-                        data: qtte,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1,
-                    },
-                    {
                         label: 'Charges : Prix',
                         data: data,
                         borderColor: [
@@ -307,18 +342,38 @@
                 ]
             }
         });
-    }
 
-    dailyCharge('', '', '');
-    dailyRecette('', '', '');
+        let lineChart2 = new Chart(CHART4, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Quantité ('+charge+')',
+                        data: qtte,
+                        borderColor: [
+                            "#61C8C8"
+                        ],
+                        type: 'bar'
+                    }
+                ]
+            }
+        });
+    }
+    var charge = $('#charge').val();
+    var recette = $('#recette').val();
+    dailyCharge('', '', '', charge);
+    dailyRecette('', '', '', recette);
 
     function changeCharts() {
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
         var v3 = $('#client').val();
         var v4 = $('#fournisseur').val();
-        dailyCharge(v1, v2, v4);
-        dailyRecette(v1, v2, v3);
+        var charge = $('#charge').val();
+        var recette = $('#recette').val();
+        dailyCharge(v1, v2, v4, charge);
+        dailyRecette(v1, v2, v3, recette);
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
