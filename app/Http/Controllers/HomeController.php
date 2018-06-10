@@ -56,6 +56,14 @@ class HomeController extends Controller
             ->groupBy('P.nom')
             ->orderBy('nbr', 'desc')
             ->get();
+
+            $clients = DB::table('recettes AS R')
+            ->select(DB::raw("C.nom, count(*) as 'nbr'"))
+            ->join('clients as C', 'R.client_id', '=', 'C.id')
+            ->where('R.user_id', '=', Auth::user()->id)
+            ->groupBy('C.nom')
+            ->orderBy('nbr', 'desc')
+            ->get();
             
             $produitsCharge = DB::table('produits')
             ->where('user_id','=', Auth::user()->id)
@@ -81,7 +89,7 @@ class HomeController extends Controller
             $jsonCharges = $charges->toJson();
             $jsonRecettes = $recettes->toJson();
 
-            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette', 'produits'));
+            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette', 'produits', 'clients'));
         } else {
             return redirect('/login');
         }

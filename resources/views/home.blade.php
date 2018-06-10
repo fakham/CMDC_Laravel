@@ -194,7 +194,7 @@
                 <div class="content">
                     <table class="table table-striped">
                         <thead>
-                            <th>Top 5 produits</th>
+                            <th><strong>Top 5 produits</strong></th>
                         </thead>
                         <tbody>
                             @foreach ($produits as $produit)
@@ -215,9 +215,16 @@
                 <div class="content">
                     <table class="table table-striped">
                         <thead>
-                            <th>Top 10 clients</th>
+                            <tr>
+                                <th><strong>Top 10 clients</strong></th>
+                            </tr>
                         </thead>
                         <tbody>
+                            @foreach ($clients as $client)
+                            <tr>
+                                <td>{{ $client->nom }}</td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
