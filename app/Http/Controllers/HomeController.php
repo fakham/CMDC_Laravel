@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->role <= 3) {
 
             // $recettes = DB::table('recettes AS R')
             // ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "P.nom AS produit", "P.type AS typeP")
@@ -90,6 +90,8 @@ class HomeController extends Controller
             $jsonRecettes = $recettes->toJson();
 
             return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette', 'produits', 'clients'));
+        } else if (Auth::check() && Auth::user()->role == 4) {
+            return view('home_new');
         } else {
             return redirect('/login');
         }
