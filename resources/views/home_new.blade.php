@@ -94,7 +94,7 @@
 
 <div class="content">
     <main class="py-4">
-        <center><p class="h1">en attendant l administration a approuver</p></center>
+        <center><p class="h1">Prière d'attendre la validation du comité d'organisation</p></center>
     </main>
 </div>
 
