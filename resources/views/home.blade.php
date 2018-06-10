@@ -185,6 +185,46 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Produits les plus vendus</h4>
+                </div>
+                <div class="content">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Top 5 produits</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($produits as $produit)
+                            <tr>
+                                <td>{{ $produit->nom }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Les meilleurs clients</h4>
+                </div>
+                <div class="content">
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Top 10 clients</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
 <script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script>
