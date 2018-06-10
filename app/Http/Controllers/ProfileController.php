@@ -14,8 +14,10 @@ class ProfileController extends Controller
 
     public function index() {
 
-        if (Auth::check()) {
+        if (Auth::check() && Auth::user()->role <= 3) {
             return view('profile');
+        } else if (Auth::check() && Auth::user()->role == 4) {
+            return view('profile_new');
         } else {
             return redirect('/login');
         }
