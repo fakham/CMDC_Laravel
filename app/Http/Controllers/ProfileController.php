@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Mail;
 
 use App\User;
 
@@ -32,8 +33,17 @@ class ProfileController extends Controller
             $user->email = $request->email;
             $user->telephone = $request->telephone;
 
-            if ($user->password != $request->password)
+            if ($user->password != $request->password) {
                 $user->password = Hash::make($request->password);
+
+                $data = array('name'=>$user->username, "body" => $request->password);
+                Mail::send('emails.password', $data, function($message) use ($user) {
+                    $message->to($user->email, $user->username)
+                            ->subject('CMDC APP Password Updated');
+                    $message->from('cmdcapp@gmail.com','CMDC Team');
+                });
+
+            }
 
             $user->save();
 
