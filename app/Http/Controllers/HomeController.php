@@ -55,6 +55,7 @@ class HomeController extends Controller
             ->where('R.user_id', '=', Auth::user()->id)
             ->groupBy('P.nom')
             ->orderBy('nbr', 'desc')
+            ->limit(5)
             ->get();
 
             $clients = DB::table('recettes AS R')
@@ -63,6 +64,7 @@ class HomeController extends Controller
             ->where('R.user_id', '=', Auth::user()->id)
             ->groupBy('C.nom')
             ->orderBy('nbr', 'desc')
+            ->limit(10)
             ->get();
             
             $produitsCharge = DB::table('produits')
