@@ -9,7 +9,7 @@
     <title>CMDC APP</title>
     <!-- Metas -->
     <meta charset="utf-8">
-    <link rel="icon" type="/public/image/png" href="{{ asset('login/images/icons/favicon.ico')}}" />
+    <link rel="icon" type="image/png" href="{{ asset('login_files/images/icons/favicon.ico') }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -18,25 +18,27 @@
 
     <!-- bootstrap css -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Muli:200,300,400,600,700,,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
 
     <!-- owl carousel CSS -->
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
 
     <!-- magnific-popup CSS -->
-    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/singing.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/singing.css') }}">
 
     <!-- Font Icon Core CSS -->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/et-line.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/et-line.css') }}">
 
     <!-- Core Style Css -->
-    <link rel="stylesheet" href="{{ asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 
 </head>
@@ -56,7 +58,7 @@
         <!-- ====== button-top ======  -->
         <div class="button-top" data-scroll-nav="0">
             <span>
-				<i class="fa fa-info-" aria-hidden="true"></i>
+				<i class="glyphicon glyphicon-menu-up" aria-hidden="true"></i>
 			</span>
         </div>
         <!-- ======End button-top ======  -->
@@ -92,9 +94,9 @@
                         <li><a href="#" data-scroll-nav="1" class="">About</a></li>
                         <li><a href="#" data-scroll-nav="2" class="">Portfolio</a></li>
                         <li><a href="#" data-scroll-nav="3" class="">Testimonails</a></li>
-                        <li><a href="#" data-scroll-nav="4" class="">Blog</a></li>
+                      
                         <li><a href="#" data-scroll-nav="5">Contact</a></li>
-                        <li><a href="/login"style="font-size: 48px "><font color="#d63561">Login</font></a></li>
+                        <li><a href="/login"style="font-size: 30px "><font color="#d63561">Login</font></a></li>
                     </ul>
                 </div>
             </div>
@@ -105,7 +107,7 @@
 
 
         <!-- ====== Header ======  -->
-        <section id="home" class="header bg-img" data-scroll-index="0" data-overlay-dark="6" data-background="{{ asset('img/bg.jpg')}}" data-stellar-background-ratio="0.5">
+        <section id="home" class="header bg-img" data-scroll-index="0" data-overlay-dark="6" data-background="img/bg.jpg" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row">
                     <div class="v-middle">
@@ -122,7 +124,7 @@
                             </h6>
                            
                                <div class="btn">
-                            <a href="signUp.html"><button type="submit" class="buton" >Commencer</button></a> 
+                            <a href="/register"><button type="submit" class="buton" >Commencer</button></a> 
                             
                             </div>
                             
@@ -141,7 +143,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="hero-img">
-                            <img src="{{ asset('/img/hero.jpg')}}" alt="">
+                            <img src="img/hero.jpg" alt="">
                         </div>
                     </div>
                     <div class="col-md-offset-1 col-md-7">
@@ -238,17 +240,17 @@
 
                         <div class="owl-carousel owl-theme text-center">
                             <div class="citem">
-                                <h6>Alex Smith</h6>
+                                <h6>Lorem ipsum</h6>
                                 <p>Lorem ipsum dolor sit amet, conse ctetur elit,sed do eiusmod tempor incid idunt ut labore et dolore magna aliqua.Ut enim ad minim veniam,quis nostrud exerci ipsum dolor sit amet.</p>
                                 <span>......</span>
                             </div>
                             <div class="citem">
-                                <h6>Alex Smith</h6>
+                                <h6>Lorem ipsum</h6>
                                 <p>Lorem ipsum dolor sit amet, conse ctetur elit,sed do eiusmod tempor incid idunt ut labore et dolore magna aliqua.Ut enim ad minim veniam,quis nostrud exerci ipsum dolor sit amet.</p>
                                 <span>.......</span>
                             </div>
                             <div class="citem">
-                                <h6>Alex Smith</h6>
+                                <h6>Lorem ipsum</h6>
                                 <p>Lorem ipsum dolor sit amet, conse ctetur elit,sed do eiusmod tempor incid idunt ut labore et dolore magna aliqua.Ut enim ad minim veniam,quis nostrud exerci ipsum dolor sit amet.</p>
                                 <span>........</span>
                             </div>
@@ -268,7 +270,7 @@
                     <h4>Get In Touch</h4>
                 </div>
 
-                <form class='form' id='contact-form' method='post'><input type='hidden' name='form-name' value='contact-form' onsubmit='return false'/>
+                <form class='form' id='contact-form' method='post'><input type='hidden' name='form-name' value='contact-form' />
                     <div class="messages"></div>
 
                     <div class="controls">
@@ -307,8 +309,9 @@
                 <div class="social-icon">
                     <div class="container text-center">
                         <div class="row">
+							
                             <a href="#0">
-								<span><i class="fa fa-facebook" aria-hidden="true"></i></span>
+								<span><i class="fa fa-facebook"aria-hidden="true" ></i></span>
 							</a>
                             <a href="#0">
 								<span><i class="fa fa-twitter" aria-hidden="true"></i></span>
@@ -322,10 +325,23 @@
                             <a href="#0">
 								<span><i class="fa fa-instagram" aria-hidden="true"></i></span>
 							</a>
+							 <a href="#0">
+								<span><i class="fa fa-snapchat-ghost" aria-hidden="true"></i></span>
+							</a>
+							 <a href="#0">
+								<span><i class="fa fa-android" aria-hidden="true"></i></span>
+							</a>
+							 <a href="#0">
+								<span><i class="fa fa-vimeo" aria-hidden="true"></i></span>
+							</a>
+							 <a href="#0">
+								<span><i class="fa fa-yahoo" aria-hidden="true"></i></span>
+							</a>
+
                         </div>
                     </div>
                 </div>
-                <p>&copy; Made with love for great people like Youssef, Ismail & Mohammed.</p>
+                <p>&copy; Made with love for great people like Youssef, Ismail and Mohammed.</p>
             </div>
         </section>
         <!--====== sidebare ======-->
@@ -334,48 +350,48 @@
 
 
     <!-- jQuery -->
-    <script src="{{ asset('js/jquery-3.0.0.min.js')}}"></script>
-    <script src="{{ asset('js/jquery-migrate-3.0.0.min.js')}}"></script>
+    <script src="{{ asset('js/jquery-3.0.0.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-migrate-3.0.0.min.js') }}"></script>
 
     <!-- bootstrap -->
-    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
     <!-- scrollIt -->
-    <script src="{{ asset('js/scrollIt.min.js')}}"></script>
+    <script src="{{ asset('js/scrollIt.min.js') }}"></script>
 
     <!-- magnific-popup -->
-    <script src="{{ asset('js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 
     <!-- owl carousel -->
-    <script src="{{ asset('js/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 
     <!-- stellar js -->
-    <script src="{{ asset('js/jquery.stellar.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.stellar.min.js') }}"></script>
 
     <!-- animated.headline js -->
-    <script src="{{ asset('js/animated.headline.js')}}"></script>
+    <script src="{{ asset('js/animated.headline.js') }}"></script>
 
     <!-- jquery.waypoints.min js -->
-    <script src="{{ asset('js/jquery.waypoints.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
 
     <!-- jquery.counterup.min js -->
-    <script src="{{ asset('js/jquery.counterup.min.js')}}"></script>
+    <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>
 
     <!-- isotope.pkgd.min js -->
-    <script src="{{ asset('js/isotope.pkgd.min.js')}}"></script>
+    <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
 
     <!-- validator js -->
-    <script src="{{ asset('js/validator.js')}}"></script>
+    <script src="{{ asset('js/validator.js') }}"></script>
 
     <!-- custom script -->
-    <script src="{{ asset('js/custom.js')}}"></script>
-    <!--- functionload
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <!-- functionload-->
     <script>
         // Get the modal
         var modal = document.getElementById('id01');
 
         // When the user clicks anywhere outside of the modal, close it
-        *window.onclick = function(event) {
+        window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
@@ -383,7 +399,7 @@
    
 
     </script>
-    -->
+
 </body>
 
 </html>
