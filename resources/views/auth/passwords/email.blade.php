@@ -35,7 +35,7 @@
 
     <div class="limiter">
         <div class="container-login100">
-            <div class="login100-more" style="background-image: url('img/calculator.jpeg');"></div>
+            <div class="login100-more" style="background-image: url('/public/img/calculator.jpeg');"></div>
             <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
                 @if (session('status'))
                     <div class="alert alert-success">
@@ -46,7 +46,7 @@
                     @csrf
                     <span class="login100-form-title p-b-59">
                         
-                            <a style="font-size:20px; " href="../" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30"> 
+                            <a style="font-size:20px; " href="../../" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30"> 
                                 <i class="fa fa-long-arrow-left m-l-5"></i>
 							Home
 							
