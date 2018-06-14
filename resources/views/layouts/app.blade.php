@@ -138,7 +138,7 @@
 									<b class="ti-angle-double-down"></b>
                               </a>
 								<ul class="dropdown-menu">
-                                    @if ( Auth::user()->role <= 2 )
+                                    @if ( Auth::check() && Auth::user()->role <= 2 )
 									<li><a href="/control">Control</a></li>
                                     @endif
 									<li><a href="/profile">Profile</a></li>
