@@ -23,7 +23,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="description" class="form-control border-input" placeholder="Description..." rows="3" value="{{ $produit->description }}"></textarea>
+                                    <textarea name="description" class="form-control border-input" placeholder="Description..." rows="3">{{ $produit->description }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
         $('#fournisseurDiv').hide();
         $('#clientDiv').show();
     }
-    
+
     function checkCharge() {
         
         $('#type').val('');

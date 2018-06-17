@@ -159,7 +159,6 @@
     $('#fournisseurDiv').show();
 
     function getSelectedValue(e) {
-        alert(typeP);
         proOrForId = e.value;
         changePage();
     }
