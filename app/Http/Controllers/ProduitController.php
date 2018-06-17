@@ -141,6 +141,17 @@ class ProduitController extends Controller
             $produit->prix = $request->prix;
             $produit->type = $request->type;
 
+            if ($request->fournisseur != "") {
+                $produit->fournisseur_id = $request->fournisseur;
+                $produit->client_id = null;
+            } else if ($request->client != "") {
+                $produit->fournisseur_id = null;
+                $produit->client_id = $request->client;
+            } else {
+                $produit->fournisseur_id = null;
+                $produit->client_id = null;
+            }
+
             $produit->save();
 
             return redirect('/programmer?produit=modified');
