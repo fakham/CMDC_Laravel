@@ -153,20 +153,23 @@
     document.getElementById("activeProgramme").classList.add('active');
 
     var url = '{{ url("/") }}'; 
-    var type = "addCharge";
+    var typeP = "addCharge";
     var proOrForId = 0;
     $('#clientDiv').hide();
+    $('#fournisseurDiv').show();
 
     function getSelectedValue(e) {
+        alert(typeP);
         proOrForId = e.value;
         changePage();
     }
 
     function changePage() {
-        $('#formProduit').attr('action', url + '/produits/add/' + proOrForId + '/' + type);
+        $('#formProduit').attr('action', url + '/produits/add/' + proOrForId + '/' + typeP);
     }
 
     function checkRecette() {
+        typeP = "addRecette";
         $('#type').val('');
         $("#types option").remove();
         $("#types").append('<option value="Produits d\'exploitation"></option>');
@@ -222,10 +225,10 @@
         $("#types").append('<option value="Transfert de charges d\'exploitation"></option>');
         $('#fournisseurDiv').hide();
         $('#clientDiv').show();
-        type = "addRecette";
         changePage();
     }
     function checkCharge() {
+        typeP = "addCharge";
         
         $('#type').val('');
         $("#types option").remove();
@@ -337,7 +340,6 @@
         $("#types").append('<option value="Rappels et dégrèvements des impôts sur les résultats"></option>');
         $('#fournisseurDiv').show();
         $('#clientDiv').hide();
-        type = "addCharge";
         changePage();
     }
 </script>
