@@ -39,7 +39,11 @@
             <div class="login100-more" style="background-image: url('img/bg.jpg');"></div>
                 <div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
                     
-                    
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        {{$errors->first()}}
+                    </div>
+                @endif
                     <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
                     @csrf
                           <a  style="align-content: center;text-align: left "href="/" class="dis-block txt3 hov1 p-r-30 p-t-10 p-b-10 p-l-30" >
@@ -52,42 +56,78 @@
 
                         <div class="wrap-input100 validate-input" data-validate="Prenom is required">
                             <span class="label-input100"> Prenom</span>
-                            <input class="input100" type="text" id="prenom" name="prenom" placeholder="Prenom..." required autofocus>
+                            <input class="input100 {{ $errors->has('prenom') ? ' is-invalid' : '' }}" type="text" id="prenom" name="prenom" placeholder="Prenom..." value="{{ old('prenom') }}" required autofocus>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('prenom'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('prenom') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="wrap-input100 validate-input" data-validate="Nom is required">
                             <span class="label-input100">Nom</span>
-                            <input class="input100" type="text" id="nom" name="nom" placeholder="Nom..." required autofocus>
+                            <input class="input100 {{ $errors->has('nom') ? ' is-invalid' : '' }}" type="text" id="nom" name="nom" placeholder="Nom..." value="{{ old('nom') }}" required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('nom'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('nom') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Username is required">
                             <span class="label-input100">Username</span>
-                            <input class="input100" type="text" id="username" name="username" placeholder="Username..." required autofocus>
+                            <input class="input100 {{ $errors->has('username') ? ' is-invalid' : '' }}" type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Username..." required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('username'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('username') }}</strong>
+                                </span>
+                            @endif
                         </div>
-                        <div class="wrap-input100 validate-input" data-validate="E-Mail Address is required: ex@abc.xyz">
+
+                        <div class="wrap-input100" data-validate="E-Mail Address is required: ex@abc.xyz">
                             <span class="label-input100">E-Mail Address</span>
-                            <input class="input100" type="text" id="email" name="email" placeholder="E-Mail Address..." required>
+                            <input class="input100 validate-input {{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" type="text" id="email" name="email" placeholder="E-Mail Address..." required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Telephone is required: ex@abc.xyz">
                             <span class="label-input100">Telephone</span>
-                            <input class="input100" type="text" id="telephone" name="telephone" placeholder="Telephone..." required autofocus>
+                            <input value="{{ old('telephone') }}" class="input100 {{ $errors->has('telephone') ? ' is-invalid' : '' }}" type="text" id="telephone" name="telephone" placeholder="Telephone..." required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('telephone'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('telephone') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Password is required">
                             <span class="label-input100">Password</span>
-                            <input class="input100" type="password" id="password" name="password" placeholder="Password..." required>
+                            <input class="input100 {{ $errors->has('password') ? ' is-invalid' : '' }}" type="password" id="password" name="password" placeholder="Password..." required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate="Repeat Password is required">
                             <span class="label-input100">Repeat Password</span>
-                            <input class="input100" type="password" id="password-confirm" name="password_confirmation" placeholder="*************" required>
+                            <input class="input100 {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" type="password" id="password-confirm" name="password_confirmation" placeholder="*************" required>
                             <span class="focus-input100"></span>
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="flex-m w-full p-b-33">
