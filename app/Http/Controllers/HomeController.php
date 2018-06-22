@@ -124,4 +124,61 @@ class HomeController extends Controller
         return redirect('/control');
 
     }
+
+    public function structureCharge(Request  $request) {
+
+        if (Auth::check() && Auth::user()->role <= 3) {
+            
+            if (!$request->has('dateD')  && !$request->has('dateF')) {
+                $structure = DB::table('charges as c')
+                            ->select(DB::raw('p.type, count(*) as nombre'))
+                            ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                            ->where('p.user_id', '=', Auth::user()->id)
+                            ->groupBy('P.type')
+                            ->get();
+
+                // return $structure->toJson();
+                return response()->json(array('structure'=> $structure), 200);
+
+            } else if ($request.dateF == null) {
+                $structure = DB::table('charges as c')
+                            ->select(DB::raw('p.type, count(*) as nombre'))
+                            ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                            ->where('p.user_id', '=', Auth::user()->id)
+                            ->where('c.date', '>=', $request.dateD)
+                            ->where('c.date', '<=', 'getdate()')
+                            ->groupBy('p.type')
+                            ->get();
+
+                return response()->json(array('structure'=> $structure), 200);
+
+            } else if ($request.dateD == null) {
+                $structure = DB::table('charges as c')
+                            ->select(DB::raw('p.type, count(*) as nombre'))
+                            ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                            ->where('p.user_id', '=', Auth::user()->id)
+                            ->where('c.date', '<=', $request.dateF)
+                            ->groupBy('p.type')
+                            ->get();
+
+                // return $structure->toJson();
+                return response()->json(array('structure'=> $structure), 200);
+
+            } else {
+                $structure = DB::table('charges as c')
+                            ->select(DB::raw('p.type, count(*) as nombre'))
+                            ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                            ->where('p.user_id', '=', Auth::user()->id)
+                            ->where('c.date', '>=', $request.dateD)
+                            ->where('c.date', '<=', $request.dateF)
+                            ->groupBy('p.type')
+                            ->get();
+
+                // return $structure->toJson();
+                return response()->json(array('structure'=> $structure), 200);
+            }
+        
+        }
+
+    }
 }

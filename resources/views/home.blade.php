@@ -249,8 +249,18 @@
 			type: 'success',
 			timer: 4000
 		});
+        
+        $.ajax({
+               type:'GET',
+               url:'/home/structureCharge',
+               data:'_token = <?php echo csrf_token() ?>',
+               success:function(data){
+                  console.log(data.structure);
+               }
+        });
 
 	});
+
 
     const CHART = document.getElementById("chart");
     const CHART2 = document.getElementById("chart2");
