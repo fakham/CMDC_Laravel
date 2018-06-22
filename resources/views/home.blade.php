@@ -281,15 +281,16 @@
         $.ajax({
                type:'GET',
                url:'/home/structureCharge',
-               data:'_token = <?php echo csrf_token() ?>',
-               success:function(data){
+               //data: {'_token:  <?php echo csrf_token() ?>'},
+               data: {dateD:'', dateF:''},
+               success:function(d){
                   var nombres = [];
                   var types = [];
                   var colors = [];
 
-                  for (var i = 0; i < data.structure.length; i++) {
-                      nombres.push(data.structure[i].nombre);
-                      types.push(data.structure[i].type);
+                  for (var i = 0; i < d.structure.length; i++) {
+                      nombres.push(d.structure[i].nombre);
+                      types.push(d.structure[i].type);
                       colors.push(getRandomColor());
                   }
                   
@@ -323,6 +324,33 @@
 
     var charges = {!! $jsonCharges !!};
     var recettes = {!! $jsonRecettes !!};
+
+    function updateStructureCharge(dateD, dateF) {
+
+        $.ajax({
+               type:'GET',
+               url:'/home/structureCharge',
+            //    data:['_token = <?php echo csrf_token() ?>', 'dateD = ' + dateD, 'dateF = ' + dateF ],
+               data: {dateD:dateD, dateF:dateF},
+               success:function(data){
+                  var nombres = [];
+                  var types = [];
+                  var colors = [];
+
+                  for (var i = 0; i < data.structure.length; i++) {
+                      nombres.push(data.structure[i].nombre);
+                      types.push(data.structure[i].type);
+                      colors.push(getRandomColor());
+                      
+                //   console.log(data.structure);
+                  canvaStructure.data.datasets[0].data = nombres;
+                  canvaStructure.data.datasets[0].backgroundColor = colors;
+                  canvaStructure.data.labels = types;
+                  canvaStructure.update();
+               }
+        });
+
+    }
 
     function dailyRecette(dateD, dateF, client, recette) {
         var labels = [];
@@ -485,6 +513,7 @@
         var recette = $('#recette').val();
         dailyCharge(v1, v2, v4, charge);
         dailyRecette(v1, v2, v3, recette);
+        updateStructureCharge(v1, v2);
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
