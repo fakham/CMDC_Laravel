@@ -129,7 +129,7 @@ class HomeController extends Controller
 
         if (Auth::check() && Auth::user()->role <= 3) {
             
-            if (!$request->has('dateD')  && !$request->has('dateF')) {
+            if ($request->dateD == ''  && $request->dateF == '') {
                 $structure = DB::table('charges as c')
                             ->select(DB::raw('p.type, count(*) as nombre'))
                             ->join('produits as p', 'c.produit_id', '=', 'p.id')
@@ -140,24 +140,24 @@ class HomeController extends Controller
                 // return $structure->toJson();
                 return response()->json(array('structure'=> $structure), 200);
 
-            } else if ($request.dateF == null) {
+            } else if ($request->dateF == '') {
                 $structure = DB::table('charges as c')
                             ->select(DB::raw('p.type, count(*) as nombre'))
                             ->join('produits as p', 'c.produit_id', '=', 'p.id')
                             ->where('p.user_id', '=', Auth::user()->id)
-                            ->where('c.date', '>=', $request.dateD)
+                            ->where('c.date', '>=', $request->dateD)
                             ->where('c.date', '<=', 'getdate()')
                             ->groupBy('p.type')
                             ->get();
 
                 return response()->json(array('structure'=> $structure), 200);
 
-            } else if ($request.dateD == null) {
+            } else if ($request->dateD == '') {
                 $structure = DB::table('charges as c')
                             ->select(DB::raw('p.type, count(*) as nombre'))
                             ->join('produits as p', 'c.produit_id', '=', 'p.id')
                             ->where('p.user_id', '=', Auth::user()->id)
-                            ->where('c.date', '<=', $request.dateF)
+                            ->where('c.date', '<=', $request->dateF)
                             ->groupBy('p.type')
                             ->get();
 
@@ -169,8 +169,8 @@ class HomeController extends Controller
                             ->select(DB::raw('p.type, count(*) as nombre'))
                             ->join('produits as p', 'c.produit_id', '=', 'p.id')
                             ->where('p.user_id', '=', Auth::user()->id)
-                            ->where('c.date', '>=', $request.dateD)
-                            ->where('c.date', '<=', $request.dateF)
+                            ->where('c.date', '>=', $request->dateD)
+                            ->where('c.date', '<=', $request->dateF)
                             ->groupBy('p.type')
                             ->get();
 

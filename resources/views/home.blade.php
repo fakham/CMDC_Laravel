@@ -186,6 +186,19 @@
     </div>
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Structure de charge</h4>
+                </div>
+                <div class="content">
+                    <canvas id="canvaStructure"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="header">
@@ -237,6 +250,21 @@
 <script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script>
 <script src="{{ asset('/js/Chart.min.js') }}"></script>
 <script type="text/javascript">
+
+    var chartCanvaStructure = document.getElementById("canvaStructure");
+    var canvaStructure;
+
+    var config;
+
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
 	$(document).ready(function() {
 
 		demo.initChartist();
@@ -255,7 +283,33 @@
                url:'/home/structureCharge',
                data:'_token = <?php echo csrf_token() ?>',
                success:function(data){
-                  console.log(data.structure);
+                  var nombres = [];
+                  var types = [];
+                  var colors = [];
+
+                  for (var i = 0; i < data.structure.length; i++) {
+                      nombres.push(data.structure[i].nombre);
+                      types.push(data.structure[i].type);
+                      colors.push(getRandomColor());
+                  }
+                  
+                  config = {
+                        type: 'pie',
+                        data: {
+                            datasets: [{
+                                data: nombres,
+                                backgroundColor: colors,
+                                label: 'Dataset 1'
+                            }],
+                            labels: types
+                        },
+                        options: {
+                            responsive: true
+                        }
+                    };
+
+                //   console.log(data.structure);
+                  canvaStructure = new Chart(chartCanvaStructure, config);
                }
         });
 
