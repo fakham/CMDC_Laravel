@@ -341,12 +341,19 @@
                       nombres.push(data.structure[i].nombre);
                       types.push(data.structure[i].type);
                       colors.push(getRandomColor());
-                      
+                  }
+
                 //   console.log(data.structure);
-                  canvaStructure.data.datasets[0].data = nombres;
-                  canvaStructure.data.datasets[0].backgroundColor = colors;
-                  canvaStructure.data.labels = types;
-                  canvaStructure.update();
+                    if (nombres.length == 0) {
+                        nombres.push(1);
+                        types.push("No results!!");
+                        colors.push("#000");
+                    } 
+                    canvaStructure.data.datasets[0].data = nombres;
+                    canvaStructure.data.datasets[0].backgroundColor = colors;
+                    canvaStructure.data.labels = types;
+                    canvaStructure.update();
+
                }
         });
 
