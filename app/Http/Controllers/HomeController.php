@@ -181,4 +181,26 @@ class HomeController extends Controller
         }
 
     }
+
+    public function chiffreCharge(Request $request) {
+
+        if (Auth::check() && Auth::user()->role <= 3) {
+
+            if ($request->dateD == '' && $request->dateF == '') {
+                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, (c.prix * c.qtte) as 'prix' from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = 1 and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonCharges'=>$jsonCharges), 200);
+            } else if ($request->dateF == '') {
+                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, (c.prix * c.qtte) as 'prix' from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = 1 and c.date >= $request->dateD and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonCharges'=>$jsonCharges), 200);
+            } else if ($request->dateD == '') {
+                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, (c.prix * c.qtte) as 'prix' from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = 1 and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonCharges'=>$jsonCharges), 200);
+            } else {
+                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, (c.prix * c.qtte) as 'prix' from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = 1 and c.date >= $request->dateD and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonCharges'=>$jsonCharges), 200);
+            }
+
+        }
+
+    }
 }
