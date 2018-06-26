@@ -276,6 +276,28 @@ class HomeController extends Controller
 
     }
 
+    public function prixCharge(Request $request) {
+
+        if (Auth::check() && Auth::user()->role <= 3) {
+
+            if ($request->dateD == '' && $request->dateF == '') {
+                $jsonPrixCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, c.prix from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonPrixCharges'=>$jsonPrixCharges), 200);
+            } else if ($request->dateF == '') {
+                $jsonPrixCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, c.prix from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date >= $request->dateD and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonPrixCharges'=>$jsonPrixCharges), 200);
+            } else if ($request->dateD == '') {
+                $jsonPrixCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, c.prix from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonPrixCharges'=>$jsonPrixCharges), 200);
+            } else {
+                $jsonPrixCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, c.prix from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date >= $request->dateD and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
+                return response()->json(array('jsonPrixCharges'=>$jsonPrixCharges), 200);
+            }
+
+        }
+
+    }
+
     public function filterCharge(Request $request) {
 
         if (Auth::check() && Auth::user()->role <= 3) {

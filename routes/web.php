@@ -23,6 +23,7 @@ Route::get('/home/chiffreCharge', 'HomeController@chiffreCharge')->name('chiffre
 Route::get('/home/chiffreRecette', 'HomeController@chiffreRecette')->name('chiffreRecette');
 Route::get('/home/quantiteCharge', 'HomeController@quantiteCharge')->name('quantiteCharge');
 Route::get('/home/quantiteRecette', 'HomeController@quantiteRecette')->name('quantiteRecette');
+Route::get('/home/prixCharge', 'HomeController@prixCharge')->name('prixCharge');
 Route::get('/home/filterCharge', 'HomeController@filterCharge')->name('filterCharge');
 Route::get('/home/filterRecette', 'HomeController@filterRecette')->name('filterRecette');
 
