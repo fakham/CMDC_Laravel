@@ -20,6 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/structureCharge', 'HomeController@structureCharge')->name('structureCharge');
 Route::get('/home/chiffreCharge', 'HomeController@chiffreCharge')->name('chiffreCharge');
+Route::get('/home/chiffreRecette', 'HomeController@chiffreRecette')->name('chiffreRecette');
+Route::get('/home/filterCharge', 'HomeController@filterCharge')->name('filterCharge');
+Route::get('/home/filterRecette', 'HomeController@filterRecette')->name('filterRecette');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile/{user}/update', 'ProfileController@update')->name('updateProfile');
