@@ -359,6 +359,12 @@
                       colors.push(getRandomColor());
                   }
 
+                  if (nombres.length == 0) {
+                        nombres.push(1);
+                        types.push("No results!!");
+                        colors.push("#000");
+                  } 
+
                     configCanvaStructure = {
                         type: 'pie',
                         data: {

@@ -132,7 +132,7 @@ class HomeController extends Controller
                             ->select(DB::raw('p.type, count(*) as nombre'))
                             ->join('produits as p', 'c.produit_id', '=', 'p.id')
                             ->where('p.user_id', '=', Auth::user()->id)
-                            ->groupBy('P.type')
+                            ->groupBy('p.type')
                             ->get();
 
                 // return $structure->toJson();
