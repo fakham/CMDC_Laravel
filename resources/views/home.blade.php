@@ -107,12 +107,17 @@
                 <div class="header">
                     <h4 class="title">Recette Statistics (Prix)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="input-group col-sm-5">
-                            <select id="client" name="client" class="form-control border-input" onchange="changeCharts()">
+                        <div class="col-sm-5">
+                            <select id="clientChiffreRecette" name="client" class="form-control border-input" onchange="filterClientChiffreRecette()">
                                 <option value="" selected>Client.. (Tous)</option>
-                                @foreach ($recettes as $recette)
-                                    <option value="{{$recette->id_client}}">{{$recette->client}}</option>
+                                @foreach ($clients as $client)
+                                    <option value="{{$client->id}}">{{$client->nom}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <select id="produitChiffreRecette" name="client" class="form-control border-input" onchange="filterProduitChiffreRecette()">
+                                <option value="" selected>Produit..</option>
                             </select>
                         </div>
                     </div>
@@ -127,12 +132,17 @@
                 <div class="header">
                     <h4 class="title">Charge Statistics (Prix)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="input-group col-sm-6">
-                            <select id="fournisseur" name="fournisseur" class="form-control border-input" onchange="changeCharts()">
+                        <div class="col-sm-6">
+                            <select id="fournisseurChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurChiffreCharge()">
                                 <option value="" selected>Fournisseur.. (Tous)</option>
-                                @foreach ($charges as $charge)
-                                    <option value="{{$charge->id_fournisseur}}">{{$charge->fournisseur}}</option>
+                                @foreach ($fournisseurs as $fournisseur)
+                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="produitChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitChiffreCharge()">
+                                <option value="" selected>Produit..</option>
                             </select>
                         </div>
                     </div>
@@ -150,11 +160,17 @@
                 <div class="header">
                     <h4 class="title">Recette Statistics (Quantité)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="input-group col-sm-5">
-                            <select id="recette" name="recette" class="form-control border-input" onchange="changeCharts()">
-                                @foreach ($produitsRecette as $recette)
-                                    <option value="{{$recette->nom}}">{{$recette->nom}}</option>
+                        <div class="col-sm-5">
+                            <select id="clientQuantiteRecette" name="client" class="form-control border-input" onchange="filterClientQuantiteRecette()">
+                                <option value="" selected>Client.. (Tous)</option>
+                                @foreach ($clients as $client)
+                                    <option value="{{$client->id}}">{{$client->nom}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <select id="produitQuantiteRecette" name="client" class="form-control border-input" onchange="filterProduitQuantiteRecette()">
+                                <option value="" selected>Produit..</option>
                             </select>
                         </div>
                     </div>
@@ -169,11 +185,17 @@
                 <div class="header">
                     <h4 class="title">Charge Statistics (Quantité)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="input-group col-sm-6">
-                            <select id="charge" name="charge" class="form-control border-input" onchange="changeCharts()">
-                                @foreach ($produitsCharge as $charge)
-                                    <option value="{{$charge->nom}}">{{$charge->nom}}</option>
+                        <div class="col-sm-6">
+                            <select id="fournisseurQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurQuantiteCharge()">
+                                <option value="" selected>Fournisseur.. (Tous)</option>
+                                @foreach ($fournisseurs as $fournisseur)
+                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="produitQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitQuantiteCharge()">
+                                <option value="" selected>Produit..</option>
                             </select>
                         </div>
                     </div>
@@ -191,11 +213,17 @@
                 <div class="header">
                     <h4 class="title">Charge Statistics (Prix unitaire)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="input-group col-sm-6">
-                            <select id="charge" name="charge" class="form-control border-input" onchange="changeCharts()">
-                                @foreach ($produitsCharge as $charge)
-                                    <option value="{{$charge->nom}}">{{$charge->nom}}</option>
+                        <div class="col-sm-6">
+                            <select id="fournisseurPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurPrixCharge()">
+                                <option value="" selected>Fournisseur.. (Tous)</option>
+                                @foreach ($fournisseurs as $fournisseur)
+                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select id="produitPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitPrixCharge()">
+                                <option value="" selected>Produit..</option>
                             </select>
                         </div>
                     </div>
@@ -252,7 +280,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($clients as $client)
+                            @foreach ($topClients as $client)
                             <tr>
                                 <td>{{ $client->nom }}</td>
                             </tr>
@@ -546,7 +574,7 @@
                     var barChartData = {
                         labels: types,
                         datasets: [{
-                            label: 'Dataset 1',
+                            label: 'Charges par Quantité',
                             backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
                             borderColor: "#61C8C8",
                             borderWidth: 1,
@@ -630,7 +658,7 @@
                     var barChartData = {
                         labels: types,
                         datasets: [{
-                            label: 'Dataset 1',
+                            label: 'Recettes par Quantité',
                             backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
                             borderColor: "#61C8C8",
                             borderWidth: 1,
@@ -1140,30 +1168,249 @@
             }
         });
     }
+
+    function filterFournisseurChiffreCharge() {
+        var fournisseur = $('#fournisseurChiffreCharge').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurChiffreCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updateChiffreCharge(v1, v2, f, '');
+        
+        $("#produitChiffreCharge option").remove();
+        $('#produitChiffreCharge').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterCharge',
+            data: {fournisseur:fournisseur},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitChiffreCharge').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterClientChiffreRecette() {
+        var client = $('#clientChiffreRecette').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientChiffreRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updateChiffreRecette(v1, v2, c, '');
+        
+        $("#produitChiffreRecette option").remove();
+        $('#produitChiffreRecette').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterRecette',
+            data: {client:client},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitChiffreRecette').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterFournisseurQuantiteCharge() {
+        var fournisseur = $('#fournisseurQuantiteCharge').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurQuantiteCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updateQuantiteCharge(v1, v2, f, '');
+        
+        $("#produitQuantiteCharge option").remove();
+        $('#produitQuantiteCharge').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterCharge',
+            data: {fournisseur:fournisseur},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitQuantiteCharge').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterClientQuantiteRecette() {
+        var client = $('#clientQuantiteRecette').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientQuantiteRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updateQuantiteRecette(v1, v2, c, '');
+        
+        $("#produitQuantiteRecette option").remove();
+        $('#produitQuantiteRecette').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterRecette',
+            data: {client:client},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitQuantiteRecette').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterFournisseurPrixCharge() {
+        var fournisseur = $('#fournisseurPrixCharge').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurPrixCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updatePrixCharge(v1, v2, f, '');
+        
+        $("#produitPrixCharge option").remove();
+        $('#produitPrixCharge').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterCharge',
+            data: {fournisseur:fournisseur},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitPrixCharge').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterProduitChiffreCharge() {
+        var fournisseur = $('#fournisseurChiffreCharge').val();
+        var produit = $('#produitChiffreCharge').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurChiffreCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updateChiffreCharge(v1, v2, f, produit);
+    }
+
+    function filterProduitChiffreRecette() {
+        var client = $('#clientChiffreRecette').val();
+        var produit = $('#produitChiffreRecette').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientChiffreRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updateChiffreRecette(v1, v2, c, produit);
+    }
+
+    function filterProduitQuantiteCharge() {
+        var fournisseur = $('#fournisseurQuantiteCharge').val();
+        var produit = $('#produitQuantiteCharge').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurQuantiteCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updateQuantiteCharge(v1, v2, f, produit);
+    }
+
+    function filterProduitQuantiteRecette() {
+        var client = $('#clientQuantiteRecette').val();
+        var produit = $('#produitQuantiteRecette').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientQuantiteRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updateQuantiteRecette(v1, v2, c, produit);
+    }
+
+    function filterProduitPrixCharge() {
+        var fournisseur = $('#fournisseurPrixCharge').val();
+        var produit = $('#produitPrixCharge').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var f = $("#fournisseurPrixCharge option:selected").text();
+
+        if (fournisseur == '')
+            f = '';
+
+
+        updatePrixCharge(v1, v2, f, produit);
+    }
+
     var charge = $('#charge').val();
     var recette = $('#recette').val();
-    // dailyCharge('', '', '', charge);
-    // dailyRecette('', '', '', recette);
 
     function changeCharts() {
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
-        var v3 = $('#client').val();
-        var v4 = $('#fournisseur').val();
-        var charge = $('#charge').val();
-        var recette = $('#recette').val();
-        // dailyCharge(v1, v2, v4, charge);
-        // dailyRecette(v1, v2, v3, recette);
         updateStructureCharge(v1, v2);
-        updateChiffreCharge(v1, v2, '', '');
-        updateChiffreRecette(v1, v2, '', '');
-        updateQuantiteCharge(v1, v2, '', '');
-        updateQuantiteRecette(v1, v2, '', '');
-        updatePrixCharge(v1, v2, '', '');
-        console.log(v1);
-        console.log(v3);
-        // console.log(moment($('#datetimepicker1').val()).get('date')); 
-        // console.log(moment($('#datetimepicker2').val()).get('date')); 
+        filterProduitChiffreCharge();
+        filterProduitChiffreRecette();
+        filterProduitQuantiteCharge();
+        filterProduitQuantiteRecette();
+        filterProduitPrixCharge();
     }
 </script>
 @endsection

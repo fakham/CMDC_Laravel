@@ -29,6 +29,10 @@ class HomeController extends Controller
     {
         if (Auth::check() && Auth::user()->role <= 3) {
 
+            $fournisseurs = DB::select(DB::raw("SELECT distinct f.id, f.nom from charges c inner JOIN fournisseurs f on c.fournisseur_id = f.id where c.user_id = ".Auth::user()->id));
+
+            $clients = DB::select(DB::raw("SELECT distinct c.id, c.nom from recettes r inner JOIN clients c on c.id = r.client_id where r.user_id = ".Auth::user()->id));
+
             $recettes = DB::table('recettes AS R')
             ->select("R.id AS id", "R.date AS date", "R.prix AS prix", "R.qtte AS qtte", "C.id AS id_client", "C.nom AS client", "P.nom AS produit", "P.type AS typeP")
             ->join('clients AS C', 'R.client_id', '=', 'C.id')
@@ -52,7 +56,7 @@ class HomeController extends Controller
             ->limit(5)
             ->get();
 
-            $clients = DB::table('recettes AS R')
+            $topClients = DB::table('recettes AS R')
             ->select(DB::raw("C.nom, count(*) as 'nbr'"))
             ->join('clients as C', 'R.client_id', '=', 'C.id')
             ->where('R.user_id', '=', Auth::user()->id)
@@ -85,7 +89,7 @@ class HomeController extends Controller
             $jsonCharges = $charges->toJson();
             $jsonRecettes = $recettes->toJson();
 
-            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette', 'produits', 'clients'));
+            return view('home', compact('resultatsCharges', 'resultatsRecettes', 'resultats', 'jsonCharges', 'jsonRecettes', 'recettes', 'charges', 'produitsCharge', 'produitsRecette', 'produits', 'topClients', 'clients', 'fournisseurs'));
         } else if (Auth::check() && Auth::user()->role == 4) {
             return view('home_new');
         } else {
