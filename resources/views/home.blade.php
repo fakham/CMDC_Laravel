@@ -186,7 +186,26 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="card ">
+                <div class="header">
+                    <h4 class="title">Charge Statistics (Prix unitaire)</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="input-group col-sm-6">
+                            <select id="charge" name="charge" class="form-control border-input" onchange="changeCharts()">
+                                @foreach ($produitsCharge as $charge)
+                                    <option value="{{$charge->nom}}">{{$charge->nom}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <canvas id="canvaPrixCharge"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card">
                 <div class="header">
                     <h4 class="title">Structure de charge</h4>
@@ -258,18 +277,21 @@
     var chartChiffreCharge = document.getElementById("chart2");
     var chartQuantiteRecette = document.getElementById("chart3");
     var chartQuantiteCharge = document.getElementById("chart4");
+    var chartPrixCharge = document.getElementById("canvaPrixCharge");
 
     var canvaStructure;
     var canvaChiffreRecette;
     var canvaChiffreCharge;
     var canvaQuantiteRecette;
     var canvaQuantiteCharge;
+    var canvaPrixCharge;
 
     var configCanvaStructure;
     var configCanvaChiffreRecette;
     var configCanvaChiffreCharge;
     var configCanvaQuantiteRecette;
     var configCanvaQuantiteCharge;
+    var configCanvaPrixCharge;
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
@@ -367,6 +389,7 @@
                             labels: types,
                             datasets: [{
                                 label: 'Charges par Chiffre',
+                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
                                 borderColor: "#61C8C8",
                                 data: nombres,
                             }]
@@ -446,6 +469,7 @@
                             labels: types,
                             datasets: [{
                                 label: 'Recettes par Chiffre',
+                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
                                 borderColor: "#61C8C8",
                                 data: nombres,
                             }]
@@ -655,6 +679,86 @@
                }
         });
 
+        $.ajax({
+               type:'GET',
+               url:'/home/prixCharge',
+               data: {dateD:'', dateF:'', fournisseur:'', produit:''},
+               success:function(d){
+                  var nombres = [];
+                  var types = [];
+                  var isFound = false;
+                    
+                    var dateD = '';
+                    var dateF = '';
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
+                            dateR = moment(d.jsonPrixCharges[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonPrixCharges[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+                  
+                  configCanvaPrixCharge = {
+                        type: 'line',
+                        data: {
+                            labels: types,
+                            datasets: [{
+                                label: 'Charges par Prix Unitaire',
+                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
+                                borderColor: "#61C8C8",
+                                data: nombres,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Charges par Prix Unitaire'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Jour'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Prix Unitaire'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    canvaPrixCharge = new Chart(chartPrixCharge, configCanvaPrixCharge);
+               }
+        });
+
 	});
 
     var charges = {!! $jsonCharges !!};
@@ -850,6 +954,45 @@
 
     }
 
+    function updatePrixCharge(dateD, dateF, fournisseur, produit) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/prixCharge',
+            data: {dateD:dateD, dateF:dateF, fournisseur:fournisseur, produit:produit},
+            success:function(d){
+                var nombres = [];
+                var types = [];
+                var isFound = false;
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
+                            dateR = moment(d.jsonPrixCharges[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonPrixCharges[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    canvaPrixCharge.data.datasets[0].data = nombres;
+                    canvaPrixCharge.data.labels = types;
+                    canvaPrixCharge.update();
+            }
+        });
+
+    }
+
     function dailyRecette(dateD, dateF, client, recette) {
         var labels = [];
         var data = [];
@@ -1016,6 +1159,7 @@
         updateChiffreRecette(v1, v2, '', '');
         updateQuantiteCharge(v1, v2, '', '');
         updateQuantiteRecette(v1, v2, '', '');
+        updatePrixCharge(v1, v2, '', '');
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
