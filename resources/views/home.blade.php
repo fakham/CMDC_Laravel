@@ -251,19 +251,25 @@
 <script src="{{ asset('/js/Chart.min.js') }}"></script>
 <script type="text/javascript">
 
+    var color = Chart.helpers.color;
+
     var chartCanvaStructure = document.getElementById("canvaStructure");
     var chartChiffreRecette = document.getElementById("chart");
     var chartChiffreCharge = document.getElementById("chart2");
-    var CHART3 = document.getElementById("chart3");
-    var CHART4 = document.getElementById("chart4");
+    var chartQuantiteRecette = document.getElementById("chart3");
+    var chartQuantiteCharge = document.getElementById("chart4");
 
     var canvaStructure;
     var canvaChiffreRecette;
     var canvaChiffreCharge;
+    var canvaQuantiteRecette;
+    var canvaQuantiteCharge;
 
     var configCanvaStructure;
     var configCanvaChiffreRecette;
     var configCanvaChiffreCharge;
+    var configCanvaQuantiteRecette;
+    var configCanvaQuantiteCharge;
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
@@ -481,6 +487,90 @@
                }
         });
 
+        $.ajax({
+               type:'GET',
+               url:'/home/quantiteCharge',
+               data: {dateD:'', dateF:'', fournisseur:'', produit:''},
+               success:function(d){
+                  var nombres = [];
+                  var types = [];
+                  var isFound = false;
+                    
+                    var dateD = '';
+                    var dateF = '';
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonCharges.length; j++) {
+                            dateR = moment(d.jsonCharges[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonCharges[j].qtte);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    var barChartData = {
+                        labels: types,
+                        datasets: [{
+                            label: 'Dataset 1',
+                            backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
+                            borderColor: "#61C8C8",
+                            borderWidth: 1,
+                            data: nombres
+                        }]
+
+                    };
+
+                  configCanvaQuantiteCharge = {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Charges par Quantité'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Jour'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Quantité'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    canvaQuantiteCharge = new Chart(chartQuantiteCharge, configCanvaQuantiteCharge);
+               }
+        });
+
 	});
 
     var charges = {!! $jsonCharges !!};
@@ -593,6 +683,45 @@
                     canvaChiffreRecette.data.datasets[0].data = nombres;
                     canvaChiffreRecette.data.labels = types;
                     canvaChiffreRecette.update();
+            }
+        });
+
+    }
+
+    function updateQuantiteCharge(dateD, dateF, fournisseur, produit) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/quantiteCharge',
+            data: {dateD:dateD, dateF:dateF, fournisseur:fournisseur, produit:produit},
+            success:function(d){
+                var nombres = [];
+                var types = [];
+                var isFound = false;
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonCharges.length; j++) {
+                            dateR = moment(d.jsonCharges[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonCharges[j].qtte);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    canvaQuantiteCharge.data.datasets[0].data = nombres;
+                    canvaQuantiteCharge.data.labels = types;
+                    canvaQuantiteCharge.update();
             }
         });
 
@@ -762,6 +891,7 @@
         updateStructureCharge(v1, v2);
         updateChiffreCharge(v1, v2, '', '');
         updateChiffreRecette(v1, v2, '', '');
+        updateQuantiteCharge(v1, v2, '', '');
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
