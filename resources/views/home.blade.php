@@ -571,6 +571,90 @@
                }
         });
 
+        $.ajax({
+               type:'GET',
+               url:'/home/quantiteRecette',
+               data: {dateD:'', dateF:'', client:'', produit:''},
+               success:function(d){
+                  var nombres = [];
+                  var types = [];
+                  var isFound = false;
+                    
+                    var dateD = '';
+                    var dateF = '';
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            dateR = moment(d.jsonRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonRecettes[j].qtte);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    var barChartData = {
+                        labels: types,
+                        datasets: [{
+                            label: 'Dataset 1',
+                            backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
+                            borderColor: "#61C8C8",
+                            borderWidth: 1,
+                            data: nombres
+                        }]
+
+                    };
+
+                  configCanvaQuantiteRecette = {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Recettes par Quantité'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Jour'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Quantité'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    canvaQuantiteRecette = new Chart(chartQuantiteRecette, configCanvaQuantiteRecette);
+               }
+        });
+
 	});
 
     var charges = {!! $jsonCharges !!};
@@ -722,6 +806,45 @@
                     canvaQuantiteCharge.data.datasets[0].data = nombres;
                     canvaQuantiteCharge.data.labels = types;
                     canvaQuantiteCharge.update();
+            }
+        });
+
+    }
+
+    function updateQuantiteRecette(dateD, dateF, client, produit) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/quantiteRecette',
+            data: {dateD:dateD, dateF:dateF, client:client, produit:produit},
+            success:function(d){
+                var nombres = [];
+                var types = [];
+                var isFound = false;
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            dateR = moment(d.jsonRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonRecettes[j].qtte);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    canvaQuantiteRecette.data.datasets[0].data = nombres;
+                    canvaQuantiteRecette.data.labels = types;
+                    canvaQuantiteRecette.update();
             }
         });
 
@@ -892,6 +1015,7 @@
         updateChiffreCharge(v1, v2, '', '');
         updateChiffreRecette(v1, v2, '', '');
         updateQuantiteCharge(v1, v2, '', '');
+        updateQuantiteRecette(v1, v2, '', '');
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
