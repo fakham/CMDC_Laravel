@@ -402,6 +402,85 @@
                }
         });
 
+        $.ajax({
+               type:'GET',
+               url:'/home/chiffreRecette',
+               data: {dateD:'', dateF:'', client:'', produit:''},
+               success:function(d){
+                  var nombres = [];
+                  var types = [];
+                  var isFound = false;
+                    
+                    var dateD = '';
+                    var dateF = '';
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            dateR = moment(d.jsonRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonRecettes[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+                  
+                  configCanvaChiffreRecette = {
+                        type: 'line',
+                        data: {
+                            labels: types,
+                            datasets: [{
+                                label: 'Recettes par Chiffre',
+                                borderColor: "#61C8C8",
+                                data: nombres,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Recettes par Chiffre'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Jour'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Chiffre'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    canvaChiffreRecette = new Chart(chartChiffreRecette, configCanvaChiffreRecette);
+               }
+        });
+
 	});
 
     var charges = {!! $jsonCharges !!};
@@ -476,6 +555,45 @@
                     canvaChiffreCharge.data.labels = types;
                     canvaChiffreCharge.update();
                }
+        });
+
+    }
+
+    function updateChiffreRecette(dateD, dateF, client, produit) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/chiffreRecette',
+            data: {dateD:dateD, dateF:dateF, client:client, produit:produit},
+            success:function(d){
+                var nombres = [];
+                var types = [];
+                var isFound = false;
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            dateR = moment(d.jsonRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonRecettes[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    canvaChiffreRecette.data.datasets[0].data = nombres;
+                    canvaChiffreRecette.data.labels = types;
+                    canvaChiffreRecette.update();
+            }
         });
 
     }
@@ -643,6 +761,7 @@
         // dailyRecette(v1, v2, v3, recette);
         updateStructureCharge(v1, v2);
         updateChiffreCharge(v1, v2, '', '');
+        updateChiffreRecette(v1, v2, '', '');
         console.log(v1);
         console.log(v3);
         // console.log(moment($('#datetimepicker1').val()).get('date')); 
