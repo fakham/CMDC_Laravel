@@ -52,7 +52,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Prix unitaire</label>
-                                    <input name="prix" type="number" id="price" class="form-control border-input">
+                                    <input name="prix" step="any" type="number" id="price" class="form-control border-input">
                                 </div>
                             </div>
                             <div class="col-md-6">

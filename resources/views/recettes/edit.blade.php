@@ -60,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Prix unitaire</label>
-                                    <input name="prix" type="number" id="price" class="form-control border-input" value="{{ $recette->prix }}">
+                                    <input name="prix" step="any" type="number" id="price" class="form-control border-input" value="{{ $recette->prix }}">
                                 </div>
                             </div>
                             <div class="col-md-6">
