@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-sm-6">
+        <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -15,7 +15,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Charges</p>
-                                {{ $resultatsCharges }}
+                                {{ $resultatsCharges }} MAD
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
+        <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -40,7 +40,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Recette</p>
-                                {{ $resultatsRecettes }}
+                                {{ $resultatsRecettes }} MAD
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-sm-6">
+        <div class="col-lg-4 col-sm-6">
             <div class="card">
                 <div class="content">
                     <div class="row">
@@ -65,7 +65,7 @@
                         <div class="col-xs-7">
                             <div class="numbers">
                                 <p>Resultat </p>
-                                {{ $resultats }}
+                                {{ $resultats }} MAD
                             </div>
                         </div>
                     </div>
@@ -881,6 +881,8 @@
                 var nombres = [];
                 var types = [];
                 var isFound = false;
+
+                console.log(d.jsonRecettes);
 
                     var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
