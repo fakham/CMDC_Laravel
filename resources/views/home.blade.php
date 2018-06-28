@@ -130,7 +130,7 @@
         <div class="col-md-6">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">Charge Statistics (Prix)</h4>
+                    <h4 class="title">Analyse charges en chiffre</h4>
                     <div class="d-flex justify-content-center">
                         <div class="col-sm-6">
                             <select id="fournisseurChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurChiffreCharge()">
@@ -147,6 +147,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="row"></div>
                 <div class="content">
                     <canvas id="chart2"></canvas>
                 </div>
@@ -416,8 +417,59 @@
 
                         types.push(i.get('date'));
                     }
+
+                    configCanvaChiffreCharge = {
+                        type: 'line',
+                        data: {
+                            labels: types,
+                            datasets: [{
+                                label: 'Charges par Chiffre',
+                                borderColor: "#61C8C8",
+                                data: nombres,
+                                fill: false,
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [8, 4]
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Chiffre (MAD)'
+                                    },
+                                    gridLines: {
+                                        borderDash: [8, 4]
+                                    }
+                                }]
+                            }
+                        }
+                    };
                   
-                  configCanvaChiffreCharge = {
+                  /*configCanvaChiffreCharge = {
                         type: 'line',
                         data: {
                             labels: types,
@@ -460,6 +512,7 @@
                             }
                         }
                     };
+                    */
 
                     canvaChiffreCharge = new Chart(chartChiffreCharge, configCanvaChiffreCharge);
                }
