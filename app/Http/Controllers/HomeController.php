@@ -454,6 +454,57 @@ class HomeController extends Controller
 
     }
 
+    public function prixRecette(Request $request) {
+
+        if (Auth::check() && Auth::user()->role <= 3) {
+
+            if ($request->dateD == '' && $request->dateF == '') {
+                $jsonPrixRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, r.prix from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where r.user_id = ".Auth::user()->id." and p.nom like '$request->produit%' and c.nom like '$request->client%' order by r.date"));
+                
+                return response()->json(array('jsonPrixRecettes'=>$jsonPrixRecettes), 200);
+            } else if ($request->dateF == '') {
+                $jsonPrixRecettes = DB::table('recettes as r')
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.prix'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->join('clients as c', 'r.client_id', '=', 'c.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '>=', $request->dateD)
+                               ->where('p.nom', 'like', $request->produit.'%')
+                               ->where('c.nom', 'like', $request->client.'%')
+                               ->orderBy('r.date')
+                               ->get();
+                return response()->json(array('jsonPrixRecettes'=>$jsonPrixRecettes), 200);
+            } else if ($request->dateD == '') {
+                $jsonPrixRecettes = DB::table('recettes as r')
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.prix'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->join('clients as c', 'r.client_id', '=', 'c.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '<=', $request->dateF)
+                               ->where('p.nom', 'like', $request->produit.'%')
+                               ->where('c.nom', 'like', $request->client.'%')
+                               ->orderBy('r.date')
+                               ->get();
+                return response()->json(array('jsonPrixRecettes'=>$jsonPrixRecettes), 200);
+            } else {
+                $jsonPrixRecettes = DB::table('recettes as r')
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.prix'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->join('clients as c', 'r.client_id', '=', 'c.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '>=', $request->dateD)
+                               ->where('r.date', '<=', $request->dateF)
+                               ->where('p.nom', 'like', $request->produit.'%')
+                               ->where('c.nom', 'like', $request->client.'%')
+                               ->orderBy('r.date')
+                               ->get();
+                return response()->json(array('jsonPrixRecettes'=>$jsonPrixRecettes), 200);
+            }
+
+        }
+
+    }
+
     public function filterCharge(Request $request) {
 
         if (Auth::check() && Auth::user()->role <= 3) {

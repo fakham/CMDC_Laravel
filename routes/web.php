@@ -24,6 +24,7 @@ Route::get('/home/chiffreRecette', 'HomeController@chiffreRecette')->name('chiff
 Route::get('/home/quantiteCharge', 'HomeController@quantiteCharge')->name('quantiteCharge');
 Route::get('/home/quantiteRecette', 'HomeController@quantiteRecette')->name('quantiteRecette');
 Route::get('/home/prixCharge', 'HomeController@prixCharge')->name('prixCharge');
+Route::get('/home/prixRecette', 'HomeController@prixRecette')->name('prixRecette');
 Route::get('/home/filterCharge', 'HomeController@filterCharge')->name('filterCharge');
 Route::get('/home/filterRecette', 'HomeController@filterRecette')->name('filterRecette');
 
