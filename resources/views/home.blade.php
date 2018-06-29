@@ -295,7 +295,8 @@
 
 </div>
 <script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
-<script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script>
+<!--<script src="http://momentjs.com/downloads/moment.js" type="text/javascript"></script> -->
+<script src="{{ asset('/js/moment-with-locales.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/js/Chart.min.js') }}"></script>
 <script type="text/javascript">
 
@@ -452,7 +453,8 @@
                                     },
                                     gridLines: {
                                         // You can change the color, the dash effect, the main axe color, etc.
-                                        borderDash: [8, 4]
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
@@ -462,7 +464,8 @@
                                         labelString: 'Chiffre (MAD)'
                                     },
                                     gridLines: {
-                                        borderDash: [8, 4]
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
