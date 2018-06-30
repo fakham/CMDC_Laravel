@@ -105,20 +105,24 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Recette Statistics (Prix)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-5">
-                            <select id="clientChiffreRecette" name="client" class="form-control border-input" onchange="filterClientChiffreRecette()">
-                                <option value="" selected>Client.. (Tous)</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{$client->id}}">{{$client->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-5">
-                            <select id="produitChiffreRecette" name="client" class="form-control border-input" onchange="filterProduitChiffreRecette()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse recettes en chiffre</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="clientChiffreRecette" name="client" class="form-control border-input" onchange="filterClientChiffreRecette()">
+                                    <option value="" selected>Client.. (Tous)</option>
+                                    @foreach ($clients as $client)
+                                        <option value="{{$client->id}}">{{$client->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitChiffreRecette" name="client" class="form-control border-input" onchange="filterProduitChiffreRecette()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -163,20 +167,24 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Recette Statistics (Quantité)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-5">
-                            <select id="clientQuantiteRecette" name="client" class="form-control border-input" onchange="filterClientQuantiteRecette()">
-                                <option value="" selected>Client.. (Tous)</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{$client->id}}">{{$client->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-5">
-                            <select id="produitQuantiteRecette" name="client" class="form-control border-input" onchange="filterProduitQuantiteRecette()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse recettes en quantité</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="clientQuantiteRecette" name="client" class="form-control border-input" onchange="filterClientQuantiteRecette()">
+                                    <option value="" selected>Client.. (Tous)</option>
+                                    @foreach ($clients as $client)
+                                        <option value="{{$client->id}}">{{$client->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitQuantiteRecette" name="client" class="form-control border-input" onchange="filterProduitQuantiteRecette()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,20 +196,24 @@
         <div class="col-md-6">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">Charge Statistics (Quantité)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-6">
-                            <select id="fournisseurQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurQuantiteCharge()">
-                                <option value="" selected>Fournisseur.. (Tous)</option>
-                                @foreach ($fournisseurs as $fournisseur)
-                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <select id="produitQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitQuantiteCharge()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse charges en quantité</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="fournisseurQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurQuantiteCharge()">
+                                    <option value="" selected>Fournisseur.. (Tous)</option>
+                                    @foreach ($fournisseurs as $fournisseur)
+                                        <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitQuantiteCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitQuantiteCharge()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -216,20 +228,24 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Recette Statistics (Prix unitaire)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-5">
-                            <select id="clientPrixRecette" name="client" class="form-control border-input" onchange="filterClientPrixRecette()">
-                                <option value="" selected>Client.. (Tous)</option>
-                                @foreach ($clients as $client)
-                                    <option value="{{$client->id}}">{{$client->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-5">
-                            <select id="produitPrixRecette" name="client" class="form-control border-input" onchange="filterProduitPrixRecette()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse recettes en prix unitaire</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="clientPrixRecette" name="client" class="form-control border-input" onchange="filterClientPrixRecette()">
+                                    <option value="" selected>Client.. (Tous)</option>
+                                    @foreach ($clients as $client)
+                                        <option value="{{$client->id}}">{{$client->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitPrixRecette" name="client" class="form-control border-input" onchange="filterProduitPrixRecette()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -241,20 +257,24 @@
         <div class="col-md-6">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">Charge Statistics (Prix unitaire)</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-6">
-                            <select id="fournisseurPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurPrixCharge()">
-                                <option value="" selected>Fournisseur.. (Tous)</option>
-                                @foreach ($fournisseurs as $fournisseur)
-                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <select id="produitPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitPrixCharge()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse charges en prix unitaire</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="fournisseurPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurPrixCharge()">
+                                    <option value="" selected>Fournisseur.. (Tous)</option>
+                                    @foreach ($fournisseurs as $fournisseur)
+                                        <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitPrixCharge()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -460,7 +480,7 @@
                             labels: types,
                             datasets: [{
                                 label: 'Charges par Chiffre',
-                                borderColor: "#61C8C8",
+                                borderColor: "#F3BB45",
                                 data: nombres,
                                 fill: false,
                                 borderWidth: 2
@@ -594,16 +614,16 @@
                             labels: types,
                             datasets: [{
                                 label: 'Recettes par Chiffre',
-                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                                borderColor: "#61C8C8",
+                                borderColor: "#8FCCAA",
                                 data: nombres,
+                                fill: false,
+                                borderWidth: 2
                             }]
                         },
                         options: {
                             responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Recettes par Chiffre'
+                            legend: {
+                                display: false
                             },
                             tooltips: {
                                 mode: 'index',
@@ -618,14 +638,24 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Jour'
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Chiffre'
+                                        labelString: 'Chiffre (MAD)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
@@ -672,8 +702,8 @@
                         labels: types,
                         datasets: [{
                             label: 'Charges par Quantité',
-                            backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                            borderColor: "#61C8C8",
+                            backgroundColor: color("#F3BB45").alpha(0.5).rgbString(),
+                            borderColor: "#F3BB45",
                             borderWidth: 1,
                             data: nombres
                         }]
@@ -685,9 +715,8 @@
                         data: barChartData,
                         options: {
                             responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Charges par Quantité'
+                            legend: {
+                                display: false
                             },
                             tooltips: {
                                 mode: 'index',
@@ -702,7 +731,12 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Jour'
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
@@ -710,6 +744,11 @@
                                     scaleLabel: {
                                         display: true,
                                         labelString: 'Quantité'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
@@ -756,8 +795,8 @@
                         labels: types,
                         datasets: [{
                             label: 'Recettes par Quantité',
-                            backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                            borderColor: "#61C8C8",
+                            backgroundColor: color("#8FCCAA").alpha(0.5).rgbString(),
+                            borderColor: "#8FCCAA",
                             borderWidth: 1,
                             data: nombres
                         }]
@@ -769,9 +808,8 @@
                         data: barChartData,
                         options: {
                             responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Recettes par Quantité'
+                            legend: {
+                                display: false
                             },
                             tooltips: {
                                 mode: 'index',
@@ -786,7 +824,12 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Jour'
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
@@ -794,6 +837,11 @@
                                     scaleLabel: {
                                         display: true,
                                         labelString: 'Quantité'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
@@ -842,16 +890,16 @@
                             labels: types,
                             datasets: [{
                                 label: 'Charges par Prix Unitaire',
-                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                                borderColor: "#61C8C8",
+                                borderColor: "#F3BB45",
                                 data: nombres,
+                                fill: false,
+                                borderWidth: 2
                             }]
                         },
                         options: {
                             responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Charges par Prix Unitaire'
+                            legend: {
+                                display: false
                             },
                             tooltips: {
                                 mode: 'index',
@@ -866,7 +914,12 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Jour'
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
@@ -874,6 +927,11 @@
                                     scaleLabel: {
                                         display: true,
                                         labelString: 'Prix Unitaire'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
@@ -922,16 +980,16 @@
                             labels: types,
                             datasets: [{
                                 label: 'Recettes par Prix Unitaire',
-                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                                borderColor: "#61C8C8",
+                                borderColor: "#8FCCAA",
                                 data: nombres,
+                                fill: false,
+                                borderWidth: 2
                             }]
                         },
                         options: {
                             responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Recettes par Prix Unitaire'
+                            legend: {
+                                display: false
                             },
                             tooltips: {
                                 mode: 'index',
@@ -946,7 +1004,12 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Jours'
+                                        labelString: 'Temps (jours)'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }],
                                 yAxes: [{
@@ -954,6 +1017,11 @@
                                     scaleLabel: {
                                         display: true,
                                         labelString: 'Prix Unitaire'
+                                    },
+                                    gridLines: {
+                                        // You can change the color, the dash effect, the main axe color, etc.
+                                        borderDash: [1, 5],
+                                        color: 'rgba(0, 0, 0, 0.3)'
                                     }
                                 }]
                             }
