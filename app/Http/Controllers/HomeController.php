@@ -292,41 +292,39 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->role <= 3) {
 
             if ($request->dateD == '' && $request->dateF == '') {
-                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, count(*) as qtte from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' group by p.id, p.nom, f.nom, c.date order by c.date"));
+                $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, c.qtte from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' order by c.date"));
                 
                 return response()->json(array('jsonCharges'=>$jsonCharges), 200);
             } else if ($request->dateF == '') {
                 // $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, count(*) as qtte from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date >= $request->dateD and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' group by p.id, p.nom, f.nom, c.date order by c.date"));
                 $jsonCharges = DB::table('charges as c')
-                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, c.qtte'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->join('fournisseurs as f', 'c.fournisseur_id', '=', 'f.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('c.date', '>=', $request->dateD)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('f.nom', 'like', $request->fournisseur.'%')
-                               ->groupBy('p.id', 'p.nom', 'f.nom', 'c.date')
                                ->orderBy('c.date')
                                ->get();
                 return response()->json(array('jsonCharges'=>$jsonCharges), 200);
             } else if ($request->dateD == '') {
                 // $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, count(*) as qtte from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' group by p.id, p.nom, f.nom, c.date order by c.date"));
                 $jsonCharges = DB::table('charges as c')
-                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, c.qtte'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->join('fournisseurs as f', 'c.fournisseur_id', '=', 'f.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('c.date', '<=', $request->dateF)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('f.nom', 'like', $request->fournisseur.'%')
-                               ->groupBy('p.id', 'p.nom', 'f.nom', 'c.date')
                                ->orderBy('c.date')
                                ->get();
                 return response()->json(array('jsonCharges'=>$jsonCharges), 200);
             } else {
                 // $jsonCharges = DB::select(DB::raw("SELECT p.id, p.nom, f.nom, c.date, count(*) as qtte from produits p inner join charges c on p.id = c.produit_id inner join fournisseurs f on f.id = c.fournisseur_id where c.user_id = ".Auth::user()->id." and c.date >= $request->dateD and c.date <= $request->dateF and p.nom like '$request->produit%' and f.nom like '$request->fournisseur%' group by p.id, p.nom, f.nom, c.date order by c.date"));
                 $jsonCharges = DB::table('charges as c')
-                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, f.nom, c.date, c.qtte'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->join('fournisseurs as f', 'c.fournisseur_id', '=', 'f.id')
                                ->where('c.user_id', '=', Auth::user()->id)
@@ -334,7 +332,6 @@ class HomeController extends Controller
                                ->where('c.date', '<=', $request->dateF)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('f.nom', 'like', $request->fournisseur.'%')
-                               ->groupBy('p.id', 'p.nom', 'f.nom', 'c.date')
                                ->orderBy('c.date')
                                ->get();
                 return response()->json(array('jsonCharges'=>$jsonCharges), 200);
@@ -349,41 +346,39 @@ class HomeController extends Controller
         if (Auth::check() && Auth::user()->role <= 3) {
 
             if ($request->dateD == '' && $request->dateF == '') {
-                $jsonRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, count(*) as qtte from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where c.user_id = ".Auth::user()->id." and p.nom like '%$request->produit' and c.nom like '$request->client%' group by p.id, p.nom, c.nom, r.date order by r.date"));
+                $jsonRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, r.qtte as qtte from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where c.user_id = ".Auth::user()->id." and p.nom like '%$request->produit' and c.nom like '$request->client%' order by r.date"));
                 
                 return response()->json(array('jsonRecettes'=>$jsonRecettes), 200);
             } else if ($request->dateF == '') {
                 // $jsonRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, count(*) as qtte from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where c.user_id = ".Auth::user()->id." and r.date >= $request->dateD and p.nom like '%$request->produit' and c.nom like '$request->client%' group by p.id, p.nom, c.nom, r.date order by r.date"));
                 $jsonRecettes = DB::table('recettes as r')
-                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.qtte'))
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->join('clients as c', 'r.client_id', '=', 'c.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('r.date', '>=', $request->dateD)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('c.nom', 'like', $request->client.'%')
-                               ->groupBy('p.id', 'p.nom', 'c.nom', 'r.date')
                                ->orderBy('r.date')
                                ->get();
                 return response()->json(array('jsonRecettes'=>$jsonRecettes), 200);
             } else if ($request->dateD == '') {
                 // $jsonRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, count(*) as qtte from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where c.user_id = ".Auth::user()->id." and r.date <= $request->dateF and p.nom like '%$request->produit' and c.nom like '$request->client%' group by p.id, p.nom, c.nom, r.date order by r.date"));
                 $jsonRecettes = DB::table('recettes as r')
-                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.qtte'))
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->join('clients as c', 'r.client_id', '=', 'c.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('r.date', '<=', $request->dateF)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('c.nom', 'like', $request->client.'%')
-                               ->groupBy('p.id', 'p.nom', 'c.nom', 'r.date')
                                ->orderBy('r.date')
                                ->get();
                 return response()->json(array('jsonRecettes'=>$jsonRecettes), 200);
             } else {
                 // $jsonRecettes = DB::select(DB::raw("SELECT p.id, p.nom, c.nom, r.date, count(*) as qtte from produits p inner join recettes r on p.id = r.produit_id inner join clients c on c.id = r.client_id where c.user_id = ".Auth::user()->id." and r.date >= $request->dateD and r.date <= $request->dateF and p.nom like '%$request->produit' and c.nom like '$request->client%' group by p.id, p.nom, c.nom, r.date order by r.date"));
                 $jsonRecettes = DB::table('recettes as r')
-                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, count(*) as qtte'))
+                               ->select(DB::raw('p.id, p.nom, c.nom, r.date, r.qtte'))
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->join('clients as c', 'r.client_id', '=', 'c.id')
                                ->where('c.user_id', '=', Auth::user()->id)
@@ -391,7 +386,6 @@ class HomeController extends Controller
                                ->where('r.date', '<=', $request->dateF)
                                ->where('p.nom', 'like', $request->produit.'%')
                                ->where('c.nom', 'like', $request->client.'%')
-                               ->groupBy('p.id', 'p.nom', 'c.nom', 'r.date')
                                ->orderBy('r.date')
                                ->get();
                 return response()->json(array('jsonRecettes'=>$jsonRecettes), 200);

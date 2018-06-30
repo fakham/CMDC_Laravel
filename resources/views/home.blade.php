@@ -130,20 +130,24 @@
         <div class="col-md-6">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">Analyse charges en chiffre</h4>
                     <div class="d-flex justify-content-center">
-                        <div class="col-sm-6">
-                            <select id="fournisseurChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurChiffreCharge()">
-                                <option value="" selected>Fournisseur.. (Tous)</option>
-                                @foreach ($fournisseurs as $fournisseur)
-                                    <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-6">
-                            <select id="produitChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitChiffreCharge()">
-                                <option value="" selected>Produit..</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse charges en chiffre</h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="fournisseurChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurChiffreCharge()">
+                                    <option value="" selected>Fournisseur.. (Tous)</option>
+                                    @foreach ($fournisseurs as $fournisseur)
+                                        <option value="{{$fournisseur->id}}">{{$fournisseur->nom}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <select id="produitChiffreCharge" name="fournisseur" class="form-control border-input" onchange="filterProduitChiffreCharge()">
+                                    <option value="" selected>Produit..</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
