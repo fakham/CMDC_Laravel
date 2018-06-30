@@ -231,7 +231,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse recettes en prix unitaire</h4>
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse recettes par prix</h4>
                             </div>
                             <div class="col-sm-4">
                                 <select id="clientPrixRecette" name="client" class="form-control border-input" onchange="filterClientPrixRecette()">
@@ -260,7 +260,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse charges en prix unitaire</h4>
+                                <h4 class="title" style="font-size:1em; font-weight:bold">Analyse charges par prix</h4>
                             </div>
                             <div class="col-sm-4">
                                 <select id="fournisseurPrixCharge" name="fournisseur" class="form-control border-input" onchange="filterFournisseurPrixCharge()">
@@ -743,7 +743,7 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Quantité'
+                                        labelString: 'Quantité (unités)'
                                     },
                                     gridLines: {
                                         // You can change the color, the dash effect, the main axe color, etc.
@@ -836,7 +836,7 @@
                                     display: true,
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Quantité'
+                                        labelString: 'Quantité (unités)'
                                     },
                                     gridLines: {
                                         // You can change the color, the dash effect, the main axe color, etc.
