@@ -434,7 +434,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -568,7 +568,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -648,7 +648,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -732,7 +732,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -816,7 +816,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -896,7 +896,7 @@
                     var dateD = '';
                     var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1014,7 +1014,7 @@
                   var types = [];
                   var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1055,7 +1055,7 @@
 
                 console.log(d.jsonRecettes);
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1094,7 +1094,7 @@
                 var types = [];
                 var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1133,7 +1133,7 @@
                 var types = [];
                 var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1172,7 +1172,7 @@
                 var types = [];
                 var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1211,7 +1211,7 @@
                 var types = [];
                 var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
 
@@ -1244,7 +1244,7 @@
         var data = [];
         var qtte = [];
         
-        var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
         var dateE = dateF === "" ? moment() : moment(dateF);
         var dateR = moment();
         
@@ -1318,7 +1318,7 @@
         var data = [];
         var qtte = [];
         
-        var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
         var dateE = dateF === "" ? moment() : moment(dateF);
         var dateR = moment();
         
