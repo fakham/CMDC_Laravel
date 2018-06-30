@@ -210,6 +210,31 @@
 
     <div class="row">
         <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title">Recette Statistics (Prix unitaire)</h4>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-sm-5">
+                            <select id="clientPrixRecette" name="client" class="form-control border-input" onchange="filterClientPrixRecette()">
+                                <option value="" selected>Client.. (Tous)</option>
+                                @foreach ($clients as $client)
+                                    <option value="{{$client->id}}">{{$client->nom}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <select id="produitPrixRecette" name="client" class="form-control border-input" onchange="filterProduitPrixRecette()">
+                                <option value="" selected>Produit..</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <canvas id="canvaPrixRecette"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="card ">
                 <div class="header">
                     <h4 class="title">Charge Statistics (Prix unitaire)</h4>
@@ -234,7 +259,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
                 <div class="header">
                     <h4 class="title">Structure de charge</h4>
@@ -308,6 +336,7 @@
     var chartQuantiteRecette = document.getElementById("chart3");
     var chartQuantiteCharge = document.getElementById("chart4");
     var chartPrixCharge = document.getElementById("canvaPrixCharge");
+    var chartPrixRecette = document.getElementById("canvaPrixRecette");
 
     var canvaStructure;
     var canvaChiffreRecette;
@@ -315,6 +344,7 @@
     var canvaQuantiteRecette;
     var canvaQuantiteCharge;
     var canvaPrixCharge;
+    var canvaPrixRecette;
 
     var configCanvaStructure;
     var configCanvaChiffreRecette;
@@ -322,6 +352,7 @@
     var configCanvaQuantiteRecette;
     var configCanvaQuantiteCharge;
     var configCanvaPrixCharge;
+    var configCanvaPrixRecette;
 
     function getRandomColor() {
         var letters = '0123456789ABCDEF';
@@ -849,6 +880,86 @@
                }
         });
 
+        $.ajax({
+               type:'GET',
+               url:'/home/prixRecette',
+               data: {dateD:'', dateF:'', client:'', produit:''},
+               success:function(d){
+                  var nombres = [];
+                  var types = [];
+                  var isFound = false;
+                    
+                    var dateD = '';
+                    var dateF = '';
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
+                            dateR = moment(d.jsonPrixRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonPrixRecettes[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+                  
+                  configCanvaPrixRecette = {
+                        type: 'line',
+                        data: {
+                            labels: types,
+                            datasets: [{
+                                label: 'Recettes par Prix Unitaire',
+                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
+                                borderColor: "#61C8C8",
+                                data: nombres,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            title: {
+                                display: true,
+                                text: 'Recettes par Prix Unitaire'
+                            },
+                            tooltips: {
+                                mode: 'index',
+                                intersect: false,
+                            },
+                            hover: {
+                                mode: 'nearest',
+                                intersect: true
+                            },
+                            scales: {
+                                xAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Jours'
+                                    }
+                                }],
+                                yAxes: [{
+                                    display: true,
+                                    scaleLabel: {
+                                        display: true,
+                                        labelString: 'Prix Unitaire'
+                                    }
+                                }]
+                            }
+                        }
+                    };
+
+                    canvaPrixRecette = new Chart(chartPrixRecette, configCanvaPrixRecette);
+               }
+        });
+
 	});
 
     var charges = {!! $jsonCharges !!};
@@ -1080,6 +1191,45 @@
                     canvaPrixCharge.data.datasets[0].data = nombres;
                     canvaPrixCharge.data.labels = types;
                     canvaPrixCharge.update();
+            }
+        });
+
+    }
+
+    function updatePrixRecette(dateD, dateF, client, produit) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/prixRecette',
+            data: {dateD:dateD, dateF:dateF, client:client, produit:produit},
+            success:function(d){
+                var nombres = [];
+                var types = [];
+                var isFound = false;
+
+                    var dateS = dateD === "" ? moment().add(-30, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+
+                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
+                            dateR = moment(d.jsonPrixRecettes[j].date);
+                            if (dateR.isSame(i, "day")) {
+                                isFound = true;
+                                nombres.push(d.jsonPrixRecettes[j].prix);
+                            }
+                        }
+                        if (!isFound) {
+                            nombres.push(0);
+                        } else
+                            isFound = false;
+
+                        types.push(i.get('date'));
+                    }
+
+                    canvaPrixRecette.data.datasets[0].data = nombres;
+                    canvaPrixRecette.data.labels = types;
+                    canvaPrixRecette.update();
             }
         });
 
@@ -1388,6 +1538,68 @@
 
     }
 
+    function filterClientPrixRecette() {
+        var client = $('#clientPrixRecette').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientPrixRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updatePrixRecette(v1, v2, c, '');
+        
+        $("#produitPrixRecette option").remove();
+        $('#produitPrixRecette').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterRecette',
+            data: {client:client},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitPrixRecette').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
+    function filterClientPrixRecette() {
+        var client = $('#clientPrixRecette').val();
+
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientPrixRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updatePrixRecette(v1, v2, c, '');
+        
+        $("#produitPrixRecette option").remove();
+        $('#produitPrixRecette').append('<option value="">Produit..</option>');
+
+        $.ajax({
+            type:'GET',
+            url:'/home/filterRecette',
+            data: {client:client},
+            success:function(d){
+
+                for(var i = 0; i < d.jsonProduits.length; i++) {
+                    $('#produitPrixRecette').append('<option value="'+ d.jsonProduits[i].produit  +'">'+ d.jsonProduits[i].produit  +'</option>');
+                }
+
+            }
+        });        
+
+    }
+
     function filterProduitChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
         var produit = $('#produitChiffreCharge').val();
@@ -1463,6 +1675,21 @@
         updatePrixCharge(v1, v2, f, produit);
     }
 
+    function filterProduitPrixRecette() {
+        var client = $('#clientPrixRecette').val();
+        var produit = $('#produitPrixRecette').val();
+        
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        var c = $("#clientPrixRecette option:selected").text();
+
+        if (client == '')
+            c = '';
+
+
+        updatePrixRecette(v1, v2, c, produit);
+    }
+
     var charge = $('#charge').val();
     var recette = $('#recette').val();
 
@@ -1475,6 +1702,7 @@
         filterProduitQuantiteCharge();
         filterProduitQuantiteRecette();
         filterProduitPrixCharge();
+        filterProduitPrixRecette();
     }
 </script>
 @endsection
