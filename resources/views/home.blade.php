@@ -91,11 +91,17 @@
                 <div class="col-md-3">
                     Période : 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                </div>
+                <div class="col-md-3">
+                    <select id="filter" class="form-control border-input" onchange="changeCharts()">
+                        <option value="daily" selected>Daily</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
                 </div>
             </div>
         </div> 
@@ -441,7 +447,7 @@
                   canvaStructure = new Chart(chartCanvaStructure, configCanvaStructure);
                }
         });
-
+        
         $.ajax({
                type:'GET',
                url:'/home/chiffreCharge',
@@ -526,55 +532,10 @@
                             }
                         }
                     };
-                  
-                  /*configCanvaChiffreCharge = {
-                        type: 'line',
-                        data: {
-                            labels: types,
-                            datasets: [{
-                                label: 'Charges par Chiffre',
-                                backgroundColor: color("#61C8C8").alpha(0.5).rgbString(),
-                                borderColor: "#61C8C8",
-                                data: nombres,
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            title: {
-                                display: true,
-                                text: 'Charges par Chiffre'
-                            },
-                            tooltips: {
-                                mode: 'index',
-                                intersect: false,
-                            },
-                            hover: {
-                                mode: 'nearest',
-                                intersect: true
-                            },
-                            scales: {
-                                xAxes: [{
-                                    display: true,
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Jour'
-                                    }
-                                }],
-                                yAxes: [{
-                                    display: true,
-                                    scaleLabel: {
-                                        display: true,
-                                        labelString: 'Chiffre'
-                                    }
-                                }]
-                            }
-                        }
-                    };
-                    */
-
+                    
                     canvaChiffreCharge = new Chart(chartChiffreCharge, configCanvaChiffreCharge);
                }
-        });
+        }); 
 
         $.ajax({
                type:'GET',
@@ -1071,7 +1032,7 @@
 
     }
 
-    function updateChiffreCharge(dateD, dateF, fournisseur, produit) {
+    function updateChiffreCharge(dateD, dateF, fournisseur, produit, filter) {
 
         $.ajax({
                type:'GET',
@@ -1082,24 +1043,47 @@
                   var types = [];
                   var isFound = false;
 
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
+                    if (filter == "daily") {
 
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonCharges.length; j++) {
-                            dateR = moment(d.jsonCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonCharges[j].prix);
+                        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
+                        var dateE = dateF === "" ? moment() : moment(dateF);
+                        var dateR = moment();
+
+                        for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                            for (var j = 0; j < d.jsonCharges.length; j++) {
+                                dateR = moment(d.jsonCharges[j].date);
+                                if (dateR.isSame(i, "day")) {
+                                    isFound = true;
+                                    nombres.push(d.jsonCharges[j].prix);
+                                }
+                            }
+                            if (!isFound) {
+                                nombres.push(0);
+                            } else
+                                isFound = false;
+
+                            types.push(i.get('date'));
+                        }
+
+                    } else if (filter == "weekly") {
+                        var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                        console.log(old);
+                        var n = moment(old).endOf('day').add(1 ,'week');
+                        for (var i = 0; i < 7; i++) {
+                            if (dateD == "")
+                                old = moment().startOf('day').subtract(7 - i, 'week');
+                            else
+                                old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                            n = moment(old).endOf('day').add(1 ,'week');
+                            nombres[i] = 0;
+                            types[i] = "Week " + (i + 1);
+                            for (var j = 0; j < d.jsonCharges.length; j++) {
+                                if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
+                                    nombres[i] += d.jsonCharges[j].prix;
+                                }
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
 
                     canvaChiffreCharge.data.datasets[0].data = nombres;
@@ -1110,7 +1094,7 @@
 
     }
 
-    function updateChiffreRecette(dateD, dateF, client, produit) {
+    function updateChiffreRecette(dateD, dateF, client, produit, filter) {
 
         $.ajax({
             type:'GET',
@@ -1120,9 +1104,8 @@
                 var nombres = [];
                 var types = [];
                 var isFound = false;
-
-                console.log(d.jsonRecettes);
-
+                
+                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1142,6 +1125,25 @@
 
                         types.push(i.get('date'));
                     }
+                } else if (filter == "weekly") {
+                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 7; i++) {
+                        if (dateD == "")
+                            old = moment().startOf('day').subtract(7 - i, 'week');
+                        else
+                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += d.jsonRecettes[j].prix;
+                            }
+                        }
+                    }
+                }
 
                     canvaChiffreRecette.data.datasets[0].data = nombres;
                     canvaChiffreRecette.data.labels = types;
@@ -1151,7 +1153,7 @@
 
     }
 
-    function updateQuantiteCharge(dateD, dateF, fournisseur, produit) {
+    function updateQuantiteCharge(dateD, dateF, fournisseur, produit, filter) {
 
         $.ajax({
             type:'GET',
@@ -1161,7 +1163,8 @@
                 var nombres = [];
                 var types = [];
                 var isFound = false;
-
+                
+                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1182,6 +1185,26 @@
                         types.push(i.get('date'));
                     }
 
+                } else if (filter == "weekly") {
+                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 7; i++) {
+                        if (dateD == "")
+                            old = moment().startOf('day').subtract(7 - i, 'week');
+                        else
+                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonCharges.length; j++) {
+                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += d.jsonCharges[j].qtte;
+                            }
+                        }
+                    }
+                }
+
                     canvaQuantiteCharge.data.datasets[0].data = nombres;
                     canvaQuantiteCharge.data.labels = types;
                     canvaQuantiteCharge.update();
@@ -1190,7 +1213,7 @@
 
     }
 
-    function updateQuantiteRecette(dateD, dateF, client, produit) {
+    function updateQuantiteRecette(dateD, dateF, client, produit, filter) {
 
         $.ajax({
             type:'GET',
@@ -1201,6 +1224,7 @@
                 var types = [];
                 var isFound = false;
 
+                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1220,6 +1244,25 @@
 
                         types.push(i.get('date'));
                     }
+                } else if (filter == "weekly") {
+                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 7; i++) {
+                        if (dateD == "")
+                            old = moment().startOf('day').subtract(7 - i, 'week');
+                        else
+                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonRecettes.length; j++) {
+                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += d.jsonRecettes[j].qtte;
+                            }
+                        }
+                    }
+                }
 
                     canvaQuantiteRecette.data.datasets[0].data = nombres;
                     canvaQuantiteRecette.data.labels = types;
@@ -1229,7 +1272,7 @@
 
     }
 
-    function updatePrixCharge(dateD, dateF, fournisseur, produit) {
+    function updatePrixCharge(dateD, dateF, fournisseur, produit, filter) {
 
         $.ajax({
             type:'GET',
@@ -1239,7 +1282,8 @@
                 var nombres = [];
                 var types = [];
                 var isFound = false;
-
+                
+                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1259,6 +1303,25 @@
 
                         types.push(i.get('date'));
                     }
+                } else if (filter == "weekly") {
+                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 7; i++) {
+                        if (dateD == "")
+                            old = moment().startOf('day').subtract(7 - i, 'week');
+                        else
+                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
+                            if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += d.jsonPrixCharges[j].prix;
+                            }
+                        }
+                    }
+                }
 
                     canvaPrixCharge.data.datasets[0].data = nombres;
                     canvaPrixCharge.data.labels = types;
@@ -1268,7 +1331,7 @@
 
     }
 
-    function updatePrixRecette(dateD, dateF, client, produit) {
+    function updatePrixRecette(dateD, dateF, client, produit, filter) {
 
         $.ajax({
             type:'GET',
@@ -1278,7 +1341,8 @@
                 var nombres = [];
                 var types = [];
                 var isFound = false;
-
+                
+                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1298,6 +1362,25 @@
 
                         types.push(i.get('date'));
                     }
+                } else if (filter == "weekly") {
+                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 7; i++) {
+                        if (dateD == "")
+                            old = moment().startOf('day').subtract(7 - i, 'week');
+                        else
+                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
+
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
+                            if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += d.jsonPrixRecettes[j].prix;
+                            }
+                        }
+                    }
+                }
 
                     canvaPrixRecette.data.datasets[0].data = nombres;
                     canvaPrixRecette.data.labels = types;
@@ -1675,6 +1758,7 @@
     function filterProduitChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
         var produit = $('#produitChiffreCharge').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1684,12 +1768,13 @@
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, produit);
+        updateChiffreCharge(v1, v2, f, produit, filter);
     }
 
     function filterProduitChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
         var produit = $('#produitChiffreRecette').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1699,12 +1784,13 @@
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, produit);
+        updateChiffreRecette(v1, v2, c, produit, filter);
     }
 
     function filterProduitQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
         var produit = $('#produitQuantiteCharge').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1714,12 +1800,13 @@
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, produit);
+        updateQuantiteCharge(v1, v2, f, produit, filter);
     }
 
     function filterProduitQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
         var produit = $('#produitQuantiteRecette').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1729,12 +1816,13 @@
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, produit);
+        updateQuantiteRecette(v1, v2, c, produit, filter);
     }
 
     function filterProduitPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
         var produit = $('#produitPrixCharge').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1744,12 +1832,13 @@
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, produit);
+        updatePrixCharge(v1, v2, f, produit, filter);
     }
 
     function filterProduitPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var produit = $('#produitPrixRecette').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1759,7 +1848,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, produit);
+        updatePrixRecette(v1, v2, c, produit, filter);
     }
 
     var charge = $('#charge').val();
