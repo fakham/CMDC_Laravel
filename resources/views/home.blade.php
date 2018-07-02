@@ -1540,6 +1540,7 @@
 
     function filterFournisseurChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
+        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1549,7 +1550,7 @@
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, '');
+        updateChiffreCharge(v1, v2, f, '', filter);
         
         $("#produitChiffreCharge option").remove();
         $('#produitChiffreCharge').append('<option value="">Produit..</option>');
@@ -1571,6 +1572,7 @@
 
     function filterClientChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1580,7 +1582,7 @@
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, '');
+        updateChiffreRecette(v1, v2, c, '', filter);
         
         $("#produitChiffreRecette option").remove();
         $('#produitChiffreRecette').append('<option value="">Produit..</option>');
@@ -1602,6 +1604,7 @@
 
     function filterFournisseurQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1611,7 +1614,7 @@
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, '');
+        updateQuantiteCharge(v1, v2, f, '', filter);
         
         $("#produitQuantiteCharge option").remove();
         $('#produitQuantiteCharge').append('<option value="">Produit..</option>');
@@ -1633,6 +1636,7 @@
 
     function filterClientQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1642,7 +1646,7 @@
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, '');
+        updateQuantiteRecette(v1, v2, c, '', filter);
         
         $("#produitQuantiteRecette option").remove();
         $('#produitQuantiteRecette').append('<option value="">Produit..</option>');
@@ -1664,6 +1668,7 @@
 
     function filterFournisseurPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1673,7 +1678,7 @@
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, '');
+        updatePrixCharge(v1, v2, f, '', filter);
         
         $("#produitPrixCharge option").remove();
         $('#produitPrixCharge').append('<option value="">Produit..</option>');
@@ -1695,6 +1700,7 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1704,7 +1710,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '');
+        updatePrixRecette(v1, v2, c, '', filter);
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1726,6 +1732,7 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
+        var filter = $('#filter').val();
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1735,7 +1742,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '');
+        updatePrixRecette(v1, v2, c, '', filter);
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
