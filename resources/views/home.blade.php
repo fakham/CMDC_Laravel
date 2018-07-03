@@ -91,17 +91,11 @@
                 <div class="col-md-3">
                     Période : 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
-                </div>
-                <div class="col-md-3">
-                    <select id="filter" class="form-control border-input" onchange="changeCharts()">
-                        <option value="daily" selected>Daily</option>
-                        <option value="weekly">Weekly</option>
-                    </select>
                 </div>
             </div>
         </div> 
@@ -1032,7 +1026,7 @@
 
     }
 
-    function updateChiffreCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updateChiffreCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
                type:'GET',
@@ -1042,8 +1036,6 @@
                   var nombres = [];
                   var types = [];
                   var isFound = false;
-
-                    if (filter == "daily") {
 
                         var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                         var dateE = dateF === "" ? moment() : moment(dateF);
@@ -1065,33 +1057,6 @@
                             types.push(i.get('date'));
                         }
 
-                    } else if (filter == "weekly") {
-                        var old = moment().startOf('day').subtract(7 ,'week');
-                        if (dateF != "") {
-                            var dd = moment(dateF);
-                            old.set('date', dd.get('date'));
-                            old.set('month', dd.get('month'));
-                            old.set('year', dd.get('year'));
-                            old = old.startOf('day').subtract(7, 'week');
-                        }
-                        // console.log(old);
-                        var n = moment(old).endOf('day').add(1 ,'week');
-                        for (var i = 0; i < 7; i++) {
-                            if (dateF == "")
-                                old = moment().startOf('day').subtract(7 - i, 'week');
-                            else
-                                old = old.startOf('day').add(i, 'week');
-                            // console.log(old);
-                            n = moment(old).endOf('day').add(1 ,'week');
-                            nombres[i] = 0;
-                            types[i] = "Week " + (i + 1);
-                            for (var j = 0; j < d.jsonCharges.length; j++) {
-                                if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
-                                    nombres[i] += parseFloat(d.jsonCharges[j].prix);
-                                }
-                            }
-                        }
-                    }
 
                     canvaChiffreCharge.data.datasets[0].data = nombres;
                     canvaChiffreCharge.data.labels = types;
@@ -1101,7 +1066,7 @@
 
     }
 
-    function updateChiffreRecette(dateD, dateF, client, produit, filter) {
+    function updateChiffreRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1112,7 +1077,6 @@
                 var types = [];
                 var isFound = false;
                 
-                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1132,25 +1096,6 @@
 
                         types.push(i.get('date'));
                     }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonRecettes[j].prix;
-                            }
-                        }
-                    }
-                }
 
                     canvaChiffreRecette.data.datasets[0].data = nombres;
                     canvaChiffreRecette.data.labels = types;
@@ -1160,7 +1105,7 @@
 
     }
 
-    function updateQuantiteCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updateQuantiteCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
             type:'GET',
@@ -1171,7 +1116,6 @@
                 var types = [];
                 var isFound = false;
                 
-                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1192,25 +1136,7 @@
                         types.push(i.get('date'));
                     }
 
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonCharges.length; j++) {
-                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonCharges[j].qtte;
-                            }
-                        }
-                    }
-                }
+                
 
                     canvaQuantiteCharge.data.datasets[0].data = nombres;
                     canvaQuantiteCharge.data.labels = types;
@@ -1220,7 +1146,7 @@
 
     }
 
-    function updateQuantiteRecette(dateD, dateF, client, produit, filter) {
+    function updateQuantiteRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1231,7 +1157,6 @@
                 var types = [];
                 var isFound = false;
 
-                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1251,25 +1176,6 @@
 
                         types.push(i.get('date'));
                     }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonRecettes[j].qtte;
-                            }
-                        }
-                    }
-                }
 
                     canvaQuantiteRecette.data.datasets[0].data = nombres;
                     canvaQuantiteRecette.data.labels = types;
@@ -1279,7 +1185,7 @@
 
     }
 
-    function updatePrixCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updatePrixCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
             type:'GET',
@@ -1290,7 +1196,6 @@
                 var types = [];
                 var isFound = false;
                 
-                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1310,25 +1215,7 @@
 
                         types.push(i.get('date'));
                     }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
-                            if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonPrixCharges[j].prix;
-                            }
-                        }
-                    }
-                }
+                
 
                     canvaPrixCharge.data.datasets[0].data = nombres;
                     canvaPrixCharge.data.labels = types;
@@ -1338,7 +1225,7 @@
 
     }
 
-    function updatePrixRecette(dateD, dateF, client, produit, filter) {
+    function updatePrixRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1349,7 +1236,6 @@
                 var types = [];
                 var isFound = false;
                 
-                if (filter == "daily") {
                     var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
                     var dateE = dateF === "" ? moment() : moment(dateF);
                     var dateR = moment();
@@ -1369,25 +1255,7 @@
 
                         types.push(i.get('date'));
                     }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
-                            if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonPrixRecettes[j].prix;
-                            }
-                        }
-                    }
-                }
+                
 
                     canvaPrixRecette.data.datasets[0].data = nombres;
                     canvaPrixRecette.data.labels = types;
@@ -1547,7 +1415,6 @@
 
     function filterFournisseurChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
-        var filter = $('#filter').val();
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1557,7 +1424,7 @@
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, '', filter);
+        updateChiffreCharge(v1, v2, f, '');
         
         $("#produitChiffreCharge option").remove();
         $('#produitChiffreCharge').append('<option value="">Produit..</option>');
@@ -1579,7 +1446,7 @@
 
     function filterClientChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1589,7 +1456,7 @@
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, '', filter);
+        updateChiffreRecette(v1, v2, c, '');
         
         $("#produitChiffreRecette option").remove();
         $('#produitChiffreRecette').append('<option value="">Produit..</option>');
@@ -1611,7 +1478,7 @@
 
     function filterFournisseurQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1621,7 +1488,7 @@
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, '', filter);
+        updateQuantiteCharge(v1, v2, f, '');
         
         $("#produitQuantiteCharge option").remove();
         $('#produitQuantiteCharge').append('<option value="">Produit..</option>');
@@ -1643,7 +1510,7 @@
 
     function filterClientQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1653,7 +1520,7 @@
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, '', filter);
+        updateQuantiteRecette(v1, v2, c, '');
         
         $("#produitQuantiteRecette option").remove();
         $('#produitQuantiteRecette').append('<option value="">Produit..</option>');
@@ -1675,7 +1542,7 @@
 
     function filterFournisseurPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1685,7 +1552,7 @@
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, '', filter);
+        updatePrixCharge(v1, v2, f, '');
         
         $("#produitPrixCharge option").remove();
         $('#produitPrixCharge').append('<option value="">Produit..</option>');
@@ -1707,7 +1574,7 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1717,7 +1584,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '', filter);
+        updatePrixRecette(v1, v2, c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1739,7 +1606,7 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
-        var filter = $('#filter').val();
+        
 
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1749,7 +1616,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '', filter);
+        updatePrixRecette(v1, v2, c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1772,7 +1639,7 @@
     function filterProduitChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
         var produit = $('#produitChiffreCharge').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1782,13 +1649,13 @@
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, produit, filter);
+        updateChiffreCharge(v1, v2, f, produit);
     }
 
     function filterProduitChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
         var produit = $('#produitChiffreRecette').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1798,13 +1665,13 @@
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, produit, filter);
+        updateChiffreRecette(v1, v2, c, produit);
     }
 
     function filterProduitQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
         var produit = $('#produitQuantiteCharge').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1814,13 +1681,13 @@
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, produit, filter);
+        updateQuantiteCharge(v1, v2, f, produit);
     }
 
     function filterProduitQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
         var produit = $('#produitQuantiteRecette').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1830,13 +1697,13 @@
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, produit, filter);
+        updateQuantiteRecette(v1, v2, c, produit);
     }
 
     function filterProduitPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
         var produit = $('#produitPrixCharge').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1846,13 +1713,13 @@
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, produit, filter);
+        updatePrixCharge(v1, v2, f, produit);
     }
 
     function filterProduitPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var produit = $('#produitPrixRecette').val();
-        var filter = $('#filter').val();
+        
         
         var v1 = $('#datepicker1').val();
         var v2 = $('#datepicker2').val();
@@ -1862,7 +1729,7 @@
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, produit, filter);
+        updatePrixRecette(v1, v2, c, produit);
     }
 
     var charge = $('#charge').val();
