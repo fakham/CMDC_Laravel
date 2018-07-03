@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/weekly', 'HomeController@weekly')->name('weekly');
 Route::get('/home/monthly', 'HomeController@monthly')->name('monthly');
+Route::get('/home/quarterly', 'HomeController@quarterly')->name('quarterly');
 Route::get('/home/structureCharge', 'HomeController@structureCharge')->name('structureCharge');
 Route::get('/home/chiffreCharge', 'HomeController@chiffreCharge')->name('chiffreCharge');
 Route::get('/home/chiffreRecette', 'HomeController@chiffreRecette')->name('chiffreRecette');
