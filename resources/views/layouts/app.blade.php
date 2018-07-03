@@ -47,10 +47,22 @@
 				</div>
 
 				<ul class="nav">
-					<li class="active" id="activeDashboard">
-						<a href="/home">
+					<li class="active dropdown" id="activeDashboard">
+						<!--<a href="/home">
                         <i class="ti-dashboard"></i>
-                        <p>Dashboard</p>
+                        <p>Dashboard</p> -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class=" ti-dashboard"></i>
+                                    <p class="notification"></p>
+									<p>Dashboard</p>
+									
+                              </a>
+						<ul class="dropdown-menu">
+							<li><a href="/home">Daily</a></li>
+							<li><a href="/home/weekly">Weekly</a></li>
+							<li><a href="/home/monthly">Monthly</a></li>
+							<li><a href="/home/quarterly">Quarterly</a></li>
+						</ul>
                     </a>
 					</li>
 					<li>
