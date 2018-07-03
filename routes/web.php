@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/weekly', 'HomeController@weekly')->name('weekly');
 Route::get('/home/structureCharge', 'HomeController@structureCharge')->name('structureCharge');
 Route::get('/home/chiffreCharge', 'HomeController@chiffreCharge')->name('chiffreCharge');
 Route::get('/home/chiffreRecette', 'HomeController@chiffreRecette')->name('chiffreRecette');

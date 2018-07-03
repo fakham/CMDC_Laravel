@@ -88,21 +88,7 @@
     <div class="card">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    Période : 
-                </div>
-                <div class="col-md-3">
-                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
-                </div>
-                <div class="col-md-3">
-                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
-                </div>
-                <div class="col-md-3">
-                    <select id="filter" class="form-control border-input" onchange="changeCharts()">
-                        <option value="daily" selected>Daily</option>
-                        <option value="weekly">Weekly</option>
-                    </select>
-                </div>
+                <h4>Weekly</h4>
             </div>
         </div> 
     </div>
@@ -455,29 +441,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                    var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonCharges.length; j++) {
-                            dateR = moment(d.jsonCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonCharges[j].prix);
+                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += parseFloat(d.jsonCharges[j].prix);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
 
                     configCanvaChiffreCharge = {
@@ -544,29 +522,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
 
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                  var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            dateR = moment(d.jsonRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonRecettes[j].prix);
+                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += parseFloat(d.jsonRecettes[j].prix);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
                   
                   configCanvaChiffreRecette = {
@@ -634,29 +604,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
-
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                  
+                  var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonCharges.length; j++) {
-                            dateR = moment(d.jsonCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonCharges[j].qtte);
+                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += parseInt(d.jsonCharges[j].qtte);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
 
                     var barChartData = {
@@ -727,29 +689,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
-
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                  
+                  var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            dateR = moment(d.jsonRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonRecettes[j].qtte);
+                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += parseInt(d.jsonRecettes[j].qtte);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
 
                     var barChartData = {
@@ -820,29 +774,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
-
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                  
+                  var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonPrixCharges.length; j++) {
-                            dateR = moment(d.jsonPrixCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonPrixCharges[j].prix);
+                            if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += parseFloat(d.jsonPrixCharges[j].prix);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
                   
                   configCanvaPrixCharge = {
@@ -910,29 +856,21 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
-                    
-                    var dateD = '';
-                    var dateF = '';
-
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
+                  
+                  var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
-                            dateR = moment(d.jsonPrixRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonPrixRecettes[j].prix);
+                            if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
+                                nombres[i] += parseFloat(d.jsonPrixRecettes[j].prix);
                             }
                         }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
                     }
                   
                   configCanvaPrixRecette = {
@@ -995,44 +933,7 @@
 
 	});
 
-    var charges = {!! $jsonCharges !!};
-    var recettes = {!! $jsonRecettes !!};
-
-    function updateStructureCharge(dateD, dateF) {
-
-        $.ajax({
-               type:'GET',
-               url:'/home/structureCharge',
-            //    data:['_token = <?php echo csrf_token() ?>', 'dateD = ' + dateD, 'dateF = ' + dateF ],
-               data: {dateD:dateD, dateF:dateF},
-               success:function(data){
-                  var nombres = [];
-                  var types = [];
-                  var colors = [];
-
-                  for (var i = 0; i < data.structure.length; i++) {
-                      nombres.push(data.structure[i].nombre);
-                      types.push(data.structure[i].type);
-                      colors.push(getRandomColor());
-                  }
-
-                //   console.log(data.structure);
-                    if (nombres.length == 0) {
-                        nombres.push(1);
-                        types.push("No results!!");
-                        colors.push("#000");
-                    } 
-                    canvaStructure.data.datasets[0].data = nombres;
-                    canvaStructure.data.datasets[0].backgroundColor = colors;
-                    canvaStructure.data.labels = types;
-                    canvaStructure.update();
-
-               }
-        });
-
-    }
-
-    function updateChiffreCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updateChiffreCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
                type:'GET',
@@ -1041,54 +942,19 @@
                success:function(d){
                   var nombres = [];
                   var types = [];
-                  var isFound = false;
 
-                    if (filter == "daily") {
-
-                        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                        var dateE = dateF === "" ? moment() : moment(dateF);
-                        var dateR = moment();
-
-                        for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                            for (var j = 0; j < d.jsonCharges.length; j++) {
-                                dateR = moment(d.jsonCharges[j].date);
-                                if (dateR.isSame(i, "day")) {
-                                    isFound = true;
-                                    nombres.push(d.jsonCharges[j].prix);
-                                }
-                            }
-                            if (!isFound) {
-                                nombres.push(0);
-                            } else
-                                isFound = false;
-
-                            types.push(i.get('date'));
-                        }
-
-                    } else if (filter == "weekly") {
-                        var old = moment().startOf('day').subtract(7 ,'week');
-                        if (dateF != "") {
-                            var dd = moment(dateF);
-                            old.set('date', dd.get('date'));
-                            old.set('month', dd.get('month'));
-                            old.set('year', dd.get('year'));
-                            old = old.startOf('day').subtract(7, 'week');
-                        }
+                    var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                    var n = moment(old).endOf('day').add(1 ,'week');
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
                         // console.log(old);
-                        var n = moment(old).endOf('day').add(1 ,'week');
-                        for (var i = 0; i < 7; i++) {
-                            if (dateF == "")
-                                old = moment().startOf('day').subtract(7 - i, 'week');
-                            else
-                                old = old.startOf('day').add(i, 'week');
-                            // console.log(old);
-                            n = moment(old).endOf('day').add(1 ,'week');
-                            nombres[i] = 0;
-                            types[i] = "Week " + (i + 1);
-                            for (var j = 0; j < d.jsonCharges.length; j++) {
-                                if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
-                                    nombres[i] += parseFloat(d.jsonCharges[j].prix);
-                                }
+                        n = moment(old).endOf('day').add(1 ,'week');
+                        nombres[i] = 0;
+                        types[i] = "Week " + (i + 1);
+                        for (var j = 0; j < d.jsonCharges.length; j++) {
+                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
+                                nombres[i] += parseFloat(d.jsonCharges[j].prix);
                             }
                         }
                     }
@@ -1101,7 +967,7 @@
 
     }
 
-    function updateChiffreRecette(dateD, dateF, client, produit, filter) {
+    function updateChiffreRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1110,44 +976,19 @@
             success:function(d){
                 var nombres = [];
                 var types = [];
-                var isFound = false;
                 
-                if (filter == "daily") {
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            dateR = moment(d.jsonRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonRecettes[j].prix);
-                            }
-                        }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
-                    }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonRecettes[j].prix;
-                            }
+                var old = moment().startOf('day').subtract(8 ,'week');
+                // console.log(old);
+                var n = moment(old).endOf('day').add(1 ,'week');
+                for (var i = 0; i < 8; i++) {
+                    old = moment().startOf('day').subtract(8 - i, 'week');
+                    // console.log(old);
+                    n = moment(old).endOf('day').add(1 ,'week');
+                    nombres[i] = 0;
+                    types[i] = "Week " + (i + 1);
+                    for (var j = 0; j < d.jsonRecettes.length; j++) {
+                        if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
+                            nombres[i] += parseFloat(d.jsonRecettes[j].prix);
                         }
                     }
                 }
@@ -1160,7 +1001,7 @@
 
     }
 
-    function updateQuantiteCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updateQuantiteCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
             type:'GET',
@@ -1169,48 +1010,22 @@
             success:function(d){
                 var nombres = [];
                 var types = [];
-                var isFound = false;
                 
-                if (filter == "daily") {
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonCharges.length; j++) {
-                            dateR = moment(d.jsonCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonCharges[j].qtte);
-                            }
-                        }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
-                    }
-
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
                     var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
                         types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonCharges[j].qtte;
+                                nombres[i] += parseInt(d.jsonCharges[j].qtte);
                             }
                         }
                     }
-                }
 
                     canvaQuantiteCharge.data.datasets[0].data = nombres;
                     canvaQuantiteCharge.data.labels = types;
@@ -1220,7 +1035,7 @@
 
     }
 
-    function updateQuantiteRecette(dateD, dateF, client, produit, filter) {
+    function updateQuantiteRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1229,47 +1044,22 @@
             success:function(d){
                 var nombres = [];
                 var types = [];
-                var isFound = false;
 
-                if (filter == "daily") {
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            dateR = moment(d.jsonRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonRecettes[j].qtte);
-                            }
-                        }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
-                    }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
+                var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
                     var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
+                    for (var i = 0; i < 8; i++) {
+                        old = moment().startOf('day').subtract(8 - i, 'week');
+                        // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
                         types[i] = "Week " + (i + 1);
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
                             if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonRecettes[j].qtte;
+                                nombres[i] += parseInt(d.jsonRecettes[j].qtte);
                             }
                         }
                     }
-                }
 
                     canvaQuantiteRecette.data.datasets[0].data = nombres;
                     canvaQuantiteRecette.data.labels = types;
@@ -1279,7 +1069,7 @@
 
     }
 
-    function updatePrixCharge(dateD, dateF, fournisseur, produit, filter) {
+    function updatePrixCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
             type:'GET',
@@ -1288,44 +1078,19 @@
             success:function(d){
                 var nombres = [];
                 var types = [];
-                var isFound = false;
                 
-                if (filter == "daily") {
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
-                            dateR = moment(d.jsonPrixCharges[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonPrixCharges[j].prix);
-                            }
-                        }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
-                    }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonPrixCharges.length; j++) {
-                            if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonPrixCharges[j].prix;
-                            }
+                var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                var n = moment(old).endOf('day').add(1 ,'week');
+                for (var i = 0; i < 8; i++) {
+                    old = moment().startOf('day').subtract(8 - i, 'week');
+                    // console.log(old);
+                    n = moment(old).endOf('day').add(1 ,'week');
+                    nombres[i] = 0;
+                    types[i] = "Week " + (i + 1);
+                    for (var j = 0; j < d.jsonPrixCharges.length; j++) {
+                        if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
+                            nombres[i] += parseFloat(d.jsonPrixCharges[j].prix);
                         }
                     }
                 }
@@ -1338,7 +1103,7 @@
 
     }
 
-    function updatePrixRecette(dateD, dateF, client, produit, filter) {
+    function updatePrixRecette(dateD, dateF, client, produit) {
 
         $.ajax({
             type:'GET',
@@ -1347,44 +1112,19 @@
             success:function(d){
                 var nombres = [];
                 var types = [];
-                var isFound = false;
                 
-                if (filter == "daily") {
-                    var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-                    var dateE = dateF === "" ? moment() : moment(dateF);
-                    var dateR = moment();
-
-                    for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
-                            dateR = moment(d.jsonPrixRecettes[j].date);
-                            if (dateR.isSame(i, "day")) {
-                                isFound = true;
-                                nombres.push(d.jsonPrixRecettes[j].prix);
-                            }
-                        }
-                        if (!isFound) {
-                            nombres.push(0);
-                        } else
-                            isFound = false;
-
-                        types.push(i.get('date'));
-                    }
-                } else if (filter == "weekly") {
-                    var old = dateD === "" ? moment().startOf('day').subtract(7 ,'week') : moment(dateD).startOf('day').subtract(7 ,'week');
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 7; i++) {
-                        if (dateD == "")
-                            old = moment().startOf('day').subtract(7 - i, 'week');
-                        else
-                            old = moment(dateD).startOf('day').subtract(7 - i, 'week');
-
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
-                            if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += d.jsonPrixRecettes[j].prix;
-                            }
+                var old = moment().startOf('day').subtract(8 ,'week');
+                    // console.log(old);
+                var n = moment(old).endOf('day').add(1 ,'week');
+                for (var i = 0; i < 8; i++) {
+                    old = moment().startOf('day').subtract(8 - i, 'week');
+                    // console.log(old);
+                    n = moment(old).endOf('day').add(1 ,'week');
+                    nombres[i] = 0;
+                    types[i] = "Week " + (i + 1);
+                    for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
+                        if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
+                            nombres[i] += parseFloat(d.jsonPrixRecettes[j].prix);
                         }
                     }
                 }
@@ -1397,167 +1137,16 @@
 
     }
 
-    function dailyRecette(dateD, dateF, client, recette) {
-        var labels = [];
-        var data = [];
-        var qtte = [];
-        
-        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-        var dateE = dateF === "" ? moment() : moment(dateF);
-        var dateR = moment();
-        
-        var isClient = client == "" ? false : true;
-        var isFound = false;
-        var isFoundQtte = false;
-        for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-            for (var j = 0; j < recettes.length; j++) {
-                dateR = moment(recettes[j].date);
-                if (dateR.isSame(i, "day") && (!isClient || recettes[j].id_client == client)) {
-                    isFound = true;
-                    data.push(recettes[j].prix * recettes[j].qtte);
-                    if (recette == recettes[j].produit) {
-                        qtte.push(recettes[j].qtte);
-                        isFoundQtte = true;
-                    }
-                }
-            }
-            if (!isFound) {
-                data.push(0);
-            } else
-                isFound = false;
-
-            if (!isFoundQtte)
-                qtte.push(0);
-            else
-                isFoundQtte = false;
-
-            labels.push(i.get('date'));
-        }
-        // data.shift();
-        console.log(data);
-
-        let lineChart = new Chart(CHART, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Recettes : Prix',
-                        data: data,
-                        borderColor: [
-                            "#61C8C8"
-                        ],
-                        type: 'line'
-                    }
-                ]
-            }
-        });
-
-        let lineChart2 = new Chart(CHART3, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Quantité ('+recette+')',
-                        data: qtte,
-                        borderColor: [
-                            "#61C8C8"
-                        ],
-                        type: 'bar'
-                    }
-                ]
-            }
-        });
-    }
-
-    function dailyCharge(dateD, dateF, fournisseur, charge) {
-        var labels = [];
-        var data = [];
-        var qtte = [];
-        
-        var dateS = dateD === "" ? moment().add(-7, 'days') : moment(dateD);
-        var dateE = dateF === "" ? moment() : moment(dateF);
-        var dateR = moment();
-        
-        var isFournisseur = fournisseur == "" ? false : true;
-        var isFound = false;
-        var isFoundQtte = false;
-        for (var i = dateS; i.isBefore(dateE); i.add(1, 'days')) {
-            for (var j = 0; j < charges.length; j++) {
-                dateR = moment(charges[j].date);
-                if (dateR.isSame(i, "day") && (!isFournisseur || charges[j].id_fournisseur == fournisseur)) {
-                    isFound = true;
-                    data.push(charges[j].prix * charges[j].qtte);
-                    if (charge == charges[j].produit) {
-                        isFoundQtte = true;
-                        qtte.push(charges[j].qtte);
-                    }
-                }
-            }
-            if (!isFound) {
-                data.push(0);
-            } else
-                isFound = false;
-
-            if (!isFoundQtte) {
-                qtte.push(0);
-            } else
-                isFoundQtte = false;
-
-            labels.push(i.get('date'));
-        }
-        // data.shift();
-        console.log(data);
-
-        let lineChart = new Chart(CHART2, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Charges : Prix',
-                        data: data,
-                        borderColor: [
-                            "#61C8C8"
-                        ],
-                        type: 'line'
-                    }
-                ]
-            }
-        });
-
-        let lineChart2 = new Chart(CHART4, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: 'Quantité ('+charge+')',
-                        data: qtte,
-                        borderColor: [
-                            "#61C8C8"
-                        ],
-                        type: 'bar'
-                    }
-                ]
-            }
-        });
-    }
-
     function filterFournisseurChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
-        var filter = $('#filter').val();
         
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurChiffreCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, '', filter);
+        updateChiffreCharge('', '', f, '');
         
         $("#produitChiffreCharge option").remove();
         $('#produitChiffreCharge').append('<option value="">Produit..</option>');
@@ -1579,17 +1168,13 @@
 
     function filterClientChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientChiffreRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, '', filter);
+        updateChiffreRecette('', '', c, '');
         
         $("#produitChiffreRecette option").remove();
         $('#produitChiffreRecette').append('<option value="">Produit..</option>');
@@ -1611,17 +1196,13 @@
 
     function filterFournisseurQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurQuantiteCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, '', filter);
+        updateQuantiteCharge('', '', f, '');
         
         $("#produitQuantiteCharge option").remove();
         $('#produitQuantiteCharge').append('<option value="">Produit..</option>');
@@ -1643,17 +1224,13 @@
 
     function filterClientQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientQuantiteRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, '', filter);
+        updateQuantiteRecette('', '', c, '');
         
         $("#produitQuantiteRecette option").remove();
         $('#produitQuantiteRecette').append('<option value="">Produit..</option>');
@@ -1675,17 +1252,13 @@
 
     function filterFournisseurPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurPrixCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, '', filter);
+        updatePrixCharge('', '', f, '');
         
         $("#produitPrixCharge option").remove();
         $('#produitPrixCharge').append('<option value="">Produit..</option>');
@@ -1707,17 +1280,13 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientPrixRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '', filter);
+        updatePrixRecette('', '', c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1739,17 +1308,13 @@
 
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
-        var filter = $('#filter').val();
-
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientPrixRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, '', filter);
+        updatePrixRecette('', '', c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1772,106 +1337,80 @@
     function filterProduitChiffreCharge() {
         var fournisseur = $('#fournisseurChiffreCharge').val();
         var produit = $('#produitChiffreCharge').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurChiffreCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateChiffreCharge(v1, v2, f, produit, filter);
+        updateChiffreCharge('', '', f, produit);
     }
 
     function filterProduitChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
         var produit = $('#produitChiffreRecette').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientChiffreRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updateChiffreRecette(v1, v2, c, produit, filter);
+        updateChiffreRecette('', '', c, produit);
     }
 
     function filterProduitQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
         var produit = $('#produitQuantiteCharge').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurQuantiteCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateQuantiteCharge(v1, v2, f, produit, filter);
+        updateQuantiteCharge('', '', f, produit);
     }
 
     function filterProduitQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
         var produit = $('#produitQuantiteRecette').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientQuantiteRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updateQuantiteRecette(v1, v2, c, produit, filter);
+        updateQuantiteRecette('', '', c, produit);
     }
 
     function filterProduitPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
         var produit = $('#produitPrixCharge').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var f = $("#fournisseurPrixCharge option:selected").text();
 
         if (fournisseur == '')
             f = '';
 
 
-        updatePrixCharge(v1, v2, f, produit, filter);
+        updatePrixCharge('', '', f, produit);
     }
 
     function filterProduitPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var produit = $('#produitPrixRecette').val();
-        var filter = $('#filter').val();
-        
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
         var c = $("#clientPrixRecette option:selected").text();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette(v1, v2, c, produit, filter);
+        updatePrixRecette('', '', c, produit);
     }
 
     var charge = $('#charge').val();
     var recette = $('#recette').val();
 
     function changeCharts() {
-        var v1 = $('#datepicker1').val();
-        var v2 = $('#datepicker2').val();
-        updateStructureCharge(v1, v2);
+        updateStructureCharge('', '');
         filterProduitChiffreCharge();
         filterProduitChiffreRecette();
         filterProduitQuantiteCharge();
