@@ -92,10 +92,10 @@
                     <h4>Monthly</h4>
                 </div>
                 <div class="col-md-4">
-                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                    <input id="datepicker1" type='month' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
                 <div class="col-md-4">
-                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                    <input id="datepicker2" type='month' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
             </div>
         </div> 
