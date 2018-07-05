@@ -88,15 +88,16 @@
     <div class="card">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
                     <h4>Monthly</h4>
+                <div class="col-md-3">
+                    <label>Date Début : </label>
+                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
-                <div class="col-md-4">
-                    <input id="datepicker1" type='month' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                <div class="col-md-3">
+                    <label>Date Fin : </label>
+                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
                 </div>
-                <div class="col-md-4">
-                    <input id="datepicker2" type='month' class="form-control border-input" name="date" onchange="changeCharts()"/>
-                </div>
+                <div class="col-md-6"></div>
             </div>
         </div> 
     </div>
