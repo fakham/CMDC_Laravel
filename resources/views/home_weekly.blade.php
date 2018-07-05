@@ -88,7 +88,16 @@
     <div class="card">
         <div class="container">
             <div class="row">
-                <h4>Weekly</h4>
+                    <h4>Weekly</h4>
+                <div class="col-md-3">
+                    <label>Date Début : </label>
+                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                </div>
+                <div class="col-md-3">
+                    <label>Date Fin : </label>
+                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                </div>
+                <div class="col-md-6"></div>
             </div>
         </div> 
     </div>
@@ -933,6 +942,40 @@
 
 	});
 
+    function updateStructureCharge(dateD, dateF) {
+
+        $.ajax({
+            type:'GET',
+            url:'/home/structureCharge',
+            //    data:['_token = <?php echo csrf_token() ?>', 'dateD = ' + dateD, 'dateF = ' + dateF ],
+            data: {dateD:dateD, dateF:dateF},
+            success:function(data){
+                var nombres = [];
+                var types = [];
+                var colors = [];
+
+                for (var i = 0; i < data.structure.length; i++) {
+                    nombres.push(data.structure[i].nombre);
+                    types.push(data.structure[i].type);
+                    colors.push(getRandomColor());
+                }
+
+                //   console.log(data.structure);
+                    if (nombres.length == 0) {
+                        nombres.push(1);
+                        types.push("No results!!");
+                        colors.push("#000");
+                    } 
+                    canvaStructure.data.datasets[0].data = nombres;
+                    canvaStructure.data.datasets[0].backgroundColor = colors;
+                    canvaStructure.data.labels = types;
+                    canvaStructure.update();
+
+            }
+        });
+
+    }
+
     function updateChiffreCharge(dateD, dateF, fournisseur, produit) {
 
         $.ajax({
@@ -943,7 +986,24 @@
                   var nombres = [];
                   var types = [];
 
-                    var old = moment().startOf('day').subtract(8 ,'week');
+                    var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                    var dateE = dateF === "" ? moment() : moment(dateF);
+                    var dateR = moment();
+                    var n = 0;
+                    for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                        nombres.push(0);
+                        for (var j = 0; j < d.jsonCharges.length; j++) {
+                            dateR = moment(d.jsonCharges[j].date);
+                            if (dateR.isSame(i, 'week')) {
+                                nombres[n] += parseFloat(d.jsonCharges[j].prix);
+                            }
+                        }
+
+                        types[n] = "Week " + (n + 1);
+                        n++;
+                    }
+
+                    /*var old = moment().startOf('day').subtract(8 ,'week');
                     // console.log(old);
                     var n = moment(old).endOf('day').add(1 ,'week');
                     for (var i = 0; i < 8; i++) {
@@ -957,7 +1017,7 @@
                                 nombres[i] += parseFloat(d.jsonCharges[j].prix);
                             }
                         }
-                    }
+                    } */
 
                     canvaChiffreCharge.data.datasets[0].data = nombres;
                     canvaChiffreCharge.data.labels = types;
@@ -977,20 +1037,21 @@
                 var nombres = [];
                 var types = [];
                 
-                var old = moment().startOf('day').subtract(8 ,'week');
-                // console.log(old);
-                var n = moment(old).endOf('day').add(1 ,'week');
-                for (var i = 0; i < 8; i++) {
-                    old = moment().startOf('day').subtract(8 - i, 'week');
-                    // console.log(old);
-                    n = moment(old).endOf('day').add(1 ,'week');
-                    nombres[i] = 0;
-                    types[i] = "Week " + (i + 1);
+                var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                var dateE = dateF === "" ? moment() : moment(dateF);
+                var dateR = moment();
+                var n = 0;
+                for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                    nombres.push(0);
                     for (var j = 0; j < d.jsonRecettes.length; j++) {
-                        if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                            nombres[i] += parseFloat(d.jsonRecettes[j].prix);
+                        dateR = moment(d.jsonRecettes[j].date);
+                        if (dateR.isSame(i, 'week')) {
+                            nombres[n] += parseFloat(d.jsonRecettes[j].prix);
                         }
                     }
+
+                    types[n] = "Week " + (n + 1);
+                    n++;
                 }
 
                     canvaChiffreRecette.data.datasets[0].data = nombres;
@@ -1011,21 +1072,22 @@
                 var nombres = [];
                 var types = [];
                 
-                var old = moment().startOf('day').subtract(8 ,'week');
-                    // console.log(old);
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 8; i++) {
-                        old = moment().startOf('day').subtract(8 - i, 'week');
-                        // console.log(old);
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonCharges.length; j++) {
-                            if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
-                                nombres[i] += parseInt(d.jsonCharges[j].qtte);
-                            }
+                var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                var dateE = dateF === "" ? moment() : moment(dateF);
+                var dateR = moment();
+                var n = 0;
+                for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                    nombres.push(0);
+                    for (var j = 0; j < d.jsonCharges.length; j++) {
+                        dateR = moment(d.jsonCharges[j].date);
+                        if (dateR.isSame(i, 'week')) {
+                            nombres[n] += parseInt(d.jsonCharges[j].qtte);
                         }
                     }
+
+                    types[n] = "Week " + (n + 1);
+                    n++;
+                }
 
                     canvaQuantiteCharge.data.datasets[0].data = nombres;
                     canvaQuantiteCharge.data.labels = types;
@@ -1045,21 +1107,22 @@
                 var nombres = [];
                 var types = [];
 
-                var old = moment().startOf('day').subtract(8 ,'week');
-                    // console.log(old);
-                    var n = moment(old).endOf('day').add(1 ,'week');
-                    for (var i = 0; i < 8; i++) {
-                        old = moment().startOf('day').subtract(8 - i, 'week');
-                        // console.log(old);
-                        n = moment(old).endOf('day').add(1 ,'week');
-                        nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
-                        for (var j = 0; j < d.jsonRecettes.length; j++) {
-                            if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
-                                nombres[i] += parseInt(d.jsonRecettes[j].qtte);
-                            }
+                var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                var dateE = dateF === "" ? moment() : moment(dateF);
+                var dateR = moment();
+                var n = 0;
+                for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                    nombres.push(0);
+                    for (var j = 0; j < d.jsonRecettes.length; j++) {
+                        dateR = moment(d.jsonRecettes[j].date);
+                        if (dateR.isSame(i, 'week')) {
+                            nombres[n] += parseInt(d.jsonRecettes[j].qtte);
                         }
                     }
+
+                    types[n] = "Week " + (n + 1);
+                    n++;
+                }
 
                     canvaQuantiteRecette.data.datasets[0].data = nombres;
                     canvaQuantiteRecette.data.labels = types;
@@ -1079,20 +1142,21 @@
                 var nombres = [];
                 var types = [];
                 
-                var old = moment().startOf('day').subtract(8 ,'week');
-                    // console.log(old);
-                var n = moment(old).endOf('day').add(1 ,'week');
-                for (var i = 0; i < 8; i++) {
-                    old = moment().startOf('day').subtract(8 - i, 'week');
-                    // console.log(old);
-                    n = moment(old).endOf('day').add(1 ,'week');
-                    nombres[i] = 0;
-                    types[i] = "Week " + (i + 1);
+                var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                var dateE = dateF === "" ? moment() : moment(dateF);
+                var dateR = moment();
+                var n = 0;
+                for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                    nombres.push(0);
                     for (var j = 0; j < d.jsonPrixCharges.length; j++) {
-                        if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
-                            nombres[i] += parseFloat(d.jsonPrixCharges[j].prix);
+                        dateR = moment(d.jsonPrixCharges[j].date);
+                        if (dateR.isSame(i, 'week')) {
+                            nombres[n] += parseFloat(d.jsonPrixCharges[j].prix);
                         }
                     }
+
+                    types[n] = "Week " + (n + 1);
+                    n++;
                 }
 
                     canvaPrixCharge.data.datasets[0].data = nombres;
@@ -1113,20 +1177,21 @@
                 var nombres = [];
                 var types = [];
                 
-                var old = moment().startOf('day').subtract(8 ,'week');
-                    // console.log(old);
-                var n = moment(old).endOf('day').add(1 ,'week');
-                for (var i = 0; i < 8; i++) {
-                    old = moment().startOf('day').subtract(8 - i, 'week');
-                    // console.log(old);
-                    n = moment(old).endOf('day').add(1 ,'week');
-                    nombres[i] = 0;
-                    types[i] = "Week " + (i + 1);
+                var dateS = dateD === "" ? moment().add(-56, 'days') : moment(dateD);
+                var dateE = dateF === "" ? moment() : moment(dateF);
+                var dateR = moment();
+                var n = 0;
+                for (var i = moment(dateS); i.isBefore(dateE); i.add(7, 'days')) {
+                    nombres.push(0);
                     for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
-                        if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
-                            nombres[i] += parseFloat(d.jsonPrixRecettes[j].prix);
+                        dateR = moment(d.jsonPrixRecettes[j].date);
+                        if (dateR.isSame(i, 'week')) {
+                            nombres[n] += parseFloat(d.jsonPrixRecettes[j].prix);
                         }
                     }
+
+                    types[n] = "Week " + (n + 1);
+                    n++;
                 }
 
                     canvaPrixRecette.data.datasets[0].data = nombres;
@@ -1141,12 +1206,14 @@
         var fournisseur = $('#fournisseurChiffreCharge').val();
         
         var f = $("#fournisseurChiffreCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateChiffreCharge('', '', f, '');
+        updateChiffreCharge(v1, v2, f, '');
         
         $("#produitChiffreCharge option").remove();
         $('#produitChiffreCharge').append('<option value="">Produit..</option>');
@@ -1169,12 +1236,14 @@
     function filterClientChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
         var c = $("#clientChiffreRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updateChiffreRecette('', '', c, '');
+        updateChiffreRecette(v1, v2, c, '');
         
         $("#produitChiffreRecette option").remove();
         $('#produitChiffreRecette').append('<option value="">Produit..</option>');
@@ -1197,12 +1266,14 @@
     function filterFournisseurQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
         var f = $("#fournisseurQuantiteCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateQuantiteCharge('', '', f, '');
+        updateQuantiteCharge(v1, v2, f, '');
         
         $("#produitQuantiteCharge option").remove();
         $('#produitQuantiteCharge').append('<option value="">Produit..</option>');
@@ -1225,12 +1296,14 @@
     function filterClientQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
         var c = $("#clientQuantiteRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updateQuantiteRecette('', '', c, '');
+        updateQuantiteRecette(v1, v2, c, '');
         
         $("#produitQuantiteRecette option").remove();
         $('#produitQuantiteRecette').append('<option value="">Produit..</option>');
@@ -1253,12 +1326,14 @@
     function filterFournisseurPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
         var f = $("#fournisseurPrixCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updatePrixCharge('', '', f, '');
+        updatePrixCharge(v1, v2, f, '');
         
         $("#produitPrixCharge option").remove();
         $('#produitPrixCharge').append('<option value="">Produit..</option>');
@@ -1281,12 +1356,14 @@
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var c = $("#clientPrixRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette('', '', c, '');
+        updatePrixRecette(v1, v2, c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1309,12 +1386,14 @@
     function filterClientPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var c = $("#clientPrixRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette('', '', c, '');
+        updatePrixRecette(v1, v2, c, '');
         
         $("#produitPrixRecette option").remove();
         $('#produitPrixRecette').append('<option value="">Produit..</option>');
@@ -1338,79 +1417,93 @@
         var fournisseur = $('#fournisseurChiffreCharge').val();
         var produit = $('#produitChiffreCharge').val();
         var f = $("#fournisseurChiffreCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateChiffreCharge('', '', f, produit);
+        updateChiffreCharge(v1, v2, f, produit);
     }
 
     function filterProduitChiffreRecette() {
         var client = $('#clientChiffreRecette').val();
         var produit = $('#produitChiffreRecette').val();
         var c = $("#clientChiffreRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updateChiffreRecette('', '', c, produit);
+        updateChiffreRecette(v1, v2, c, produit);
     }
 
     function filterProduitQuantiteCharge() {
         var fournisseur = $('#fournisseurQuantiteCharge').val();
         var produit = $('#produitQuantiteCharge').val();
         var f = $("#fournisseurQuantiteCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updateQuantiteCharge('', '', f, produit);
+        updateQuantiteCharge(v1, v2, f, produit);
     }
 
     function filterProduitQuantiteRecette() {
         var client = $('#clientQuantiteRecette').val();
         var produit = $('#produitQuantiteRecette').val();
         var c = $("#clientQuantiteRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updateQuantiteRecette('', '', c, produit);
+        updateQuantiteRecette(v1, v2, c, produit);
     }
 
     function filterProduitPrixCharge() {
         var fournisseur = $('#fournisseurPrixCharge').val();
         var produit = $('#produitPrixCharge').val();
         var f = $("#fournisseurPrixCharge option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (fournisseur == '')
             f = '';
 
 
-        updatePrixCharge('', '', f, produit);
+        updatePrixCharge(v1, v2, f, produit);
     }
 
     function filterProduitPrixRecette() {
         var client = $('#clientPrixRecette').val();
         var produit = $('#produitPrixRecette').val();
         var c = $("#clientPrixRecette option:selected").text();
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
 
         if (client == '')
             c = '';
 
 
-        updatePrixRecette('', '', c, produit);
+        updatePrixRecette(v1, v2, c, produit);
     }
 
     var charge = $('#charge').val();
     var recette = $('#recette').val();
 
     function changeCharts() {
-        updateStructureCharge('', '');
+        var v1 = $('#datepicker1').val();
+        var v2 = $('#datepicker2').val();
+        updateStructureCharge(v1, v2);
         filterProduitChiffreCharge();
         filterProduitChiffreRecette();
         filterProduitQuantiteCharge();
