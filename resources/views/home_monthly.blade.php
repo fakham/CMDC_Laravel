@@ -459,7 +459,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonCharges[j].prix);
@@ -540,7 +540,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
                             if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonRecettes[j].prix);
@@ -622,7 +622,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseInt(d.jsonCharges[j].qtte);
@@ -707,7 +707,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
                             if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseInt(d.jsonRecettes[j].qtte);
@@ -792,7 +792,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonPrixCharges.length; j++) {
                             if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonPrixCharges[j].prix);
@@ -874,7 +874,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'months');
                         nombres[i] = 0;
-                        types[i] = "Month " + (i + 1);
+                        types[i] = old.format('MMMM') + ' ' + old.get('year');
                         for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
                             if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonPrixRecettes[j].prix);
@@ -999,7 +999,7 @@
                             }
                         }
 
-                        types[n] = "Month " + (n + 1);
+                        types[n] = i.format('MMMM') + ' ' + i.get('year');
                         n++;
                     }
 
@@ -1034,7 +1034,7 @@
                         }
                     }
 
-                    types[n] = "Month " + (n + 1);
+                    types[n] = i.format('MMMM') + ' ' + i.get('year');
                     n++;
                 }
 
@@ -1069,7 +1069,7 @@
                         }
                     }
 
-                    types[n] = "Month " + (n + 1);
+                    types[n] = i.format('MMMM') + ' ' + i.get('year');
                     n++;
                 }
 
@@ -1104,7 +1104,7 @@
                         }
                     }
 
-                    types[n] = "Month " + (n + 1);
+                    types[n] = i.format('MMMM') + ' ' + i.get('year');
                     n++;
                 }
 
@@ -1139,7 +1139,7 @@
                         }
                     }
 
-                    types[n] = "Month " + (n + 1);
+                    types[n] = i.format('MMMM') + ' ' + i.get('year');
                     n++;
                 }
 
@@ -1174,7 +1174,7 @@
                         }
                     }
 
-                    types[n] = "Month " + (n + 1);
+                    types[n] = i.format('MMMM') + ' ' + i.get('year');
                     n++;
                 }
 
