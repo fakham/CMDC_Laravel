@@ -110,7 +110,7 @@
 								<nav class=" header_btn">
 									<ul class="cd-main-nav__list">
 
-										<li><a class="btn btn-outline-custom btn-rounded mt-4 MRG" href="/login" data-signin="login"> Connecter</a></li>
+										<li><a class="btn btn-outline-custom btn-rounded mt-4 MRG" href="/login" data-signin="login">Se Connecter</a></li>
 										<li><a class="btn btn-custom btn-rounded mt-4 MRG" href="/register" data-signin="signup">S'inscrire</a></li>
 									</ul>
 								</nav>
