@@ -459,7 +459,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonCharges[j].prix);
@@ -540,7 +540,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
                             if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonRecettes[j].prix);
@@ -622,7 +622,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseInt(d.jsonCharges[j].qtte);
@@ -707,7 +707,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonRecettes.length; j++) {
                             if (moment(d.jsonRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseInt(d.jsonRecettes[j].qtte);
@@ -792,7 +792,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonPrixCharges.length; j++) {
                             if (moment(d.jsonPrixCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonPrixCharges[j].prix);
@@ -874,7 +874,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonPrixRecettes.length; j++) {
                             if (moment(d.jsonPrixRecettes[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonPrixRecettes[j].prix);
@@ -999,7 +999,7 @@
                             }
                         }
 
-                        types[n] = "Week " + (n + 1);
+                        types[n] = "Week " + i.format('w');
                         n++;
                     }
 
@@ -1011,7 +1011,7 @@
                         // console.log(old);
                         n = moment(old).endOf('day').add(1 ,'week');
                         nombres[i] = 0;
-                        types[i] = "Week " + (i + 1);
+                        types[i] = "Week " + old.format('w');
                         for (var j = 0; j < d.jsonCharges.length; j++) {
                             if (moment(d.jsonCharges[j].date).isBetween(old, n)) {
                                 nombres[i] += parseFloat(d.jsonCharges[j].prix);
@@ -1050,7 +1050,7 @@
                         }
                     }
 
-                    types[n] = "Week " + (n + 1);
+                    types[n] = "Week " + i.format('w');
                     n++;
                 }
 
@@ -1085,7 +1085,7 @@
                         }
                     }
 
-                    types[n] = "Week " + (n + 1);
+                    types[n] = "Week " + i.format('w');
                     n++;
                 }
 
@@ -1120,7 +1120,7 @@
                         }
                     }
 
-                    types[n] = "Week " + (n + 1);
+                    types[n] = "Week " + i.format('w');
                     n++;
                 }
 
@@ -1155,7 +1155,7 @@
                         }
                     }
 
-                    types[n] = "Week " + (n + 1);
+                    types[n] = "Week " + i.format('w');
                     n++;
                 }
 
@@ -1190,7 +1190,7 @@
                         }
                     }
 
-                    types[n] = "Week " + (n + 1);
+                    types[n] = "Week " + i.format('w');
                     n++;
                 }
 
