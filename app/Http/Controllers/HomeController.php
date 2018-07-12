@@ -738,4 +738,17 @@ class HomeController extends Controller
         }
 
     }
+
+    public function cpc()
+    {
+        if (Auth::check() && Auth::user()->role <= 3) {
+
+            return view('cpc');
+
+        } else if (Auth::check() && Auth::user()->role == 4) {
+            return view('home_new');
+        } else {
+            return redirect('/login');
+        }
+    }
 }

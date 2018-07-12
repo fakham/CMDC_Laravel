@@ -118,6 +118,12 @@
 
 								</ul>
 							</li>
+							<li id="activeCPC">
+								<a href="/cpc">
+									<i class="ti-layout-menu-v"></i>
+									<p>CPC Périodique</p>
+                    			</a>
+							</li>
 
 
 				</ul>

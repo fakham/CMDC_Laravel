@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/cpc', 'HomeController@cpc')->name('cpc');
 Route::get('/home/weekly', 'HomeController@weekly')->name('weekly');
 Route::get('/home/monthly', 'HomeController@monthly')->name('monthly');
 Route::get('/home/quarterly', 'HomeController@quarterly')->name('quarterly');
