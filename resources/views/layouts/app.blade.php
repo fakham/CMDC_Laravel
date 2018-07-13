@@ -65,6 +65,12 @@
 						</ul>
                     </a>
 					</li>
+					<li id="activeCPC">
+						<a href="/cpc">
+							<i class="ti-layout-menu-v"></i>
+							<p>CPC Périodique</p>
+						</a>
+					</li>
 					<li>
 						<li class="" id="activeProfile">
 						<a href="/profile">
@@ -117,12 +123,6 @@
 									<li><a href="/fournisseur/new">Ajouter Fournisseur</a></li>
 
 								</ul>
-							</li>
-							<li id="activeCPC">
-								<a href="/cpc">
-									<i class="ti-layout-menu-v"></i>
-									<p>CPC Périodique</p>
-                    			</a>
 							</li>
 
 
