@@ -50,7 +50,7 @@
 
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="cpc">
                                     <tr>
                                         <td></td>
                                         <td></td>
@@ -111,16 +111,38 @@
     
     $(document).ready(function() {
 
-        @if (app('request')->input('modified'))
-            $.notify({
-                icon: 'ti-pencil',
-                message: "<b>Profile modified successfully.</b>"
+        $.ajax({
+               type:'GET',
+               url:'/cpc/filter',
+               //data: {'_token:  <?php echo csrf_token() ?>'},
+               data: {dateD:'', dateF:''},
+               success:function(d){
+                   var resp = "";
+                   var max = d.charges.length >= d.recettes.length ? d.charges.length : d.recettes.length;
 
-            }, {
-                type: 'info',
-                timer: 4000
-            });
-        @endif
+                    for (var i = 0; i < max; i++) {
+                        resp += "<tr>";
+
+                        if (i >= d.charges.length) {
+                            resp += "<td></td><td></td>";
+                        } else {
+                            resp += "<td>" + d.charges[i].type + "</td>";
+                            resp += "<td>" + d.charges[i].montant + "</td>";
+                        }
+
+                        if (i >= d.recettes.length) {
+                            resp += "<td></td><td></td>";
+                        } else {
+                            resp += "<td>" + d.recettes[i].type + "</td>";
+                            resp += "<td>" + d.recettes[i].montant + "</td>";
+                        }
+
+                        resp += "</tr>";
+                    }
+
+                    $('#cpc').html(resp);
+               }
+        });
 
     });
 
