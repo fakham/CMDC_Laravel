@@ -756,6 +756,9 @@ class HomeController extends Controller
 
         if (Auth::check() && Auth::user()->role <= 3) {
 
+            // dump($request->all());
+            // die;
+
             if ($request->dateD == '' && $request->dateF == '') {
                 $charges = DB::select(DB::raw("SELECT p.type, SUM(c.prix * c.qtte) AS montant FROM charges c INNER JOIN produits p ON p.id = c.produit_id where c.user_id = ".Auth::user()->id." GROUP BY p.type"));
 
@@ -764,7 +767,7 @@ class HomeController extends Controller
                 return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
             } else if ($request->dateF == '') {
                 $charges = DB::table('charges as c')
-                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(c.prix * c.qtte) AS montant'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('c.date', '>=', $request->dateD)
@@ -772,7 +775,7 @@ class HomeController extends Controller
                                ->get();
 
                 $recettes = DB::table('recettes as r')
-                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(r.prix * r.qtte) AS montant')) 
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->where('r.user_id', '=', Auth::user()->id)
                                ->where('r.date', '>=', $request->dateD)
@@ -781,7 +784,7 @@ class HomeController extends Controller
                 return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
             } else if ($request->dateD == '') {
                 $charges = DB::table('charges as c')
-                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(c.prix * c.qtte) AS montant'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('c.date', '<=', $request->dateF)
@@ -789,7 +792,7 @@ class HomeController extends Controller
                                ->get();
                                
                 $recettes = DB::table('recettes as r')
-                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(r.prix * r.qtte) AS montant'))
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->where('r.user_id', '=', Auth::user()->id)
                                ->where('r.date', '<=', $request->dateF)
@@ -798,7 +801,7 @@ class HomeController extends Controller
                 return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
             } else {
                 $charges = DB::table('charges as c')
-                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(c.prix * c.qtte) AS montant'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->where('c.user_id', '=', Auth::user()->id)
                                ->where('c.date', '>=', $request->dateD)
@@ -807,7 +810,7 @@ class HomeController extends Controller
                                ->get();
 
                 $recettes = DB::table('recettes as r')
-                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->select('p.type', DB::raw('SUM(r.prix * r.qtte) AS montant'))
                                ->join('produits as p', 'r.produit_id', '=', 'p.id')
                                ->where('r.user_id', '=', Auth::user()->id)
                                ->where('r.date', '>=', $request->dateD)
