@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/cpc', 'HomeController@cpc')->name('cpc');
+Route::get('/cpc/filter', 'HomeController@cpc_filter')->name('cpc_filter');
 Route::get('/home/weekly', 'HomeController@weekly')->name('weekly');
 Route::get('/home/monthly', 'HomeController@monthly')->name('monthly');
 Route::get('/home/quarterly', 'HomeController@quarterly')->name('quarterly');

@@ -751,4 +751,73 @@ class HomeController extends Controller
             return redirect('/login');
         }
     }
+
+    public function cpc_filter(Request $request) {
+
+        if (Auth::check() && Auth::user()->role <= 3) {
+
+            if ($request->dateD == '' && $request->dateF == '') {
+                $charges = DB::select(DB::raw("SELECT p.type, SUM(c.prix * c.qtte) AS montant FROM charges c INNER JOIN produits p ON p.id = c.produit_id where c.user_id = ".Auth::user()->id." GROUP BY p.type"));
+
+                $recettes = DB::select(DB::raw("SELECT p.type, SUM(r.prix * r.qtte) AS montant FROM recettes r INNER JOIN produits p ON p.id = r.produit_id where r.user_id = ".Auth::user()->id." GROUP BY p.type"));
+                
+                return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
+            } else if ($request->dateF == '') {
+                $charges = DB::table('charges as c')
+                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('c.date', '>=', $request->dateD)
+                               ->groupBy('p.type')
+                               ->get();
+
+                $recettes = DB::table('recettes as r')
+                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->where('r.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '>=', $request->dateD)
+                               ->groupBy('p.type')
+                               ->get();
+                return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
+            } else if ($request->dateD == '') {
+                $charges = DB::table('charges as c')
+                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('c.date', '<=', $request->dateF)
+                               ->groupBy('p.type')
+                               ->get();
+                               
+                $recettes = DB::table('recettes as r')
+                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->where('r.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '<=', $request->dateF)
+                               ->groupBy('p.type')
+                               ->get();
+                return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
+            } else {
+                $cpc = DB::table('charges as c')
+                               ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
+                               ->join('produits as p', 'c.produit_id', '=', 'p.id')
+                               ->where('c.user_id', '=', Auth::user()->id)
+                               ->where('c.date', '>=', $request->dateD)
+                               ->where('c.date', '<=', $request->dateF)
+                               ->groupBy('p.type')
+                               ->get();
+
+                $recettes = DB::table('recettes as r')
+                               ->select(DB::raw('SELECT p.type, SUM(r.prix * r.qtte) AS montant'))
+                               ->join('produits as p', 'r.produit_id', '=', 'p.id')
+                               ->where('r.user_id', '=', Auth::user()->id)
+                               ->where('r.date', '>=', $request->dateD)
+                               ->where('r.date', '<=', $request->dateF)
+                               ->groupBy('p.type')
+                               ->get();
+                return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
+            }
+
+        }
+
+    }
 }
