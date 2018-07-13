@@ -797,7 +797,7 @@ class HomeController extends Controller
                                ->get();
                 return response()->json(array('charges'=>$charges, 'recettes'=>$recettes), 200);
             } else {
-                $cpc = DB::table('charges as c')
+                $charges = DB::table('charges as c')
                                ->select(DB::raw('SELECT p.type, SUM(c.prix * c.qtte) AS montant'))
                                ->join('produits as p', 'c.produit_id', '=', 'p.id')
                                ->where('c.user_id', '=', Auth::user()->id)
