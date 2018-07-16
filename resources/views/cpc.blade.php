@@ -18,7 +18,7 @@
                                 </h3>
                                 <div class="form-group">
                                     <div class="input-group date">
-                                        <input type="date" id="date_debut" onclick="(this.type='date')" class="form-control " onchange="changeData()">
+                                        <input type="date" id="date_debut" onclick="(this.type='date')" class="form-control border-input" onchange="changeData()">
                                         <span class="input-group-addon ">
                                         <span class="ti-calendar"></span>
                                         </span>
@@ -29,7 +29,7 @@
                                 <h3 class="card-title">Date Fin</h3>
                                 <div class="form-group">
                                     <div class="input-group date">
-                                        <input type="date" id="date_fin" onclick="(this.type='date')" class="form-control " onchange="changeData()">
+                                        <input type="date" id="date_fin" onclick="(this.type='date')" class="form-control border-input" onchange="changeData()">
                                         <span class="input-group-addon ">
                                         <span class="ti-calendar"></span>
                                         </span>

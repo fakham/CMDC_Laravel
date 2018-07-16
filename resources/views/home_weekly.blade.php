@@ -86,18 +86,34 @@
     </div>
 
     <div class="card">
+        <div class="header">
+            <h2 class="title"><b>Weekly</b></h2>
+        </div>
         <div class="container">
             <div class="row">
-                    <h4>Weekly</h4>
-                <div class="col-md-3">
-                    <label>Date Début : </label>
-                    <input id="datepicker1" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                <div class="col-md-6">
+                    <h3 class="card-title">Date Début
+                    </h3>
+                    <div class="form-group">
+                        <div class="input-group date">
+                            <input type="date" id="datepicker1" class="form-control border-input" name="date" onchange="changeCharts()">
+                            <span class="input-group-addon ">
+                            <span class="ti-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <label>Date Fin : </label>
-                    <input id="datepicker2" type='date' class="form-control border-input" name="date" onchange="changeCharts()"/>
+                <div class="col-md-6">
+                    <h3 class="card-title">Date Fin</h3>
+                    <div class="form-group">
+                        <div class="input-group date">
+                            <input type="date" id="datepicker2" class="form-control border-input" name="date" onchange="changeCharts()">
+                            <span class="input-group-addon ">
+                            <span class="ti-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6"></div>
             </div>
         </div> 
     </div>
