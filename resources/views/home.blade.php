@@ -369,6 +369,13 @@
 <script src="{{ asset('/js/Chart.min.js') }}"></script>
 <script type="text/javascript">
 
+    // if ( $('#datepicker1').prop('type') != 'date' ) {
+    //     $('#datepicker1').datepicker({dateFormat: 'yy-mm-dd'});
+    // }
+
+    if ( $('#datepicker1')[0].type != 'date' ) 
+        $('#datepicker1').datepicker({dateFormat: 'yy-mm-dd'});
+
     var color = Chart.helpers.color;
 
     var chartCanvaStructure = document.getElementById("canvaStructure");

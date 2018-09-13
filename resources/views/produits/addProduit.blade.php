@@ -185,7 +185,7 @@
         $("#type option").remove();
         
         $('#type').append('<option value="" selected disabled>Type...</option>');
-        $("#type").append('<option value="Produits d\'exploitation">Produits d\'exploitation</option>');
+        $("#type").append('<option value="Charge d\'exploitation">Produits d\'exploitation</option>');
         $("#type").append('<option value="Charges de personnel">Charges de personnel</option>');
         $("#type").append('<option value="Impôts et taxes">Impôts et taxes</option>');
         $("#type").append('<option value="Autres charges d\'exploitation">Autres charges d\'exploitation</option>');
