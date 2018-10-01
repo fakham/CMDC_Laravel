@@ -74,3 +74,5 @@ Route::post('/fournisseur/{fournisseur}/update', 'FournisseurController@update')
 
 Route::get('/control', 'HomeController@control')->name('control');
 Route::post('/update-role/{user}', 'HomeController@updateRole')->name('update-role');
+
+Route::post('/send', 'WelcomeController@contact')->name('send');

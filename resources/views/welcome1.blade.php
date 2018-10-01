@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Transversal Developpement</title>
+	<title>CMDC APP</title>
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="YOUSSEF AIT EL KOB" />
@@ -60,7 +60,7 @@
 		<div class="container">
 			<!-- LOGO -->
 			<a class="navbar-brand logo" href="/">
-				<div class="h5">Transversal Developpement</div>
+				<div class="logo">CMDC App</div>
 
 			</a>
 
@@ -76,16 +76,16 @@
 						<a href="#about" class="nav-link">A propos
 </a>
 					</li>
-				<!--	<li class="nav-item">
+					<li class="nav-item">
 						<a href="#services" class="nav-link">Services</a>
-					</li>-->
+					</li>
 					<li class="nav-item">
 						<a href="#education" class="nav-link">Tutoriel </a>
 					</li>
-					<!--<li class="nav-item">
+					<li class="nav-item">
 						<a href="#work" class="nav-link">Testimonials
 </a>
-					</li>-->
+					</li>
 					<li class="nav-item">
 						<a href="#contact" class="nav-link">Contact</a>
 					</li>
@@ -104,7 +104,7 @@
 					<div class="row justify-content-center">
 						<div class="col-lg-12">
 							<div class="text-white text-center">
-								<h4>Transversal Developpement</h4>
+								<h4>CMDC APP</h4>
 								<h1 class="header_title mb-0 mt-4">La Gestion Simplifiée</h1>
 								<p class="text-white mx-auto header_subtitle mt-4"><span class="element font-weight-bold" data-elements="Artisan,Auto-entrepreneur,TPE,"></span></p>
 								<nav class=" header_btn">
@@ -134,8 +134,8 @@
 		<div class="cd-signin-modal__container">
 			<!-- this is the container wrapper -->
 			<ul class="cd-signin-modal__switcher js-signin-modal-switcher js-signin-modal-trigger">
-				<li><a href="#0" data-signin="login" data-type="login">Se connecter</a></li>
-				<li><a href="#0" data-signin="signup" data-type="signup">Nouveau compte</a></li>
+				<li><a href="#0" data-signin="login" data-type="login">Sign in</a></li>
+				<li><a href="#0" data-signin="signup" data-type="signup">New account</a></li>
 			</ul>
 
 			<div class="cd-signin-modal__block js-signin-modal-block" data-type="login">
@@ -144,19 +144,19 @@
 					<p class="cd-signin-modal__fieldset">
 						<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signin-email">E-mail</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-email" type="email" placeholder="E-mail">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
-						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Mot de passe</label>
+						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signin-password">Password</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signin-password" type="text" placeholder="Password">
-						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Cacher</a>
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
 						<input type="checkbox" id="remember-me" checked class="cd-signin-modal__input ">
-						<label for="remember-me">Se rappeler de moi</label>
+						<label for="remember-me">Remember me</label>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
@@ -164,7 +164,7 @@
 					</p>
 				</form>
 
-				<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Mot de passe oublié?</a></p>
+				<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="reset">Forgot your password?</a></p>
 			</div>
 			<!-- cd-signin-modal__block -->
 
@@ -174,44 +174,44 @@
 					<p class="cd-signin-modal__fieldset">
 						<label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Prenom</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Prenom">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
 						<label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Nom</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Nom">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
-						<label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Nom d'utilateur</label>
+						<label class="cd-signin-modal__label cd-signin-modal__label--username cd-signin-modal__label--image-replace" for="signup-username">Username</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-username" type="text" placeholder="Username">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
 						<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="signup-email">E-mail</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-email" type="email" placeholder="E-mail">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
-						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Mot de passe</label>
+						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password">Password</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text" placeholder="Password">
-						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Cacher</a>
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
-						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password"> Répéter mot de passe</label>
+						<label class="cd-signin-modal__label cd-signin-modal__label--password cd-signin-modal__label--image-replace" for="signup-password"> Repeat Password</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="signup-password" type="text" placeholder="Password">
-						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Cacher</a>
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<a href="#0" class="cd-signin-modal__hide-password js-hide-password">Hide</a>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
 						<input type="checkbox" id="accept-terms" class="cd-signin-modal__input ">
-						<label for="accept-terms">Je suis d'accord avec les <a href="#0">Termes</a></label>
+						<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
@@ -223,13 +223,13 @@
 
 			<div class="cd-signin-modal__block js-signin-modal-block" data-type="reset">
 				<!-- reset password form -->
-				<p class="cd-signin-modal__message">Mot de passe oublié? Merci d'entrer votre adresse Email. Vous recevrez un lien pour créer un nouveau Mot de passe.</p>
+				<p class="cd-signin-modal__message">Lost your password? Please enter your email address. You will receive a link to create a new password.</p>
 
 				<form class="cd-signin-modal__form">
 					<p class="cd-signin-modal__fieldset">
 						<label class="cd-signin-modal__label cd-signin-modal__label--email cd-signin-modal__label--image-replace" for="reset-email">E-mail</label>
 						<input class="cd-signin-modal__input cd-signin-modal__input--full-width cd-signin-modal__input--has-padding cd-signin-modal__input--has-border" id="reset-email" type="email" placeholder="E-mail">
-						<span class="cd-signin-modal__error">Message d'erreur!</span>
+						<span class="cd-signin-modal__error">Error message here!</span>
 					</p>
 
 					<p class="cd-signin-modal__fieldset">
@@ -237,10 +237,10 @@
 					</p>
 				</form>
 
-				<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">Revenir à la connexion</a></p>
+				<p class="cd-signin-modal__bottom-message js-signin-modal-trigger"><a href="#0" data-signin="login">Back to log-in</a></p>
 			</div>
 			<!-- cd-signin-modal__block -->
-			<a href="#0" class="cd-signin-modal__close js-close">fermer</a>
+			<a href="#0" class="cd-signin-modal__close js-close">Close</a>
 		</div>
 		<!-- cd-signin-modal__container -->
 	</div>
@@ -267,12 +267,12 @@
 					<div>
 					</div>
 					<div class="text-center about-detail mx-auto mt-5">
-						<h3 class="mb-3">Transversal Developpement <span class="font-weight-bold text-custom"> App Solution</span></h3>
+						<h3 class="mb-3">CMDC <span class="font-weight-bold text-custom"> App Solution</span></h3>
 							<ul class="mb-0 list-inline text-center about-work">
-								<li class="list-inline-item mr-0 text-muted">La gestion simplifiée pour artisan et entrepreneurs!</li>
+								<li class="list-inline-item mr-0 text-muted">Comptabilité simplifié pour artisan et entrepreneurs!</li>
 
 							</ul>
-							<p class="text-muted mt-3">L’analyse des comptes de ses fournisseurs peut être une mine d’informations et procure des avantages indéniables. </br></br> C’est une aide incontestable si l’on veut sécuriser ses approvisionnements, mieux négocier ses contrats et réaliser des économies. Vous avez toujours pensé que ce serait bien d'optimiser la gestion de votre entreprise, mais que cela risquait d’être côuteux et demander du temps. Il convient de relativiser. </br></br> Voici une solution dont le but est de faciliter la gestion de votre entreprise au jour le jour. Si vous désirez mieux suivre l’évolution de votre entreprise afin d’agir et réagir sur certains chiffres, d’éclairer votre vision sur sa situation financière, d’envisager des investissements pour la développer. </br> </br><strong>N'attendez plus inscrivez vous vite !</strong></p>
+							<p class="text-muted mt-3">L’analyse des comptes de ses fournisseurs peut être une mine d’informations et procure des avantages indéniables. C’est une aide incontestable si l’on veut sécuriser ses approvisionnements, mieux négocier ses contrats et réaliser des économies. Vous avez toujours pensé que ce serait bien de fqire votre comptabilité, mais que cela risquait d’être fastidieux. Il convient de relativiser. Voici une solution dont le but est de faciliter votre comptabilité, pour finalement la considérer facile. Si vous désirez mieux suivre l’évolution de votre entreprise afin d’agir et réagir sur certains chiffres, d’éclairer votre vision sur sa situation financière, d’envisager des investissements pour la développer, il est vraiment indispensable que vous acquériez des infos comptables et appréhendiez ses comptes avec objectivité.</p>
 					</div>
 				</div>
 			</div>
@@ -281,7 +281,7 @@
 	<!-- END ABOUT -->
 
 	<!-- START SERVICES -->
-<!--	<section class="section bg-light" id="services">
+	<section class="section bg-light" id="services">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-12">
@@ -336,7 +336,7 @@
 
 			</div>
 		</div>
-	</section> -->
+	</section>
 	<!-- END SERVICES -->
 
 	<!-- END FUNFACTS 
@@ -368,82 +368,79 @@
 				</div>
 			</div>
 			<div class="row mt-4 pt-4">
-				<div class="col-lg-3 mt-4">
-					<div class="text-center rounded bg-white p-2">	<div class="blog_video position-relative">
-							<div class="img_blog">
-								<img src="welcome/images/blog/img2.png" alt="" class="img-fluid rounded mx-auto d-block">
-							</div>
-							<a href="https://vimeo.com/292600852" class="blog_play"><i class="mdi mdi-play"></i></a>
+				<div class="col-lg-4 mt-3">
+					<div class="text-center rounded bg-white p-2">
+						<div class="img_blog">
+							<img src="welcome/images/blog/img1.png" alt="" class="img-fluid rounded mx-auto d-block">
 						</div>
 						<div class="content_blog pt-3 pb-3">
 							<div>
-								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Inscription et Connexion</a></h5>
+								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">There are many variations</a></h5>
 							</div>
 							<div class="mt-3">
-								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Etape 1</a></p>
-								
-								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">L'utilisateur s'inscrit et attend la validation de son compte par la commité de direction, une fois validé il peux désormé se connecter.</p>
+								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Programme</a></p>
+								<!--<p class="h6 text-muted date_blog mb-0">......<a href="#" class="text-dark font-weight-bold">.......</a></p>-->
+								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">Sit sagittis vulputate laoreet sodales tortor nulla lobortis bibendum netus primis fames. Lobortis ultricies.</p>
+								<p class="h6 mb-0"><a href="#" class="text-muted font-weight-bold">Read More...</a></p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 mt-4">
+				<div class="col-lg-4 mt-3">
 					<div class="text-center rounded bg-white p-2">
 						<div class="blog_video position-relative">
 							<div class="img_blog">
 								<img src="welcome/images/blog/img2.png" alt="" class="img-fluid rounded mx-auto d-block">
 							</div>
-							<a href="https://vimeo.com/292600887" class="blog_play"><i class="mdi mdi-play"></i></a>
+							<a href="http://vimeo.com/99025203" class="blog_play"><i class="mdi mdi-play"></i></a>
 						</div>
 						<div class="content_blog pt-3 pb-3">
 							<div>
-								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Programmation</a></h5>
+								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Contrary to popular belief</a></h5>
 							</div>
 							<div class="mt-3">
-								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Etape 2</a></p>
+								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Dashbord</a></p>
 								<!--<p class="h6 text-muted date_blog mb-0">......... <a href="#" class="text-dark font-weight-bold">........</a></p>-->
-								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">L'utilisateur programme son application avec ses propres données , tel que sa base de donnée fournisseurs, sa base de donnée clients , les différents produits / services achetés régulièrement et les produits / services qu’il vend.</p>
+								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">Sit sagittis vulputate laoreet sodales tortor nulla lobortis bibendum netus primis fames. Lobortis ultricies.</p>
+								<p class="h6 mb-0"><a href="#" class="text-muted font-weight-bold">Read More...</a></p>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-3 mt-4">
+				<div class="col-lg-4 mt-3">
 					<div class="text-center rounded bg-white p-2">
-						<div class="blog_video position-relative">
-							<div class="img_blog">
-								<img src="welcome/images/blog/img2.png" alt="" class="img-fluid rounded mx-auto d-block">
+						<div class="img_blog">
+							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img src="welcome/images/blog/img3.png" alt="" class="img-fluid rounded mx-auto d-block">
+									</div>
+									<div class="carousel-item">
+										<img src="welcome/images/blog/img4.png" alt="" class="img-fluid rounded mx-auto d-block">
+									</div>
+									<div class="carousel-item">
+										<img src="welcome/images/blog/img5.png" alt="" class="img-fluid rounded mx-auto d-block">
+									</div>
+								</div>
+								<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="mbri-arrow-prev" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+								<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="mbri-arrow-next" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
 							</div>
-							<a href="https://vimeo.com/292600867" class="blog_play"><i class="mdi mdi-play"></i></a>
 						</div>
 						<div class="content_blog pt-3 pb-3">
 							<div>
-								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Constatation</a></h5>
+								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Lorem Ipsum is not simply</a></h5>
 							</div>
 							<div class="mt-3">
-								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Etape 3</a></p>
+								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Charge & Recettes</a></p>
 								<!--<p class="h6 text-muted date_blog mb-0">.......<a href="#" class="text-dark font-weight-bold">......</a></p>-->
-								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">Lors de son activité , l’utilisateur enregistre ses différentes opération d’achats et de ventes à travers des formulaires spécifiques.
-.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 mt-4">
-					<div class="text-center rounded bg-white p-2">
-						<div class="blog_video position-relative">
-							<div class="img_blog">
-								<img src="welcome/images/blog/img2.png" alt="" class="img-fluid rounded mx-auto d-block">
-							</div>
-							<a href="https://vimeo.com/292600922" class="blog_play"><i class="mdi mdi-play"></i></a>
-						</div>
-						<div class="content_blog pt-3 pb-3">
-							<div>
-								<h5 class="font-weight-bold mb-0"><a href="#" class="text-dark">Suivi</a></h5>
-							</div>
-							<div class="mt-3">
-								<p class="font-weight-bold h6 mb-3"><a href="#" class="text-custom">Etape 4</a></p>
-								<!--<p class="h6 text-muted date_blog mb-0">.......<a href="#" class="text-dark font-weight-bold">......</a></p>-->
-								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">L'utilisateur suit son activité de manière détaillé via un tableau de bord de  gestion filtré par période, par acteur et par produit. Et un CPC périodique lui permettant de suivre ses opérations de manière global.</p>
+								<p class="mt-3 desc_blog pl-2 pr-2 text-muted">Sit sagittis vulputate laoreet sodales tortor nulla lobortis bibendum netus primis fames. Lobortis ultricies.</p>
+								<p class="h6 mb-0"><a href="#" class="text-muted font-weight-bold">Read More...</a></p>
 							</div>
 						</div>
 					</div>
@@ -454,7 +451,7 @@
 	<!-- END Tutoriel -->
 
 
-	<!--START WORK 
+	<!--START WORK -->
 	<section class="section text-center" id="work">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -467,6 +464,15 @@
 						<p class="text-muted mx-auto mt-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
 					</div>
 				</div>
+			</div>
+			<div class="row mt-4 pt-4">
+				<ul class="col list-unstyled list-inline mb-0 text-uppercase work_menu" id="menu-filter">
+					<li class="list-inline-item"><a class="active" data-filter="*">All</a></li>
+					<li class="list-inline-item"><a class="" data-filter=".Produit">Produit</a></li>
+					<li class="list-inline-item"><a class="" data-filter=".Charge">Charge</a></li>
+					<li class="list-inline-item"><a class="" data-filter=".Programme">Programme</a></li>
+					<li class="list-inline-item"><a class="" data-filter=".Dashboard">Dashboard</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="container">
@@ -557,7 +563,7 @@
 			</div>
 		</div>
 	</section>
-	  END WORK -->
+	<!--END WORK -->
 
 
 
@@ -571,7 +577,7 @@
 						<div class="main-title-border">
 							<i class="mdi mdi-asterisk"></i>
 						</div>
-						<p class="text-muted mx-auto mt-2">Pour vos observations, questions et recommandation veuillez-nous en faire part !</p>
+						<p class="text-muted mx-auto mt-2">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
 					</div>
 				</div>
 			</div>
@@ -582,8 +588,8 @@
 							<i class="mbri-mobile2 text-custom h2"></i>
 						</div>
 						<div class="mt-2">
-							<p class="mb-0 font-weight-bold">Appelez nous au:</p>
-							<p class="text-muted">+212522XXXXXX</p>
+							<p class="mb-0 font-weight-bold">Call Us On</p>
+							<p class="text-muted">+212661000000</p>
 						</div>
 					</div>
 					<div class="text-center mt-4">
@@ -591,8 +597,8 @@
 							<i class="mbri-letter text-custom h2"></i>
 						</div>
 						<div class="mt-2">
-							<p class="mb-0 font-weight-bold">Adresse Email</p>
-							<p class="text-muted">contact@transversaldeveloppement.com</p>
+							<p class="mb-0 font-weight-bold">Email Us At</p>
+							<p class="text-muted">cmdc2018@gmail.com</p>
 						</div>
 					</div>
 					<div class="text-center mt-4">
@@ -600,32 +606,31 @@
 							<i class="mbri-pin text-custom h2"></i>
 						</div>
 						<div class="mt-2">
-							<p class="mb-0 font-weight-bold">Adresse Postal</p>
-							<p class="text-muted">berrechid , casablanca, M</p>
+							<p class="mb-0 font-weight-bold">Visit Office</p>
+							<p class="text-muted">berchid , casablanca, M</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-8">
 					<div class="contact_form">
-						<form method="POST" action="/send">
-							@csrf
+						<form>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group mt-2">
-										<label for="name" class="font-weight-bold">Nom</label>
+										<label for="name" class="font-weight-bold">Name</label>
 										<input name="name" id="name" type="text" class="form-control" placeholder="Your name..." required="">
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group mt-2">
-										<label for="email" class="font-weight-bold">Adresse Email</label>
+										<label for="email" class="font-weight-bold">Email address</label>
 										<input name="email" id="email" type="email" class="form-control" placeholder="Your email..." required="">
 									</div>
 								</div>
 								<div class="col-lg-12">
 									<div class="form-group mt-2">
-										<label for="subject" class="font-weight-bold">Sujet</label>
-										<input type="text" name="subject" class="form-control" id="subject" placeholder="Your Subject.." required="" />
+										<label for="subject" class="font-weight-bold">Subject</label>
+										<input type="text" class="form-control" id="subject" placeholder="Your Subject.." required="" />
 									</div>
 								</div>
 							</div>
@@ -656,7 +661,7 @@
 			<div class="row pt-4 pb-4">
 				<div class="col-lg-12">
 					<div class="float-left float_none mt-2 mb-2">
-						<p class="copy-rights text-muted mb-0">2018 &copy; Design by <a href="http://www.startoupti.com">Startoupti</a></p>
+						<p class="copy-rights text-muted mb-0">2018 &copy; Design by Startoupti</p>
 					</div>
 					<div class="float-right float_none mt-2 mb-2">
 						<ul class="list-inline fot_social mb-0">
@@ -677,17 +682,6 @@
 
 
 	<!-- JAVASCRIPTS -->
-<!--	<script>
-	function sendMail() {
-    var link = "aitkob@gmail.com"
-             + "?cc=aitkobr@outlook.com"
-             + "&subject=" + escape("This is my subject")
-             + "&body=" + escape(document.getElementById('comments').value)
-    ;
-
-    window.location.href = link;
-    }
-    </script>-->
 	<script src="welcome/js/placeholders.min.js"></script>
 	<!-- polyfill for the HTML5 placeholder attribute -->
 	<script src="welcome/js/main.js"></script>
@@ -710,25 +704,7 @@
 	<script src="welcome/js/owl.carousel.min.js"></script>
 	<!--CUSTOM JS-->
 	<script src="welcome/js/custom.js"></script>
-	<script src="{{ asset('assets/js/jquery-1.10.2.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 	<script>
-
-		$(document).ready(function() {
-
-			@if (app('request')->input('send'))
-				$.notify({
-					icon: 'ti-pencil',
-					message: "<b>Message sent successfully.</b>"
-
-				}, {
-					type: 'info',
-					timer: 4000
-				});
-			@endif
-
-		});
-
 		$(".element").each(function() {
 			var $this = $(this);
 			$this.typed({
